@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import String, case, func
+from sqlalchemy import case, func
 from sqlalchemy.orm import Session
 
 from app.models import Event, EventRule
@@ -69,10 +69,10 @@ def build_dashboard(
         .all()
     )
     top_ips = (
-        db.query(func.cast(Event.source_ip, String), func.count(Event.id))
+        db.query(func.host(Event.source_ip), func.count(Event.id))
         .filter(*filters)
         .filter(Event.source_ip.isnot(None))
-        .group_by(Event.source_ip)
+        .group_by(func.host(Event.source_ip))
         .order_by(func.count(Event.id).desc())
         .limit(8)
         .all()

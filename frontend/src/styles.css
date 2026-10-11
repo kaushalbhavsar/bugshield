@@ -131,12 +131,14 @@ label { display: grid; gap: 0.35rem; color: var(--muted); font-size: 0.92rem; }
 .bar { display: grid; grid-template-columns: 1fr 70px; gap: 0.6rem; align-items: center; }
 .bar-track { height: 8px; background: #0e1728; border-radius: 99px; overflow: hidden; }
 .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
-.trend { display: flex; align-items: end; gap: 4px; height: 120px; }
+.trend { display: flex; align-items: end; gap: 6px; height: 140px; padding-top: 0.5rem; }
 .trend i {
-  flex: 1;
+  flex: 1 1 18px;
+  min-width: 10px;
+  max-width: 36px;
   display: block;
-  background: rgba(90, 162, 255, 0.35);
-  border-radius: 3px 3px 0 0;
+  background: rgba(90, 162, 255, 0.45);
+  border-radius: 4px 4px 0 0;
   position: relative;
 }
 .trend i em {

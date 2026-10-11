@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import String, func
+from sqlalchemy import func
 from sqlalchemy.orm import Session, selectinload
 
 from app.models import Event, EventRule, Site
@@ -43,7 +43,7 @@ def query_events(
     if occurred_to:
         filters.append(Event.occurred_at <= occurred_to)
     if source_ip:
-        filters.append(func.cast(Event.source_ip, String) == source_ip)
+        filters.append(func.host(Event.source_ip) == source_ip)
     if url:
         filters.append(Event.uri.ilike(f"%{url}%"))
     if severity:

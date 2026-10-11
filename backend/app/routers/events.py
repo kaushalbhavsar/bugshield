@@ -14,12 +14,21 @@ from app.timeutil import as_utc
 router = APIRouter(prefix="/api/events", tags=["events"])
 
 
+def _host(value) -> str | None:
+    if value is None:
+        return None
+    text = str(value)
+    if "/" in text:
+        return text.split("/", 1)[0]
+    return text
+
+
 def _summary(event) -> EventSummary:
     return EventSummary(
         id=event.id,
         site_id=event.site_id,
         occurred_at=event.occurred_at,
-        source_ip=str(event.source_ip) if event.source_ip else None,
+        source_ip=_host(event.source_ip),
         method=event.method,
         uri=event.uri,
         host=event.host,
@@ -80,7 +89,7 @@ def event_detail(
     return EventDetail(
         **summary.model_dump(),
         unique_id=event.unique_id,
-        dest_ip=str(event.dest_ip) if event.dest_ip else None,
+        dest_ip=_host(event.dest_ip),
         dest_port=event.dest_port,
         source_port=event.source_port,
         engine_mode=event.engine_mode,
