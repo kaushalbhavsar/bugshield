@@ -27,7 +27,7 @@ export function DashboardPage({ user }: { user: User }) {
   return (
     <div className="row">
       <div className="col-md-12">
-        <h4 className="title">
+        <h4 className="title" title={user.timezone}>
           Events on <b>{siteName}</b>
           <select className="form-control" value={siteId} onChange={(event) => setSiteId(event.target.value)} style={{ maxWidth: 240, display: "inline-block", marginLeft: 12 }}>
             <option value="">All sites</option>
@@ -38,7 +38,6 @@ export function DashboardPage({ user }: { user: User }) {
             ))}
           </select>
         </h4>
-        <p className="muted">Displayed in {user.timezone}. Counts distinguish detections from confirmed disruptive actions.</p>
         {data.demo_count > 0 && (
           <div className="banner">Demo dataset is loaded ({data.demo_count} synthetic events). These records are labelled and are not production traffic.</div>
         )}

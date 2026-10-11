@@ -7,9 +7,9 @@ records, searches them, and shows what the log actually recorded. It does
 **not** claim that every event was blocked.
 
 This repository is a modern open-source successor to the discontinued
-BugShield SecaaS product (ASP.NET / MySQL). The original Windows tree was not
-included here and no credentials were copied from it. See
-[docs/legacy-reference.md](docs/legacy-reference.md).
+BugShield SecaaS product (ASP.NET / MySQL). The original Windows tree is kept
+under `old/` for reference and is not modified. No credentials were copied from
+it. See [docs/legacy-reference.md](docs/legacy-reference.md).
 
 ## What the MVP does
 

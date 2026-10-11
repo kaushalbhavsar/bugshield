@@ -4,8 +4,8 @@ import type { User } from "../types";
 
 function pageTitle(pathname: string): string {
   if (pathname.startsWith("/attacks/today")) return "Attacks blocked today";
-  if (pathname.startsWith("/attacks/week")) return "Attacks this week";
-  if (pathname.startsWith("/attacks/month")) return "Attacks this month";
+  if (pathname.startsWith("/attacks/week")) return "Attacks blocked in last week";
+  if (pathname.startsWith("/attacks/month")) return "Attacks blocked in last month";
   if (pathname.startsWith("/attacks/")) return "Attack detail";
   if (pathname.startsWith("/preferences")) return "Update email address to receive notification";
   if (pathname.startsWith("/manage")) return "Change Password";

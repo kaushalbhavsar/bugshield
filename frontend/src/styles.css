@@ -1,4 +1,12 @@
 /* App-only additions on top of the original Amaze / style.css assets. */
+@font-face {
+  font-family: "Glyphicons Halflings";
+  src: url("/fonts/glyphicons-halflings-regular.eot");
+  src: url("/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/glyphicons-halflings-regular.woff") format("woff"),
+    url("/fonts/glyphicons-halflings-regular.ttf") format("truetype"),
+    url("/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+}
 html, body, #root { min-height: 100%; }
 .boot { padding: 2rem; color: #9a9a9a; }
 .navbar-user { text-align: right; }
@@ -28,6 +36,11 @@ pre.redacted { background: #263238; color: #eceff1; padding: 12px; overflow: aut
 .success-text { color: #4caf50; }
 .banner { background: #fff3e0; border-left: 4px solid #ff9800; padding: 10px 12px; margin-bottom: 16px; }
 .sidebar-open-mobile .sidebar { transform: translateX(0); }
+.modal { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; overflow: auto; }
+.modal.in { display: block; }
+.modal-backdrop.in { opacity: 0.5; }
+.attacks-heading { overflow: hidden; }
+.attacks-heading .form-control { max-width: 260px; display: inline-block; margin-left: 12px; }
 @media (max-width: 991px) {
   .sidebar { transform: translateX(-110%); }
   .sidebar.open { transform: translateX(0); z-index: 40; }
