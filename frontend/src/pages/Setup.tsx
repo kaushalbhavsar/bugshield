@@ -5,7 +5,7 @@ export function Setup({ onReady }: { onReady: () => void }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    document.title = "BugShield - Create a new account";
+    document.title = "BUGSKAN - Create a new account";
   }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -32,71 +32,98 @@ export function Setup({ onReady }: { onReady: () => void }) {
   }
 
   return (
-    <div className="register-page">
-      <div className="header-text">
-        <img src="/assets/img/logo-dark.png" width={300} alt="BugShield" />
-        <h4>Hack proof your website INSTANTLY.</h4>
-        <hr />
-      </div>
-      <div className="register-grid">
-        <div>
-          <div className="media">
-            <div className="icon icon-danger">
-              <i className="ti-shield" />
-            </div>
-            <div className="media-body">
-              <h5>Realtime Protection</h5>
-              Stop hackers before they reach your website.
-            </div>
-          </div>
-          <div className="media">
-            <div className="icon icon-warning">
-              <i className="ti-search" />
-            </div>
-            <div className="media-body">
-              <h5>Security Scanning</h5>
-              Discover security weaknesses in your website
-            </div>
-          </div>
-          <div className="media">
-            <div className="icon icon-info">
-              <i className="ti-bolt" />
-            </div>
-            <div className="media-body">
-              <h5>Instant Activation</h5>
-              Get secure instantly. No installation required!
+    <div className="wrapper wrapper-full-page">
+      <div className="register-page">
+        <div className="content">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8 col-md-offset-2">
+                <div className="header-text">
+                  <img src="/assets/img/logo.png" width={300} style={{ width: 300 }} alt="BUGSKAN" />
+                  <h4>Hack proof your website INSTANTLY.</h4>
+                  <hr />
+                </div>
+              </div>
+              <div className="col-md-4 col-md-offset-2">
+                <div className="media">
+                  <div className="media-left">
+                    <div className="icon icon-danger">
+                      <i className="ti ti-shield" />
+                    </div>
+                  </div>
+                  <div className="media-body">
+                    <h5>Realtime Protection</h5>
+                    Stop hackers before they reach your website.
+                  </div>
+                </div>
+                <div className="media">
+                  <div className="media-left">
+                    <div className="icon icon-warning">
+                      <i className="ti-search" />
+                    </div>
+                  </div>
+                  <div className="media-body">
+                    <h5>Security Scanning</h5>
+                    Discover security weaknesses in your website
+                  </div>
+                </div>
+                <div className="media">
+                  <div className="media-left">
+                    <div className="icon icon-info">
+                      <i className="ti-bolt" />
+                    </div>
+                  </div>
+                  <div className="media-body">
+                    <h5>Instant Activation</h5>
+                    Get secure instantly. No installation required!
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <form className="form-horizontal" onSubmit={submit}>
+                  <div className="card card-plain">
+                    <div className="content">
+                      <div className="form-group">
+                        <div className="col-md-10">
+                          <input className="form-control" name="display_name" placeholder="Display name" defaultValue="Administrator" required />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div className="col-md-10">
+                          <input className="form-control" id="Email" name="email" placeholder="Your email" type="text" required />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div className="col-md-10">
+                          <input className="form-control" name="password" placeholder="Password (12+ characters)" type="password" minLength={12} required />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div className="col-md-10">
+                          <input className="form-control" name="confirm_password" placeholder="Confirm password" type="password" minLength={12} required />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div className="col-md-10">
+                          <input className="form-control" name="timezone" placeholder="Timezone" defaultValue="UTC" />
+                        </div>
+                      </div>
+                      {error && <div className="text-danger">{error}</div>}
+                      <div className="footer text-center">
+                        <input type="submit" className="btn btn-fill btn-danger btn-wd" value="Sign up *" />
+                        <br />
+                        <br />
+                        <div className="media-body">
+                          <center>* By creating an account, you are agreeing to our Terms & Conditions</center>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-        <form className="form-horizontal" onSubmit={submit}>
-          <div className="card card-plain">
-            <div className="content">
-              <div className="form-group">
-                <input className="form-control" name="display_name" placeholder="Display name" defaultValue="Administrator" required />
-              </div>
-              <div className="form-group">
-                <input className="form-control" id="Email" name="email" placeholder="Your email" type="text" required />
-              </div>
-              <div className="form-group">
-                <input className="form-control" id="Password" name="password" placeholder="Password (12+ characters)" type="password" minLength={12} required />
-              </div>
-              <div className="form-group">
-                <input className="form-control" id="ConfirmPassword" name="confirm_password" placeholder="Confirm password" type="password" minLength={12} required />
-              </div>
-              <div className="form-group">
-                <input className="form-control" name="timezone" placeholder="Timezone" defaultValue="UTC" />
-              </div>
-              {error && <div className="text-danger">{error}</div>}
-              <div className="footer text-center">
-                <input id="btnSubmit" type="submit" className="btn btn-fill btn-danger btn-wd" value="Sign up *" />
-                <p className="muted" style={{ marginTop: 16 }}>
-                  * By creating an account, you are agreeing to our Terms & Conditions
-                </p>
-                <p className="muted">This first account becomes the administrator for this self-hosted instance.</p>
-              </div>
-            </div>
-          </div>
-        </form>
       </div>
     </div>
   );

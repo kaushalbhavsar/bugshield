@@ -1,13 +1,13 @@
 # Reference analysis of the original BugShield project
 
 This document records what could be learned about the discontinued BugShield
-product and which behaviors this successor reuses. The original Windows tree at
-`D:\Kaushal\Projects\bugshield` was not available in the environment that built
-this repository. No source, credentials, or secrets were copied from it. The
-restored operator UI was reconstructed from archived Razor/HTML (login,
-register, forgot password, and the authenticated sidebar from SkanJobs) plus
-the original public wordmarks. The binary Amaze/Material CSS, login
-background photo, Themify webfont, and Highcharts bundle were not recovered.
+product and which behaviors this successor reuses. The original tree is now on `main` under `old/` (`BUGSKAN.Portal`). This
+successor does not modify that folder. The operator UI is ported from
+`BUGSKAN.Portal` views and assets (`_Inner.cshtml`, `_Outer.cshtml`,
+`Account/Login.cshtml`, `Home/Index.cshtml`, `Attacks/AttackToday.cshtml`,
+`Preferences/Edit.cshtml`, `Manage/ChangePassword.cshtml`, `Home/Support.cshtml`,
+plus `amaze.css`, `style.css`, Themify fonts, logos, and `bg1.jpg`). No
+credentials or secrets were copied from it. Highcharts was not vendored.
 
 ## What the original product did
 

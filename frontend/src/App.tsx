@@ -9,8 +9,6 @@ import { DashboardPage } from "./pages/Dashboard";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { Login } from "./pages/Login";
 import { PreferencesPage } from "./pages/Preferences";
-import { ReportsPage } from "./pages/Reports";
-import { ScanPage } from "./pages/Scan";
 import { Setup } from "./pages/Setup";
 import { SupportPage } from "./pages/Support";
 import type { User } from "./types";
@@ -70,16 +68,17 @@ export function App() {
       >
         <Route path="/" element={<DashboardPage user={user} />} />
         <Route path="/dashboard" element={<DashboardPage user={user} />} />
-        <Route path="/attacks" element={<AttacksPage user={user} />} />
-        <Route path="/attacks/report" element={<ReportsPage user={user} />} />
+        <Route path="/attacks" element={<Navigate to="/attacks/today" replace />} />
+        <Route path="/attacks/today" element={<AttacksPage user={user} range="today" />} />
+        <Route path="/attacks/week" element={<AttacksPage user={user} range="week" />} />
+        <Route path="/attacks/month" element={<AttacksPage user={user} range="month" />} />
         <Route path="/attacks/:eventId" element={<AttackDetailPage user={user} />} />
-        <Route path="/skanjobs" element={<ScanPage />} />
         <Route path="/preferences" element={<PreferencesPage user={user} onUser={bootstrap} />} />
         <Route path="/preferences/edit" element={<PreferencesPage user={user} onUser={bootstrap} />} />
         <Route path="/support" element={<SupportPage />} />
         <Route path="/home/support" element={<SupportPage />} />
         <Route path="/manage/change-password" element={<ChangePasswordPage />} />
-        <Route path="/events" element={<Navigate to="/attacks" replace />} />
+        <Route path="/events" element={<Navigate to="/attacks/today" replace />} />
         <Route path="/events/:eventId" element={<EventRedirect />} />
         <Route path="/sites" element={<Navigate to="/preferences/edit" replace />} />
         <Route path="/settings" element={<Navigate to="/preferences/edit" replace />} />

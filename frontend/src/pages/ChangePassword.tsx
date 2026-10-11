@@ -29,32 +29,44 @@ export function ChangePasswordPage() {
   }
 
   return (
-    <div className="card" style={{ maxWidth: 520 }}>
-      <div className="header">
-        <h4 className="title">Change Password</h4>
-        <p className="category">The new password must be at least 12 characters.</p>
+    <form className="form-horizontal" onSubmit={submit}>
+      {error && <div className="text-danger">{error}</div>}
+      {message && <div className="success-text">{message}</div>}
+      <div className="col-md-8 col-md-offset-2">
+        <div className="card card-wizard">
+          <div className="content">
+            <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="OldPassword">
+                Current password
+              </label>
+              <div className="col-md-6">
+                <input className="form-control" id="OldPassword" name="current_password" type="password" required />
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="NewPassword">
+                New password
+              </label>
+              <div className="col-md-6">
+                <input className="form-control" id="NewPassword" name="new_password" type="password" minLength={12} required />
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="ConfirmPassword">
+                Confirm password
+              </label>
+              <div className="col-md-6">
+                <input className="form-control" id="ConfirmPassword" name="confirm_password" type="password" minLength={12} required />
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="col-md-offset-2 col-md-10" style={{ marginLeft: "50%" }}>
+                <input type="submit" value="Change password" className="btn btn-default" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="content">
-        <form onSubmit={submit}>
-          <div className="form-group">
-            <label htmlFor="OldPassword">Current password</label>
-            <input className="form-control" id="OldPassword" name="current_password" type="password" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="NewPassword">New password</label>
-            <input className="form-control" id="NewPassword" name="new_password" type="password" minLength={12} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="ConfirmPassword">Confirm new password</label>
-            <input className="form-control" id="ConfirmPassword" name="confirm_password" type="password" minLength={12} required />
-          </div>
-          {error && <p className="error">{error}</p>}
-          {message && <p className="success-text">{message}</p>}
-          <button type="submit" className="btn btn-rose">
-            Change Password
-          </button>
-        </form>
-      </div>
-    </div>
+    </form>
   );
 }

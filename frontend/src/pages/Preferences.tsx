@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
 import { api } from "../api";
-import { EmptyState } from "../components/EmptyState";
 import type { Settings, Site, Token, User } from "../types";
 
 export function PreferencesPage({ user, onUser }: { user: User; onUser: () => void }) {
@@ -15,9 +14,8 @@ export function PreferencesPage({ user, onUser }: { user: User; onUser: () => vo
   async function refreshSites() {
     const items = (await api.sites()) as Site[];
     setSites(items);
-    if (selected) {
-      setSelected(items.find((item) => item.id === selected.id) || null);
-    }
+    if (selected) setSelected(items.find((item) => item.id === selected.id) || null);
+    else if (items[0]) setSelected(items[0]);
   }
 
   useEffect(() => {
@@ -37,17 +35,10 @@ export function PreferencesPage({ user, onUser }: { user: User; onUser: () => vo
     event.preventDefault();
     if (!settings) return;
     const data = new FormData(event.currentTarget);
-    setError("");
     await api.saveSettings({
       retention_days: Number(data.get("retention_days")),
-      extra_redact_headers: String(data.get("extra_redact_headers") || "")
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean),
-      extra_redact_fields: String(data.get("extra_redact_fields") || "")
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean),
+      extra_redact_headers: String(data.get("extra_redact_headers") || "").split(",").map((item) => item.trim()).filter(Boolean),
+      extra_redact_fields: String(data.get("extra_redact_fields") || "").split(",").map((item) => item.trim()).filter(Boolean),
     });
     await api.updateMe({ timezone: data.get("timezone") });
     setMessage("Preferences saved.");
@@ -57,7 +48,6 @@ export function PreferencesPage({ user, onUser }: { user: User; onUser: () => vo
   async function createSite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    setError("");
     const site = (await api.createSite({
       name: data.get("name"),
       hostname: data.get("hostname"),
@@ -68,223 +58,191 @@ export function PreferencesPage({ user, onUser }: { user: User; onUser: () => vo
     setSelected(site);
   }
 
-  async function createToken(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!selected) return;
-    const data = new FormData(event.currentTarget);
-    const token = (await api.createToken(selected.id, String(data.get("label") || "default"))) as Token;
-    setNewToken(token);
-    setTokens((await api.tokens(selected.id)) as Token[]);
-  }
-
-  async function upload(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!selected) return;
-    const data = new FormData(event.currentTarget);
-    const file = data.get("file") as File;
-    const result = await api.upload(selected.id, file);
-    setMessage(JSON.stringify(result));
-  }
-
   if (!settings) return <p className="muted">{error || "Loading preferences…"}</p>;
 
   return (
     <div>
-      <div className="columns even">
-        <div className="card">
-          <div className="header">
-            <h4 className="title">Add a site</h4>
-            <p className="category">Each site has its own ingestion tokens.</p>
+      <form className="form-horizontal">
+        <div className="col-md-6 col-md-offset-2">
+          <div className="card card-wizard">
+            <div className="content">
+              <div className="form-group">
+                <div className="col-md-4 control-label">
+                  <b>Website</b>
+                </div>
+                <div className="col-md-6">
+                  <input className="form-control" readOnly value={selected?.hostname || selected?.name || ""} />
+                </div>
+              </div>
+              <div className="form-group">
+                <div className="col-md-4 control-label">
+                  <b>Email</b>
+                </div>
+                <div className="col-md-6">
+                  <input className="form-control" readOnly value={user.email} />
+                  <p className="muted">Notification email is not sent by this self-hosted successor.</p>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+      </form>
+
+      <div className="col-md-6">
+        <div className="card">
           <div className="content">
-            <form className="grid" onSubmit={createSite}>
-              <label>
-                Name
-                <input name="name" required />
-              </label>
-              <label>
-                Hostname
-                <input name="hostname" placeholder="app.example.test" />
-              </label>
-              <label>
-                Notes
-                <textarea name="notes" rows={3} />
-              </label>
+            <h4 className="title">Add a site</h4>
+            <form onSubmit={createSite}>
+              <div className="form-group">
+                <input className="form-control" name="name" placeholder="Name" required />
+              </div>
+              <div className="form-group">
+                <input className="form-control" name="hostname" placeholder="Hostname" />
+              </div>
+              <div className="form-group">
+                <textarea className="form-control" name="notes" placeholder="Notes" rows={3} />
+              </div>
               <button type="submit" className="btn btn-rose">
                 Create site
               </button>
             </form>
           </div>
         </div>
+      </div>
+      <div className="col-md-6">
         <div className="card">
-          <div className="header">
-            <h4 className="title">Your sites</h4>
-          </div>
           <div className="content">
-            {sites.length === 0 ? (
-              <EmptyState title="No sites yet">Create a site to start ingesting audit logs.</EmptyState>
-            ) : (
-              <div className="grid site-list">
-                {sites.map((site) => (
-                  <button
-                    key={site.id}
-                    type="button"
-                    className={`btn site-item${selected?.id === site.id ? " active" : ""}`}
-                    onClick={() => {
-                      setSelected(site);
-                      setNewToken(null);
-                      setMessage("");
-                    }}
-                  >
-                    {site.name}
-                    <div className="muted">{site.hostname || site.slug}</div>
-                  </button>
-                ))}
-              </div>
-            )}
+            <h4 className="title">Your sites</h4>
+            <div className="site-list">
+              {sites.map((site) => (
+                <button key={site.id} type="button" className="btn btn-default" onClick={() => setSelected(site)}>
+                  {site.name}
+                  <div className="muted">{site.hostname || site.slug}</div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {selected && (
-        <div className="card">
-          <div className="header">
-            <h4 className="title">{selected.name}</h4>
-            <p className="category">{selected.notes || "No notes"}</p>
-          </div>
-          <div className="content">
-            <form className="row" onSubmit={createToken}>
-              <input name="label" placeholder="Token label" defaultValue="edge-agent" className="input-bordered" />
-              <button type="submit" className="btn btn-rose">
-                Create ingestion token
-              </button>
-            </form>
-            {newToken?.token && (
-              <div className="token-once">
-                <strong>Copy this token now.</strong> It will not be shown again.
-                <pre>{newToken.token}</pre>
-              </div>
-            )}
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Prefix</th>
-                  <th>Label</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {tokens.map((token) => (
-                  <tr key={token.id}>
-                    <td>{token.token_prefix}</td>
-                    <td>{token.label}</td>
-                    <td>{token.revoked_at ? "revoked" : "active"}</td>
-                    <td>
-                      {!token.revoked_at && (
-                        <button
-                          type="button"
-                          className="btn btn-danger"
-                          onClick={async () => {
-                            await api.revokeToken(selected.id, token.id);
-                            setTokens((await api.tokens(selected.id)) as Token[]);
-                          }}
-                        >
-                          Revoke
-                        </button>
-                      )}
-                    </td>
+        <div className="col-md-12">
+          <div className="card">
+            <div className="content">
+              <h4 className="title">{selected.name}</h4>
+              <form
+                className="form-inline"
+                onSubmit={async (event) => {
+                  event.preventDefault();
+                  const data = new FormData(event.currentTarget);
+                  const token = (await api.createToken(selected.id, String(data.get("label") || "default"))) as Token;
+                  setNewToken(token);
+                  setTokens((await api.tokens(selected.id)) as Token[]);
+                }}
+              >
+                <input className="form-control" name="label" defaultValue="edge-agent" />
+                <button type="submit" className="btn btn-rose">
+                  Create ingestion token
+                </button>
+              </form>
+              {newToken?.token && (
+                <div className="token-once">
+                  <strong>Copy this token now.</strong> It will not be shown again.
+                  <pre>{newToken.token}</pre>
+                </div>
+              )}
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Prefix</th>
+                    <th>Label</th>
+                    <th>Status</th>
+                    <th></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <h4 className="title" style={{ marginTop: "1.4rem" }}>
-              Upload audit log
-            </h4>
-            <form className="row" onSubmit={upload}>
-              <input name="file" type="file" required />
-              <button type="submit" className="btn btn-info">
-                Upload
-              </button>
-            </form>
+                </thead>
+                <tbody>
+                  {tokens.map((token) => (
+                    <tr key={token.id}>
+                      <td>{token.token_prefix}</td>
+                      <td>{token.label}</td>
+                      <td>{token.revoked_at ? "revoked" : "active"}</td>
+                      <td>
+                        {!token.revoked_at && (
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={async () => {
+                              await api.revokeToken(selected.id, token.id);
+                              setTokens((await api.tokens(selected.id)) as Token[]);
+                            }}
+                          >
+                            Revoke
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <h4 className="title">Upload audit log</h4>
+              <form
+                onSubmit={async (event) => {
+                  event.preventDefault();
+                  const data = new FormData(event.currentTarget);
+                  const result = await api.upload(selected.id, data.get("file") as File);
+                  setMessage(JSON.stringify(result));
+                }}
+              >
+                <input name="file" type="file" required />
+                <button type="submit" className="btn btn-info">
+                  Upload
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       )}
 
-      <div className="card" style={{ maxWidth: 640 }}>
-        <div className="header">
-          <h4 className="title">Retention and display</h4>
-        </div>
-        <div className="content">
-          <form className="grid" onSubmit={saveSettings}>
-            <label>
-              Display timezone
-              <input name="timezone" defaultValue={user.timezone} />
-            </label>
-            <label>
-              Retention (days)
-              <input name="retention_days" type="number" min={1} max={3650} defaultValue={settings.retention_days} />
-            </label>
-            <label>
-              Extra headers to redact (comma separated)
-              <input name="extra_redact_headers" defaultValue={settings.extra_redact_headers.join(", ")} />
-            </label>
-            <label>
-              Extra query/body field names to redact
-              <input name="extra_redact_fields" defaultValue={settings.extra_redact_fields.join(", ")} />
-            </label>
-            <button type="submit" className="btn btn-rose">
-              Save preferences
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="card" style={{ maxWidth: 640 }}>
-        <div className="header">
-          <h4 className="title">Demo dataset</h4>
-          <p className="category">
-            Load clearly labelled synthetic events. They are marked as demo data and can be removed
-            without touching real ingest.
-          </p>
-        </div>
-        <div className="content">
-          <div className="row">
-            <button
-              type="button"
-              className="btn btn-rose"
-              onClick={async () => {
-                const result = await api.loadDemo();
-                setMessage(`Demo loaded: ${JSON.stringify(result)}`);
-              }}
-            >
+      <div className="col-md-8">
+        <div className="card">
+          <div className="content">
+            <h4 className="title">Retention and display</h4>
+            <form onSubmit={saveSettings}>
+              <div className="form-group">
+                <label>Display timezone</label>
+                <input className="form-control" name="timezone" defaultValue={user.timezone} />
+              </div>
+              <div className="form-group">
+                <label>Retention (days)</label>
+                <input className="form-control" name="retention_days" type="number" min={1} max={3650} defaultValue={settings.retention_days} />
+              </div>
+              <div className="form-group">
+                <label>Extra headers to redact</label>
+                <input className="form-control" name="extra_redact_headers" defaultValue={settings.extra_redact_headers.join(", ")} />
+              </div>
+              <div className="form-group">
+                <label>Extra query/body field names to redact</label>
+                <input className="form-control" name="extra_redact_fields" defaultValue={settings.extra_redact_fields.join(", ")} />
+              </div>
+              <button type="submit" className="btn btn-default">
+                Update
+              </button>
+            </form>
+            <hr />
+            <button type="button" className="btn btn-rose" onClick={async () => setMessage(JSON.stringify(await api.loadDemo()))}>
               Load demo dataset
-            </button>
-            <button
-              type="button"
-              className="btn btn-white"
-              onClick={async () => {
-                const result = await api.clearDemo();
-                setMessage(`Demo removed: ${JSON.stringify(result)}`);
-              }}
-            >
+            </button>{" "}
+            <button type="button" className="btn btn-default" onClick={async () => setMessage(JSON.stringify(await api.clearDemo()))}>
               Remove demo dataset
-            </button>
-            <button
-              type="button"
-              className="btn btn-white"
-              onClick={async () => {
-                const result = await api.runRetention();
-                setMessage(`Retention run: ${JSON.stringify(result)}`);
-              }}
-            >
+            </button>{" "}
+            <button type="button" className="btn btn-default" onClick={async () => setMessage(JSON.stringify(await api.runRetention()))}>
               Run retention now
             </button>
           </div>
         </div>
       </div>
-      {message && <p>{message}</p>}
-      {error && <p className="error">{error}</p>}
+      {message && <div className="col-md-12"><p>{message}</p></div>}
+      {error && <div className="col-md-12"><p className="error">{error}</p></div>}
     </div>
   );
 }
