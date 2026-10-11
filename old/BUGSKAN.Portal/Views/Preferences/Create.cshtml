@@ -1,0 +1,35 @@
+﻿@model BUGSKAN.Portal.Models.Preference
+
+@{
+    ViewBag.Title = "Add email to receive notification";
+    Layout = "~/Views/Shared/_Inner.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="col-md-8 col-md-offset-2">
+        <div class="card card-wizard">
+            <div class="content">
+                <div class="form-group">
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NotificationEmail, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-6">
+                        @Html.PasswordFor(m => m.NotificationEmail, new { @class = "form-control" })
+                    </div>
+                </div>
+                
+
+                
+            </div>
+        </div>
+    </div>
+}
+
+

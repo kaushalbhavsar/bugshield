@@ -1,0 +1,275 @@
+﻿@model PagedList.IPagedList<BUGSKAN.Portal.Models.ShieldLog>
+@using PagedList.Mvc;
+@using Newtonsoft.Json;
+@using MaxMind.GeoIP2.Responses;
+@using BUGSKAN.Portal.Models;
+@using Microsoft.AspNet.Identity;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Attack Logs";
+}
+
+<h2>
+    @{if (ViewContext.HttpContext.Request.QueryString["date"] != null)
+        {
+            @:Attacks on @ViewContext.HttpContext.Request.QueryString["date"]
+    }
+        else
+        {
+            @ViewBag.TotalAttacks @:Attacks today
+    }
+    }
+</h2>
+
+@using (Html.BeginForm())
+{
+
+    <p>
+        Search by Host
+    </p>
+    @Html.DropDownList("searchString", (List<SelectListItem>)ViewBag.ListofHost, null, new { @class = "dropdown-toggle current-user" })<span class="caret"></span>
+
+    <input type="submit" class="btn btn-primary" placeholder="Search here" value="Search" />
+
+    //BugSkanEntities db = new BugSkanEntities();
+    //string userId = User.Identity.GetUserId();
+    //List<SelectListItem> hostlist = new List<SelectListItem>();
+    //var listItems = (from s in db.Sites.Where(s => s.UserId.Contains(userId)) select s.Url).ToList();
+    //foreach (var items in listItems)
+    //{
+    //    hostlist.Add(new SelectListItem() { Text = items });
+    //}
+
+
+}
+        <div class="col-md-12 col-sm-12 col-sx-12">
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    <div class="table-responsive">
+
+                        <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+                            <tr class="panel-heading">
+
+
+
+                                <th>
+                                    <div class="panel-heading">
+                                        <a href="@Url.Action("Index", new { sortOrder = ViewBag.TimeSortParm , currentFilter=ViewBag.CurrentFilter})"><h4>Time <i class="glyphicon glyphicon-sort"></i></h4></a>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="panel-heading">
+                                        <a href="@Url.Action("Index", new { sortOrder = ViewBag.SourceSortParm , currentFilter=ViewBag.CurrentFilter })"><h4>Attack Source   <i class="glyphicon glyphicon-sort"></i></h4></a>
+                                    </div>
+                                </th>
+
+
+
+                                <th>
+                                    <div class="panel-heading">
+                                        <a href="@Url.Action("Index", new { sortOrder = ViewBag.MethodSortParm , currentFilter=ViewBag.CurrentFilter })"><h4>Method  <i class="glyphicon glyphicon-sort"></i></h4></a>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="panel-heading">
+                                        <a href="@Url.Action("Index", new { sortOrder = ViewBag.UrlSortParm,currentFilter=ViewBag.CurrentFilter })"><h4>URL  <i class="glyphicon glyphicon-sort"></i></h4></a>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="panel-heading">
+                                        <a href="@Url.Action("Index", new { sortOrder = ViewBag.HostSortParm,currentFilter=ViewBag.CurrentFilter })"><h4>Host  <i class="glyphicon glyphicon-sort"></i></h4></a>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="panel-heading">
+                                        <a href="@Url.Action("Index", new { sortOrder = ViewBag.AttackidSortParm,currentFilter=ViewBag.CurrentFilter })"><h4>Type  <i class="glyphicon glyphicon-sort"></i></h4></a>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="panel-heading">
+                                        <h4>Attack Type</h4>
+                                    </div>
+                                </th>
+                            </tr>
+
+
+                            @foreach (var item in Model)
+                            {
+
+                                <tr class="table table-condensed table-striped table-bordered table-hover no-margin">
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Time)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("DetailsIP","ShieldLogs", new {SourceIp= item.SourceIp, searchString=item.Host})">
+                                            @Html.DisplayFor(modelItem => item.SourceIp)
+                                        </a>
+                                        <br />
+
+
+
+                                        @{
+                                            if (item.IpInfo != null)
+                                            {
+
+                                                CityResponse city = (CityResponse)JsonConvert.DeserializeObject<CityResponse>(item.IpInfo);
+
+
+
+                                                @:<p><span class="flag-icon flag-icon-@city.Country.IsoCode.ToLower()"></span> @city.Country.Name </p>
+                            Html.Display(city.Country.Name);
+                                            }
+
+                                            else
+                                            {
+
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Method)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Url)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Host)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ResponseCode)
+                                    </td>
+
+                                    <td>
+
+                                        @*Added relationship to Attack Database*@
+                                        @Html.DisplayFor(modelItem => item.BugDB.Title)
+                                    </td>
+                                    <td>
+
+                                        <a href="@Url.Action("Details",new { id=item.id } )" class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i> Details</a>
+
+
+                                    </td>
+                                </tr>
+                                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+                                            @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                                            @Html.PagedListPager(Model, page => Url.Action("AttacksToday",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+
+
+                                            @*<table class="table">
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.Date)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.Time)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.SourceIp)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.SourcePort)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.DestIp)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.DestPort)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.Method)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.Url)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.Host)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.UserAgent)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.PostData)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.ResponseCode)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.IpInfo)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.BugDB.Title)
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+
+                                                @foreach (var item in Model) {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Date)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Time)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.SourceIp)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.SourcePort)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.DestIp)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.DestPort)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Method)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Url)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Host)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.UserAgent)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.PostData)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ResponseCode)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.IpInfo)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.BugDB.Title)
+                                                        </td>
+                                                        <td>
+                                                            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                                                            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                                                            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                                </table>*@

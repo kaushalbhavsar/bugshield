@@ -1,0 +1,1 @@
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\MySqlWatcher\MySqlWatcher\bin\Release\MySqlWatcher.exe.config

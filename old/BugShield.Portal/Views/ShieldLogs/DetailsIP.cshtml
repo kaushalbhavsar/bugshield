@@ -1,0 +1,179 @@
+﻿@model PagedList.IPagedList<BugShield.Portal.Models.ShieldLog>
+@using MaxMind.GeoIP2.Responses;
+@using Newtonsoft.Json;
+@using BugShield.Portal.Models;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title ="IP Details for " +ViewBag.SourceIp;
+}
+<table class="table table-hover no-margin">
+    <tr>
+        <td width="10%"><b>IP</b></td>
+        <td>@ViewBag.SourceIp</td>
+
+    </tr>
+    <tr>
+        <td><b>Country</b></td>
+        <td>
+            @{
+                if (ViewBag.IpInfo != null)
+                {
+
+                    CityResponse city = (CityResponse)JsonConvert.DeserializeObject<CityResponse>(ViewBag.IpInfo);
+
+
+
+                    @:<p><span class="flag-icon flag-icon-@city.Country.IsoCode.ToLower()"></span> @city.Country.Name </p>
+                        Html.Display(city.Country.Name);
+            }
+
+            else
+            {
+
+            }
+            }
+        </td>
+    </tr>
+    <tr>
+        <td><b>Today's Total Attacks</b></td>
+        <td>@ViewBag.AttackNo/Today and @ViewBag.TotalAttackNo/Till Now </td>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+
+    </tr>
+</table>
+
+<div class="col-md-12 col-sm-12 col-sx-12">
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+
+
+                    <tr class="panel-heading">
+
+
+                        <th>
+                            <div class="panel-heading">
+                                <a href="@Url.Action("Index", new { sortOrder = ViewBag.TimeSortParm , currentFilter=ViewBag.CurrentFilter})"><h4>Time <i class="glyphicon glyphicon-sort"></i></h4></a>
+                            </div>
+                        </th>
+
+                        <th>
+                            <div class="panel-heading">
+                                <a href="@Url.Action("Index", new { sortOrder = ViewBag.MethodSortParm , currentFilter=ViewBag.CurrentFilter })"><h4>Method  <i class="glyphicon glyphicon-sort"></i></h4></a>
+                            </div>
+                        </th>
+
+                        <th>
+                            <div class="panel-heading">
+                                <a href="@Url.Action("Index", new { sortOrder = ViewBag.UrlSortParm,currentFilter=ViewBag.CurrentFilter })"><h4>URL  <i class="glyphicon glyphicon-sort"></i></h4></a>
+                            </div>
+                        </th>
+
+                        <th>
+                            <div class="panel-heading">
+                                <a href="@Url.Action("Index", new { sortOrder = ViewBag.HostSortParm,currentFilter=ViewBag.CurrentFilter })"><h4>Host  <i class="glyphicon glyphicon-sort"></i></h4></a>
+                            </div>
+                        </th>
+
+                        <th>
+                            <div class="panel-heading">
+                                <a href="@Url.Action("Index", new { sortOrder = ViewBag.AttackidSortParm,currentFilter=ViewBag.CurrentFilter })"><h4>Type  <i class="glyphicon glyphicon-sort"></i></h4></a>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="panel-heading">
+                                <h4>Attack Type</h4>
+                            </div>
+                        </th>
+                    </tr>
+
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr class="table table-condensed table-striped table-bordered table-hover no-margin">
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Time)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Method)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Url)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Host)
+                            </td>
+                            <td>
+
+                                @*Added relationship to Attack Database*@
+                                @Html.DisplayFor(modelItem => item.BugDB.Title)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<dl class="dl-horizontal">
+        <dt class="col-md-2 col-sm-4">
+            IP
+        </dt>
+
+        <dd class="col-md-2 col-sm-4">
+            @ViewBag.SourceIp
+        </dd>
+
+        <dt class="col-md-2 col-sm-4">
+            Country
+        </dt>
+
+        <dd class="col-md-2 col-sm-4"
+
+            @{
+                if (ViewBag.IpInfo != null)
+                {
+
+                    CityResponse city = (CityResponse)JsonConvert.DeserializeObject<CityResponse>(ViewBag.IpInfo);
+
+
+
+                    @:<p><span class="flag-icon flag-icon-@city.Country.IsoCode.ToLower()"></span> @city.Country.Name </p>
+                            Html.Display(city.Country.Name);
+                }
+
+                else
+                {
+
+                }
+            }
+        </dd>
+
+        <dt class="col-md-2 col-sm-4">
+            No. of Attacks
+        </dt>
+
+        <dd class="col-md-2 col-sm-4">
+            @ViewBag.AttackNo
+        </dd>
+
+    </dl>*@
+
+
+<p>
+    <a href="@Url.Action("Index", "ShieldLogs",new { searchString = ViewBag.SearchString })" class="btn btn-primary"><i class="glyphicon glyphicon-backward"></i> Back to List</a>
+    @*<a href="@Url.Action("Index")" class="btn btn-default">Back to List</a>
+        @Html.ActionLink("Back to List", "Index")*@
+</p>

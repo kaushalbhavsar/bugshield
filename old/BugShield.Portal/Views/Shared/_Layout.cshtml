@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BugShield Admin Dashboard</title>
+  
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+    
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/js/flot/jquery.flot.js"></script>
+    <script src="~/js/flot/jquery.flot.time.js"></script>
+    <script src="~/js/flot/jquery.flot.axislabels.js"></script>
+    <script src="~/js/flot/jquery.flot.categories.js"></script>
+    <script src="~/js/flot/jquery.flot.stack.js"></script>
+   
+    <script src="~/js/flot/jquery.flot.pie.min.js"></script>
+
+    <script src="~/js/flot/jquery.flot.tooltip.js"></script>
+
+
+    <link rel="shortcut icon" href="img/favicon.html">
+
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- Animate CSS -->
+    <link href="/css/animate.css" rel="stylesheet" media="screen">
+    <!-- date range -->
+
+    <link rel="stylesheet" type="text/css" href="~/css/flag-icon.css">
+    <link rel="stylesheet" type="text/css" href="/css/daterange.css">
+    <!-- Main CSS -->
+    <link href="/css/main.css" rel="stylesheet" media="screen">
+    <!-- Slidebar CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/slidebars.css">
+    <!-- Font Awesome -->
+    <link href="/fonts/font-awesome.min.css" rel="stylesheet">
+    <!-- Metrize Fonts -->
+    <link href="/fonts/metrize.css" rel="stylesheet">
+    <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+
+
+    <![endif]-->
+
+  
+</head>
+<body>
+    <!-- Left sidebar start -->
+    <aside id="sidebar">
+        <!-- Logo starts -->
+        <a href="#" class="logo">
+            <img src="/img/logo.png" alt="logo">
+        </a>
+        <!-- Logo ends -->
+        <!-- Menu start -->
+        <div id='menu'>
+            <ul>
+                <li>
+                    <a href='/'>
+                        <div class="fs1" aria-hidden="true" data-icon="&#xe007;"></div>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div id='menu'>
+            <ul>
+                <li>
+                    <a href='/Sites/'>
+                        <div class="fs1" aria-hidden="true" data-icon="&#xe007;"></div>
+                        <span>My Sites</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div id='menu'>
+            <ul>
+                <li>
+                    <a href='/Sites/'>
+                        <div class="fs1" aria-hidden="true" data-icon="&#xe007;"></div>
+                        <span>Attack Logs</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div id='menu'>
+            <ul>
+                <li>
+                    <a href='/Preferences/'>
+                        <div class="fs1" aria-hidden="true" data-icon="&#xe007;"></div>
+                        <span>Preferences</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div id='menu'>
+            <ul>
+                <li>
+                    <a href='/Support/'>
+                        <div class="fs1" aria-hidden="true" data-icon="&#xe007;"></div>
+                        <span>Support</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>  
+        <!-- Menu End -->
+
+
+    </aside>
+    <!-- Left sidebar end -->
+    <!-- Dashboard Wrapper Start -->
+    <div class="dashboard-wrapper">
+        <!-- Header start -->
+        <header>
+            <ul class="pull-left" id="left-nav">
+                <li class="hidden-lg hidden-md hidden-sm">
+                    <div class="logo-mob clearfix">
+                        <h2><div class="fs1" aria-hidden="true" data-icon="&#xe0db;"></div><span>Cloud Admin</span></h2>
+                    </div>
+                </li>
+                @*<li>
+                    <div class="custom-search hidden-sm hidden-xs pull-left">
+                        <input type="text" class="search-query" placeholder="Search here">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </li>*@
+            </ul>
+            <div class="pull-right">
+                <ul id="mini-nav" class="clearfix">
+                    <li class="list-box hidden-xs">
+                        <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe129;"></div>
+                        </a>
+                        <span class="info-label red-bg animated rubberBand">7</span>
+                        <ul class="dropdown-menu flipInX animated messages">
+                            <li class="dropdown-header">You have 7 messages</li>
+                            <li>
+                                <div class="icon">
+                                    <img src="img/admin10.png" alt="Browser">
+                                </div>
+                                <div class="details">
+                                    <strong class="text-danger">Willams</strong>
+                                    <span>Firefox is a free, open-source web browser from Mozilla.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">
+                                    <img src="img/admin6.png" alt="Browser">
+                                </div>
+                                <div class="details">
+                                    <strong class="text-info">Sunny</strong>
+                                    <span>Internet Explorer is a free web browser from Microsoft.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">
+                                    <img src="img/admin3.png" alt="Browser">
+                                </div>
+                                <div class="details">
+                                    <strong class="text-info">James</strong>
+                                    <span>Safari is known for its sleek design and ease of use.</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <li class="list-box hidden-xs dropdown">
+                        <a id="drop1" href="#" role="button" class="dropdown-toggle current-user" data-toggle="dropdown" aria-expanded="true">
+                            @User.Identity.Name <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu sm fadeInUp animated messages">
+                            <li class="dropdown-content">
+                                <a href="/Sites/Create">Add new Website</a>
+                                <a href="/Customers/Index">Edit Profile</a>
+                                <a href="/Account/ChangePassword">Change Password</a>
+                                <a href="/Preferences">Settings</a>
+                                <a href="#">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+        </header>
+        <!-- Header ends -->
+        <!-- Main Container Start -->
+        <div class="main-container">
+            <!-- Top Bar Starts -->
+            <div class="top-bar clearfix">
+                <div class="page-title">
+                    <h4>@ViewBag.Title</h4>
+                </div>
+
+            </div>
+            <!-- Top Bar Ends -->
+            <!-- Container fluid Starts -->
+            <div class="container-fluid">
+                <!-- Spacer starts -->
+                <div class="spacer-xs">
+                    @RenderBody()
+                </div>
+                <!-- Spacer ends -->
+            </div>
+            <!-- Container fluid ends -->
+        </div>
+        <!-- Main Container Start -->
+        <!-- Footer Start -->
+        <footer>
+            Copyright &copy; Pratikar Technologies Pvt. Ltd. <span>2017</span>. All Rights Reserved.
+        </footer>
+        <!-- Footer end -->
+
+    </div>
+    <!-- Dashboard Wrapper End -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+   
+    <!-- Animated Right Sidebar -->
+    @*<script src="/js/slidebars.js"></script>*@
+    <!-- Date Range -->
+    @*<script src="/js/daterange/moment.js"></script>
+    <script src="/js/daterange/daterangepicker.js"></script>*@
+    <!-- Custom JS -->
+    @*<script src="/js/custom.js"></script>*@
+    <!-- jQuery UI CSS Reference -->
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" />
+    <!-- Required jQuery and jQuery UI Javascript references -->
+
+    @*<script src="~/Content/prettify/prettify.js"></script>
+    <link href="~/Content/prettify/prettify.css" rel="stylesheet" />*@
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+          
+            @RenderSection("scripts", required: false)
+            @* @RenderSection("scripts", required: false)*@
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,129 @@
+﻿
+
+
+<script id="source">
+    var $border_color = "#f9f9f9";
+    var $grid_color = "#eeeeee";
+    var $default_black = "#666666";
+    var $default_white = "#ffffff";
+    var $green = "#8ecf67";
+    var $red = "#d40000";
+    var DATE_FORMAT = "%Y-%m-%d";
+
+    var dataurl = '/Reports/GetAttacksByDay';
+    // setup plot
+    var options1 = {
+
+        series: {
+            shadowSize: 0,
+            bars: {
+                lineWidth: 1,
+                barWidth: 1000 * 1000 * 80,
+            }
+        },
+        grid: {
+            hoverable: true,
+            clickable: false,
+            borderWidth: 1,
+            tickColor: $border_color,
+            borderColor: $grid_color,
+            backgroundColor: { colors: [$default_white, $default_white] }
+        },
+        legend: {
+            show: true,
+            position: 'nw',
+            noColumns: 0,
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: '%y attacks'
+        },
+
+        xaxis: {
+            mode: "time",
+            ticks: 12, tickDecimals: 0
+        },
+        yaxis: { ticks: 6, tickDecimals: 0 },
+
+        colors: [$red],
+
+
+    };
+
+    $.ajax({
+        url: dataurl,
+        method: 'GET',
+        data: { date: 'bugskan.com' },
+        dataType: 'json',
+
+        error: function (request, error) {
+            console.log(arguments);
+            alert(" Can't do because: " + error);
+        },
+        success: function (result) {
+            // var data1 = dataurl;
+            var data1 = [[1488326400000, 55], [1488240000000, 62], [1488153600000, 60], [1488067200000, 53], [1487980800000, 106], [1487894400000, 50], [1487808000000, 66], [1487721600000, 80], [1487635200000, 91], [1487548800000, 79], [1487462400000, 23], [1487376000000, 4]];
+
+
+            var data = [{
+                label: "data1",
+                data: result,
+                bars: {
+                    show: true,
+                    barWidth: 1000 * 1000 * 80
+                }
+            }, {
+                label: "data2",
+                data: result,
+                lines: {
+                    show: true
+                },
+                points: {
+                    show: true
+                }
+            }];
+
+            var options = {
+                series: {
+                    shadowSize: 0,
+                    bars: {
+                        lineWidth: 1,
+                    }
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 1,
+                    tickColor: $border_color,
+                    borderColor: $grid_color,
+                    backgroundColor: { colors: [$default_white, $default_white] }
+                },
+                legend: {
+                    show: true,
+                    position: 'nw',
+                    noColumns: 0,
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    cssClass: "flotToolTip",
+                    content: '<span style="background:#000000"> %y attacks </span> ',
+
+                },
+
+                xaxis: { mode: "time", ticks: 6, tickDecimals: 0 },
+                yaxis: { ticks: 6, tickDecimals: 0 },
+
+                colors: [$red],
+            };
+
+
+            $.plot($("#placeholder"), data, options);
+
+        }
+    });
+
+
+    showTooltip(item.pageX, item.pageY, $.plot.formatDate(d, DATE_FORMAT) + ":" + y);
+
+
+</script>

@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>ModSecurity Map Example</title>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjUDJxxwuyyYkO9sN6FdIKFp8Sgg1pYvM&callback=initMap"
+            type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function checkExists(existingHits, MarkData) {
+            for (var i = 0; i < existingHits.length; i++) {
+                var Check = existingHits[i];
+                if (Check[0] != MarkData[0]) {
+                    continue;
+                }
+                if (Check[1] != MarkData[1]) {
+                    continue;
+                }
+                if (Check[2] != MarkData[2]) {
+                    continue;
+                }
+                if (Check[3] != MarkData[3]) {
+                    continue;
+                }
+                return true;
+            }
+            return false;
+        }
+        function updateMap(map, existingHits) {
+            $.get("/Notifications/GetNotifications", function (data) {
+                var markers = data.documentElement.getElementsByTagName("marker");
+                for (var i = 0; i < markers.length; i++) {
+                    var infoWindow = new google.maps.InfoWindow;
+                    var attack = markers[i].getAttribute("attack");
+                    var ip = markers[i].getAttribute("ip");
+                    var request = markers[i].getAttribute("request");
+                    var type = markers[i].getAttribute("type");
+                    var path = [];
+                    var lat = parseFloat(markers[i].getAttribute("lat"));
+                    var lng = parseFloat(markers[i].getAttribute("lng"));
+                    var point = new google.maps.LatLng(lat, lng);
+                    var lat2 = parseFloat(markers[i].getAttribute("destlat"));
+                    var lng2 = parseFloat(markers[i].getAttribute("destlng"));
+                    var point2 = new google.maps.LatLng(lat2, lng2);
+                    markData = [lat, lng, lat2, lng2]
+                    if (checkExists(existingHits, markData) == false) {
+                        existingHits.push(markData)
+                        path.push(point);
+                        path.push(point2);
+                        var ourLine = new google.maps.Polyline({
+                            path: path,
+                            strokeColor: "#0000FF",
+                            strokeOpacity: 0.8,
+                            strokeWeight: 2
+                        });
+                        ourLine.setMap(map);
+                        request = request.replace(/\\n/g, "<br />");
+                        var html = "<b>" + attack + "</b> <br/> <i>Source Address: " + ip + "</i><br />" + request;
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: point,
+                            html: html
+                        });
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infoWindow.setContent(this.html);
+                            infoWindow.open(map, this);
+                        });
+                    } else {
+                        continue;
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            existingHits = [];
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: new google.maps.LatLng(47.6145, -122.3418),
+                zoom: 2,
+                mapTypeId: 'roadmap'
+            });
+            updateMap(map, existingHits);
+            setInterval(function () {
+                updateMap(map, existingHits);
+            }, 5000);
+        });
+    </script>
+</head>
+<body>
+    <div id="map" style="width: 1024px; height: 700px"></div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<BUGSKAN.Portal.Models.Rpt_AttackByURL_Result>
+@{
+
+    Layout = "~/Views/Shared/_Inner.cshtml";
+    ViewBag.title = "Attacks By URL";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            $.ajax({
+                type: "POST",
+                url: "/Attacks/AjaxMethodForUrl",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    //Pie
+                    var options = {
+                    
+                        //chartArea:{left:0,top:0,width:"100%",height:"100%"},
+                        width: "95%",
+                        height: 400
+                    };
+                    var chart = new google.visualization.PieChart($("#chart")[0]);
+                    chart.draw(data, options);
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+    </script>
+
+    <div id="chart" style="width: 100%; height: 400px;">
+    </div>
+
+
+    <div class="content" style="width: 100%;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="content">
+
+                            <table id="datatables" class="table table-striped table-no-bordered table-hover" style="table-layout: fixed; width: 100%;">
+                                <colgroup>
+                                    <col style="width: 50px;">
+                                    <col style="width: 10px;">
+                                    <col style="width: 5px">
+                                </colgroup>
+
+
+                                <thead>
+
+                                    <tr>
+                                        <th>
+                                            <div class="panel-heading">
+                                                <a href="@Url.Action("AttackByUrl", new { sortOrder = ViewBag.UrlSortParm , currentFilter=ViewBag.CurrentFilter})"><h4>URL<i class="glyphicon glyphicon-sort"></i></h4></a>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="panel-heading">
+                                                <a href="@Url.Action("AttackByUrl", new { sortOrder = ViewBag.CountSortParm , currentFilter=ViewBag.CurrentFilter})"><h4>Count<i class="glyphicon glyphicon-sort"></i></h4></a>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Url)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.count)</td>
+                                    <td class="text-right">
+                                        <a href="@Url.Action("DetailsForAttackByUrl1" ,new { Url = item.Url })" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Details </a>
+
+                                    </td>
+                                </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
+        <!-- end col-md-12 -->
+    </div>
+
+</body>
+</html>

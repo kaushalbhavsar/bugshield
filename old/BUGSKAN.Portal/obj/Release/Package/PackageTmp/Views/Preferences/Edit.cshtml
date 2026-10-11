@@ -1,0 +1,84 @@
+﻿@model BUGSKAN.Portal.Models.Preference
+
+@{
+    ViewBag.Title = "Update email address to receive notification";
+    Layout = "~/Views/Shared/_Inner.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="col-md-6 col-md-offset-2">
+            <div class="card card-wizard">
+                <div class="content">
+                    <div class="form-group">
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 control-label">
+                                <b>Website</b>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.Site1.Url, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 control-label">
+                                <b>Email</b>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.NotificationEmail, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10" style="margin-left:50%;">
+                                <input type="submit" value="Update" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+         
+            <div class="col-md-10">
+                @Html.DropDownList("DefaultSite", null, htmlAttributes: new { @class = "hidden" })
+                @Html.ValidationMessageFor(model => model.Site, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+          
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "hidden" } })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Site, new { htmlAttributes = new { @class = "hidden" } })
+                @Html.ValidationMessageFor(model => model.Site, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+          
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "hidden" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+    </div>
+}

@@ -1,0 +1,137 @@
+﻿
+<script id="source">
+    var $border_color = "#f9f9f9";
+    var $grid_color = "#eeeeee";
+    var $default_black = "#666666";
+    var $default_white = "#ffffff";
+    var $green = "#8ecf67";
+    var $red = "#d40000";
+
+    var dataurl = '/Reports/GetAttacksByHour';
+    // setup plot
+    var options = {
+
+        series: {
+            shadowSize: 0,
+            bars: {
+                lineWidth: 1,
+            }
+        },
+        grid: {
+            hoverable: true,
+            clickable: false,
+            borderWidth: 1,
+            tickColor: $border_color,
+            borderColor: $grid_color,
+            backgroundColor: { colors: [$default_white, $default_white] }
+        },
+        legend: {
+            show: true,
+            position: 'nw',
+            noColumns: 0,
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: '%y attacks'
+        },
+
+        xaxis: { ticks: 15, tickDecimals: 0 },
+        yaxis: { ticks: 6, tickDecimals: 0 },
+
+        colors: [$red],
+
+
+    };
+
+    $.ajax({
+        url: dataurl,
+        method: 'GET',
+        data: { date: 'bugskan.com' },
+        dataType: 'json',
+        error: function (request, error) {
+            console.log(arguments);
+            alert(" Can't do because: " + error);
+        },
+        success: function (result) {
+
+
+            var data = [{
+                label: "No. of attacks",
+                data: result,
+                bars: {
+                    show: true,
+                    barWidth: 1
+                }
+            }];
+
+            $.plot($("#placeholder2"), data, options);
+        }
+    });
+</script>
+
+
+@*<script id="source">
+        var $border_color = "#f9f9f9";
+        var $grid_color = "#eeeeee";
+        var $default_black = "#666666";
+        var $default_white = "#ffffff";
+        var $green = "#8ecf67";
+        var $blue = "#12A4F4";
+
+        var dataurl = '/Reports/GetAttacksByHour';
+        // setup plot
+        var options = {
+
+            series: {
+                shadowSize: 0,
+                bars: {
+                    lineWidth: 1,
+                }
+            },
+            grid: {
+                hoverable: true,
+                clickable: false,
+                borderWidth: 1,
+                tickColor: $border_color,
+                borderColor: $grid_color,
+                backgroundColor: { colors: [$default_white, $default_white] }
+            },
+            legend: {
+                show: true,
+                position: 'nw',
+                noColumns: 0,
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: '%y attacks'
+            },
+
+            xaxis: { ticks: 15, tickDecimals: 0 },
+            yaxis: { ticks: 6, tickDecimals: 0 },
+
+            colors: [$blue],
+
+
+        };
+
+        $.ajax({
+            url: dataurl,
+            method: 'GET',
+            data: { date: 'bugskan.com' },
+            dataType: 'json',
+            success: function (result) {
+
+
+                var data = [{
+                    label: "No. of attacks",
+                    data: result,
+                    bars: {
+                        show: true,
+                        barWidth: 1
+                    }
+                }];
+
+                $.plot($("#placeholder2"), data, options);
+            }
+        });
+    </script>*@

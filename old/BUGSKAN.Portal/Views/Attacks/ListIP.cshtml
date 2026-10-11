@@ -1,0 +1,211 @@
+﻿@model IEnumerable<BUGSKAN.Portal.Models.ShieldLog>
+
+@{
+    ViewBag.Title = "ListIP";
+}
+
+<h2>ListIP</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p><table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SourceIp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SourcePort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestIp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestPort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Method)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Host)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAgent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResponseCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttackId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IpInfo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceIp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourcePort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestIp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestPort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Method)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Host)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserAgent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResponseCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttackId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IpInfo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SourceIp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SourcePort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestIp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestPort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Method)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Host)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAgent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResponseCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IpInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BugDB.Title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SourceIp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SourcePort)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DestIp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DestPort)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Method)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Host)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserAgent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostData)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResponseCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IpInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BugDB.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>*@

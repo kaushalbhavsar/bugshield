@@ -1,0 +1,122 @@
+﻿@model BugShield.Portal.Models.ShieldLog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShieldLog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceIp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceIp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourcePort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourcePort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DestIp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DestIp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DestPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DestPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Method)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Method)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Host)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Host)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserAgent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserAgent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResponseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResponseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttackId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttackId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

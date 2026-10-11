@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BUGSKAN.Portal.Models.Site>
+
+<div style="padding:20px;">
+    <h6>Choose Site</h6>
+    @using (Html.BeginForm("DropdownSite", "Sites"))
+    {
+        List<SelectListItem> listItems = new List<SelectListItem>();
+
+        foreach (var item in Model)
+        {
+            if (item.SiteId.ToString() == Session["SelectedSiteId"].ToString())
+            {
+                listItems.Add(new SelectListItem
+                {
+                    Text = item.Url,
+                    Value = item.SiteId.ToString(),
+                    Selected = true
+
+                });
+            }
+            else
+            {
+                listItems.Add(new SelectListItem
+                {
+                    Text = item.Url,
+                    Value = item.SiteId.ToString()
+
+                });
+            }
+        }
+
+        listItems.Add(new SelectListItem
+        {
+            Text = "--- Add New Site ---",
+            Value = "+"
+        });
+
+
+        @Html.DropDownList("SelectedSite", listItems, "-- Select Site --", new { @class = "form-control", onchange = "this.form.submit();" });
+    }
+</div>
+
+
+

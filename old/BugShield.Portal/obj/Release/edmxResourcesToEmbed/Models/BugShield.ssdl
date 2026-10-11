@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BugSkanDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BugDB">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Links" Type="varchar(max)" />
+    <Property Name="VideoUrl" Type="varchar(max)" />
+    <Property Name="TimeStamp" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ShieldLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="SourceIp" Type="varchar" MaxLength="50" />
+    <Property Name="SourcePort" Type="varchar" MaxLength="50" />
+    <Property Name="DestIp" Type="varchar" MaxLength="50" />
+    <Property Name="DestPort" Type="varchar" MaxLength="50" />
+    <Property Name="Method" Type="varchar" MaxLength="50" />
+    <Property Name="Url" Type="varchar(max)" />
+    <Property Name="Host" Type="varchar" MaxLength="50" />
+    <Property Name="UserAgent" Type="varchar(max)" />
+    <Property Name="PostData" Type="varchar(max)" />
+    <Property Name="ResponseCode" Type="varchar" MaxLength="50" />
+    <Property Name="AttackId" Type="int" />
+    <Property Name="IpInfo" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Site">
+    <Key>
+      <PropertyRef Name="SiteId" />
+    </Key>
+    <Property Name="SiteId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="Url" Type="varchar(max)" Nullable="false" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="LastScan" Type="datetime" />
+    <Property Name="Status" Type="varchar(max)" />
+    <Property Name="Notes" Type="varchar(max)" />
+    <Property Name="LoginUser" Type="varchar(max)" />
+    <Property Name="LoginPass" Type="varchar(max)" />
+    <Property Name="Technology" Type="varchar(max)" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+    <Property Name="LoginUrl" Type="varchar(max)" />
+    <Property Name="LoginSuccess" Type="nchar" MaxLength="10" />
+    <Property Name="IPAddress" Type="varchar(max)" />
+    <Property Name="Server" Type="varchar(max)" />
+    <Property Name="PlanName" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK_ShieldLog_BugDB">
+    <End Role="BugDB" Type="Self.BugDB" Multiplicity="0..1" />
+    <End Role="ShieldLog" Type="Self.ShieldLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BugDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShieldLog">
+        <PropertyRef Name="AttackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BugSkanDBModelStoreContainer">
+    <EntitySet Name="BugDB" EntityType="Self.BugDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShieldLog" EntityType="Self.ShieldLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ShieldLog_BugDB" Association="Self.FK_ShieldLog_BugDB">
+      <End Role="BugDB" EntitySet="BugDB" />
+      <End Role="ShieldLog" EntitySet="ShieldLog" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

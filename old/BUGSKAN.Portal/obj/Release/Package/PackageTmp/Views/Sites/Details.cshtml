@@ -1,0 +1,110 @@
+﻿@model BUGSKAN.Portal.Models.Site
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Site</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        
+
+        
+
+        
+
+        <dd>
+            @Html.DisplayFor(model => model.LastScan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginPass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginPass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Technology)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Technology)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginSuccess)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginSuccess)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IPAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IPAddress)
+        </dd>
+
+      
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SiteId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BugSkanDBModelStoreContainer" CdmEntityContainer="BugSkanDBEntities">
+    <EntitySetMapping Name="BugDBs">
+      <EntityTypeMapping TypeName="BugSkanDBModel.BugDB">
+        <MappingFragment StoreEntitySet="BugDB">
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+          <ScalarProperty Name="Links" ColumnName="Links" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShieldLogs">
+      <EntityTypeMapping TypeName="BugSkanDBModel.ShieldLog">
+        <MappingFragment StoreEntitySet="ShieldLog">
+          <ScalarProperty Name="IpInfo" ColumnName="IpInfo" />
+          <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+          <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+          <ScalarProperty Name="PostData" ColumnName="PostData" />
+          <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+          <ScalarProperty Name="Host" ColumnName="Host" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="DestPort" ColumnName="DestPort" />
+          <ScalarProperty Name="DestIp" ColumnName="DestIp" />
+          <ScalarProperty Name="SourcePort" ColumnName="SourcePort" />
+          <ScalarProperty Name="SourceIp" ColumnName="SourceIp" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sites">
+      <EntityTypeMapping TypeName="BugSkanDBModel.Site">
+        <MappingFragment StoreEntitySet="Site">
+          <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+          <ScalarProperty Name="Server" ColumnName="Server" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="LoginSuccess" ColumnName="LoginSuccess" />
+          <ScalarProperty Name="LoginUrl" ColumnName="LoginUrl" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Technology" ColumnName="Technology" />
+          <ScalarProperty Name="LoginPass" ColumnName="LoginPass" />
+          <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

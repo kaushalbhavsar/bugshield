@@ -1,0 +1,87 @@
+﻿@model DotNet.Highcharts.Highcharts
+@{
+    ViewBag.Title = "PieChartHighchart";
+}
+
+<h2>PieChartHighchart</h2>
+ 
+<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+<script src="~/Scripts/Highcharts/highcharts.js"></script>
+
+
+
+  
+<script >
+    function DrawPieChart(series) {
+
+        //var Highcharts = require('highcharts')(win);
+
+        var chart = new Highcharts.Chart( {
+            credits:{
+                enabled:false
+            },
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 1, //null,
+                plotShadow: false,
+
+                renderTo: 'container'
+            },
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                pointFormat: "{series.name}: <b> {point.percentage} % </b> "
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    format: '<b>{point.name}</b>: {point.percentage} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    },
+                    dataLabels: {
+                        enabled: true
+                    },
+                    showInLegend: true
+                }
+
+            },
+            series: [{
+                type: 'pie',
+                name: 'No. of Attacks',
+                data: series
+            }]
+        });
+    }
+        $(function () {
+            $.ajax({
+                url: 'PieChartData/Attacks',
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                async: false,
+                processData: false,
+                cache: false,
+                //delay: 15,
+                success: function (data) {
+                    // alert(data);
+                    var series = new Array();
+                    for (var i in data) {
+                        var serie = new Array(data[i].name, data[i].y);
+                        series.push(serie);
+                    }
+                    DrawPieChart(series);
+                },
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+        });
+        
+</script>  
+<div id="container" style="min-width: 350px; height: 350px; max-width: 600px; margin: 0 auto"></div>
+

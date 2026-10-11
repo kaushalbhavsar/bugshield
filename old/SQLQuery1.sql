@@ -1,0 +1,1 @@
+﻿select top 10 * from shieldlog  where host='kaushalbhavsar.com' order by date desc

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="844b5a0773d64f2c91d7970d817e7767" Name="Diagram1">
+        <EntityTypeShape EntityType="BugSkanDBModel.AccessLog" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.BugDB" Width="1.5" PointX="5.75" PointY="1.875" />
+        <EntityTypeShape EntityType="BugSkanDBModel.Customer" Width="1.5" PointX="4.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.Preference" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="BugSkanDBModel.ShieldLog" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="BugSkanDBModel.Site" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="BugSkanDBModel.SkanResult" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.Subscription" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.App" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugSkanDBModel.AspNetRole" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.AspNetUserClaim" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.AspNetUserLogin" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.AspNetUserRole" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.AspNetUser" Width="1.5" PointX="10.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.Bug" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.DomainRequest" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.EMailRequest" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.MailJob" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.ResultItem" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.SkanJob" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="BugSkanDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="13.75" />
+        <AssociationConnector Association="BugSkanDBModel.FK_ShieldLog_ToTable" />
+        <AssociationConnector Association="BugSkanDBModel.FK_Preferences_Site" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

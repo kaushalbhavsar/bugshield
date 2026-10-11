@@ -1,0 +1,67 @@
+﻿
+<script id="source">
+    var dataurl = '/Reports/GetAttacksByDay';
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: '/Reports/GetAttacksByDay1',
+        data: '/Reports/GetAttacksByDay2',
+    }
+
+
+    $.ajax({
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Bar Chart'
+                },
+                success: function (result) {
+
+
+                    var data = [{
+                        label: "No. of attacks",
+                        data: result,
+                        bars: {
+                            show: true,
+                            barWidth: 1
+                        }
+                    }];
+
+                    $.plot($("#placeholder"), data, options);
+
+                }
+            }
+        });
+  
+    //$.ajax({
+    //    url: dataurl,
+    //    method: 'GET',
+    //    data: { date: 'bugskan.com' },
+    //    dataType: 'json',
+
+    //    error: function (request, error) {
+    //        console.log(arguments);
+    //        alert(" Can't do because: " + error);
+    //    },
+    //    success: function (result) {
+
+
+    //        var data = [{
+    //            label: "No. of attacks",
+    //            data: result,
+    //            bars: {
+    //                show: true,
+    //                barWidth: 1
+    //            }
+    //        }];
+
+    //        $.plot($("#placeholder"), data, options);
+    //    }
+    //});
+</script>
+

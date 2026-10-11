@@ -1,0 +1,68 @@
+﻿{
+  "subdivisions": [],
+  "city": {
+    "names": {},
+    "confidence": null,
+    "geoname_id": null
+  },
+  "location": {
+    "accuracy_radius": null,
+    "average_income": null,
+    "latitude": null,
+    "longitude": null,
+    "metro_code": null,
+    "population_density": null,
+    "time_zone": null
+  },
+  "postal": {
+    "code": null,
+    "confidence": null
+  },
+  "continent": {
+    "names": {},
+    "code": null,
+    "geoname_id": null
+  },
+  "country": {
+    "names": {},
+    "confidence": null,
+    "iso_code": null,
+    "geoname_id": null
+  },
+  "maxmind": { "queries_remaining": null },
+  "registered_country": {
+    "names": {
+      "de": "China",
+      "en": "China",
+      "es": "China",
+      "fr": "Chine",
+      "ja": "??",
+      "pt-BR": "China",
+      "ru": "?????",
+      "zh-CN": "??"
+    },
+    "confidence": null,
+    "iso_code": "CN",
+    "geoname_id": 1814991
+  },
+  "represented_country": {
+    "names": {},
+    "type": null,
+    "confidence": null,
+    "iso_code": null,
+    "geoname_id": null
+  },
+  "traits": {
+    "autonomous_system_number": null,
+    "autonomous_system_organization": null,
+    "connection_type": null,
+    "domain": null,
+    "ip_address": "116.206.203.236",
+    "is_anonymous_proxy": false,
+    "is_legitimate_proxy": false,
+    "is_satellite_provider": false,
+    "isp": null,
+    "organization": null,
+    "user_type": null
+  }
+}

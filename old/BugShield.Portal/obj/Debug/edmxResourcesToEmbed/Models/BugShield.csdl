@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BugSkanDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BugSkanDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="BugSkanDBModel.Customer" />
+    <EntitySet Name="Subscriptions" EntityType="BugSkanDBModel.Subscription" />
+    <EntitySet Name="Sites" EntityType="BugSkanDBModel.Site" />
+    <EntitySet Name="BugDBs" EntityType="BugSkanDBModel.BugDB" />
+    <EntitySet Name="ShieldLogs" EntityType="BugSkanDBModel.ShieldLog" />
+    <AssociationSet Name="FK_ShieldLog_BugDB" Association="BugSkanDBModel.FK_ShieldLog_BugDB">
+      <End Role="BugDB" EntitySet="BugDBs" />
+      <End Role="ShieldLog" EntitySet="ShieldLogs" />
+    </AssociationSet>
+    <FunctionImport Name="Rpt_AttackCountByDate" ReturnType="Collection(BugSkanDBModel.AttackByDate)">
+      <Parameter Name="host" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Rpt_AttackCountByHour" ReturnType="Collection(BugSkanDBModel.Rpt_AttackCountByHour_Result)">
+      <Parameter Name="host" Mode="In" Type="String" />
+      <Parameter Name="sdate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Rpt_AttackTypeByHost" ReturnType="Collection(BugSkanDBModel.Rpt_AttackTypeByHost_Result)">
+      <Parameter Name="host" Mode="In" Type="String" />
+      <Parameter Name="sdate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Created" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="PlanName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="PaymentMade" Type="Int32" />
+    <Property Name="PaymentPending" Type="Int32" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+    <Property Name="PaymentDueDate" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Site">
+    <Key>
+      <PropertyRef Name="SiteId" />
+    </Key>
+    <Property Name="SiteId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastScan" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LoginUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LoginPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Technology" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LoginUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LoginSuccess" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Server" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PlanName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BugDB">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Links" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ShieldLogs" Relationship="BugSkanDBModel.FK_ShieldLog_BugDB" FromRole="BugDB" ToRole="ShieldLog" />
+  </EntityType>
+  <EntityType Name="ShieldLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="SourceIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SourcePort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DestIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DestPort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PostData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResponseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AttackId" Type="Int32" />
+    <Property Name="IpInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BugDB" Relationship="BugSkanDBModel.FK_ShieldLog_BugDB" FromRole="ShieldLog" ToRole="BugDB" />
+  </EntityType>
+  <Association Name="FK_ShieldLog_BugDB">
+    <End Type="BugSkanDBModel.BugDB" Role="BugDB" Multiplicity="0..1" />
+    <End Type="BugSkanDBModel.ShieldLog" Role="ShieldLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BugDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShieldLog">
+        <PropertyRef Name="AttackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="Rpt_AttackCountByDate_Result">
+    <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="Column1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Rpt_AttackCountByHour_Result">
+    <Property Type="DateTime" Name="ForDate" Nullable="true" />
+    <Property Type="Int32" Name="OnHour" Nullable="true" />
+    <Property Type="Int32" Name="Totals" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Rpt_AttackTypeByHost_Result">
+    <Property Type="Int32" Name="attackid" Nullable="true" />
+    <Property Type="String" Name="title" Nullable="true" />
+    <Property Type="Int32" Name="count" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="AttackByDate">
+    <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="count" Nullable="true" />
+  </ComplexType>
+</Schema>

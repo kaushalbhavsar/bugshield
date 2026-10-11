@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SendGridForEmail.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SendGridAPIKeyForConsole" Type="System.String" Scope="User">
+      <Value Profile="(Default)">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</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

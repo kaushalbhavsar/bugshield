@@ -1,0 +1,23 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Error.cshtml";
+}
+
+
+
+<div class="error_page_header">
+    <div class="m-l-25 uk-container-center">
+        500!
+    </div>
+</div>
+<div class="error_page_content">
+    <div class="m-l-25">
+        <p class="heading_b">Internal Server Error</p>
+        <p class="uk-text-large">
+            The server encountered an internal error or misconfiguration and was unable to complete your request.
+        </p>
+        <a href="#" onClick="history.go(-1);return false;">Go back to previous page</a>
+    </div>
+</div>

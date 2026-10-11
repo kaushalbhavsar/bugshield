@@ -1,0 +1,28 @@
+﻿@*@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+
+     $(document).ready(function () {
+         $('input[type=datetime]').datepicker({
+             dateFormat: "dd/M/yy",
+             changeMonth: true,
+             changeYear: true,
+             yearRange: "-60:+0"
+         });
+
+     });
+    </script>
+
+}*@
+@*<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('#datepicker').datepicker(); //Initialise any date pickers
+    });
+</script>*@
+@model DateTime
+Using Date Template
+@Html.TextBox("DateforChart",String.Format("{0:d}", Model.ToShortDateString()),
+  new { @class = "datefield", type = "date" })

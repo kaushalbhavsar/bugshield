@@ -1,0 +1,152 @@
+﻿@model PagedList.IPagedList<BUGSKAN.Portal.Models.Rpt_AttackByCustomDateDetails1_Result>
+
+@using PagedList.Mvc;
+@using Newtonsoft.Json;
+@using MaxMind.GeoIP2.Responses;
+@using BUGSKAN.Portal.Models;
+@using Microsoft.AspNet.Identity;
+@{
+
+    ViewBag.Title = "Attacks By Custom Dates";
+    Layout = "~/Views/Shared/_Inner.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+   <script>
+       $("sdate").datepicker({ cookie: 'yes' });
+   </script>
+</head>
+<body>
+    <form method="get" action="@Url.Action("CustomDateChart", "Attacks")">
+       <table>
+           <tr>
+               <h4>Select Date Range:</h4> 
+           </tr>
+            <tr>
+                <td>From &nbsp; <input typeof="text" class="datefield form-control" data-val="true"  data-val-required="Date is required" id="sdate" name="sdate" type="date" value =TempData["sdateForChart"] placeholder="From"/></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>To &nbsp;<input class="datefield form-control" data-val="true" data-val-required="Date is required" id="edate" name="edate" type="date" value=TempData["edateForChart"] placeholder="To"/></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><button type="submit" id="AddDateFromBtn" class="btn btn-fill btn-wd">Search</button></td>
+           </tr>
+        </table>
+    </form>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            $.ajax({
+
+                type: "POST",
+                url: "/Attacks/AjaxMethodForCustomDate",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    //Pie
+                    var options = {
+                        title: ' '
+                    };
+                    var chart = new google.visualization.LineChart($("#chart")[0]);
+                    chart.draw(data, options);
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+              
+            });
+        }
+
+
+    </script>
+    <div id="chart" style="width: 100%; height: 400px;">
+    </div>
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="content">
+                            <div style="padding:20px;">
+                            </div>
+                            <table id="datatables" class="table table-striped table-responsive table-no-bordered table-hover" style="width:100%;cellspacing:0">
+                                <thead>
+                                    <tr>
+                                        <th><a href="@Url.Action("CustomDateChart", new { sortOrder = ViewBag.TimeSortParm , currentFilter=ViewBag.CurrentFilter})"><h5>Time <i class="glyphicon glyphicon-sort"></i></h5></a></th>
+                                        <th><a href="@Url.Action("CustomDateChart", new { sortOrder = ViewBag.SourceSortParm , currentFilter=ViewBag.CurrentFilter })"><h5>Source   <i class="glyphicon glyphicon-sort"></i></h5></a></th>
+                                        <th><a href="@Url.Action("CustomDateChart", new { sortOrder = ViewBag.MethodSortParm , currentFilter=ViewBag.CurrentFilter })"><h5>Method  <i class="glyphicon glyphicon-sort"></i></h5></a></th>
+                                        <th><a href="@Url.Action("CustomDateChart", new { sortOrder = ViewBag.UrlSortParm,currentFilter=ViewBag.CurrentFilter })"><h5>URL  <i class="glyphicon glyphicon-sort"></i></h5></a></th>
+                                        <th><a href="@Url.Action("CustomDateChart", new { sortOrder = ViewBag.HostSortParm,currentFilter=ViewBag.CurrentFilter })"><h5>Host  <i class="glyphicon glyphicon-sort"></i></h5></a></th>
+                                        <th><a href="@Url.Action("CustomDateChart", new { sortOrder = ViewBag.ResponseSortParm,currentFilter=ViewBag.CurrentFilter })"><h5>Response  <i class="glyphicon glyphicon-sort"></i></h5></a></th>
+                                        <th><a href="@Url.Action("CustomDateChart", new { sortOrder = ViewBag.DescriptionSortParm,currentFilter=ViewBag.CurrentFilter })"><h5>Description  <i class="glyphicon glyphicon-sort"></i></h5></a></th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Time)
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("DetailsIPForToday", "Attacks", new { SourceIp = item.SourceIp, searchString = item.Host })">
+                                                    @Html.DisplayFor(modelItem => item.SourceIp)
+                                                </a>
+                                                <br />
+                                                @{
+                                                    if (item.IpInfo != null)
+                                                    {
+
+                                                        CityResponse city = (CityResponse)JsonConvert.DeserializeObject<CityResponse>(item.IpInfo);
+                                                        @:<p><span style="white-space: nowrap;"><span class="flag-icon flag-icon-@city.Country.IsoCode.ToLower()"></span> @city.Country.Name </span></p>@Html.Display(city.Country.Name)
+                                                    }
+
+                                                    else
+                                                    {
+
+                                                    }
+                                                }
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Method)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Url)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Host)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.ResponseCode)</td>
+                                            @*<td>@*Added relationship to Attack Database*@
+                                          @*  @Html.DisplayFor(modelItem => item.a)</td>*@
+                                      @*      <td><a href="@Url.Action("DetailsForToday", new { id = item.id })" class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i> Details</a></td>*@
+                                        </tr>
+
+                                  }
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+    </div>
+
+    Displaying page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("AttackToday",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+</body>
+</html>
+

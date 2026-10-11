@@ -1,0 +1,2753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BugSkanDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.__MigrationHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+            <PropertyRef Name="Model" />
+            <PropertyRef Name="ProductVersion" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccessLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDetails" Type="ntext" />
+          <Property Name="Url" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.App' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppName" Type="varchar(max)" />
+          <Property Name="AppTitle" Type="varchar(max)" />
+          <Property Name="AppType" Type="varchar" MaxLength="50" />
+          <Property Name="Url" Type="varchar(max)" />
+          <Property Name="SubmittedDate" Type="datetime" />
+          <Property Name="LastScan" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ReportUrl" Type="varchar(max)" />
+          <Property Name="Critical" Type="int" />
+          <Property Name="Warning" Type="int" />
+          <Property Name="Info" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetUserClaims' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetUserLogins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetUserRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="PhoneNumberConfirmed" />
+            <PropertyRef Name="TwoFactorEnabled" />
+            <PropertyRef Name="LockoutEnabled" />
+            <PropertyRef Name="AccessFailedCount" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="TempConfCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BugDB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Links" Type="varchar(max)" />
+          <Property Name="VideoUrl" Type="varchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.Bugs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Bugs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Links" Type="varchar(max)" />
+          <Property Name="VideoUrl" Type="varchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar(max)" />
+          <Property Name="Address1" Type="varchar(max)" />
+          <Property Name="Address2" Type="varchar(max)" />
+          <Property Name="Address3" Type="varchar(max)" />
+          <Property Name="City" Type="varchar(max)" />
+          <Property Name="State" Type="varchar(max)" />
+          <Property Name="Country" Type="varchar(max)" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="20" />
+          <Property Name="Website" Type="varchar(max)" />
+          <Property Name="Phone" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.DomainRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DomainRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="domain" Type="varchar(max)" />
+          <Property Name="requestip" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="verified" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.EMailRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EMailRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmailId" Type="varchar(max)" />
+          <Property Name="requestip" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="verified" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.MailJobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MailJobs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SubcriberId" Type="varchar(max)" />
+          <Property Name="JobId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NotificationContent" Type="varchar(max)" />
+          <Property Name="NotificationDate" Type="datetime" />
+          <Property Name="NotificationEmails" Type="varchar(max)" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="ViewDate" Type="datetime" />
+          <Property Name="EventId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Preferences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Site" Type="uniqueidentifier" />
+          <Property Name="NotificationEmail" Type="varchar(max)" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.ResultItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ResultItems">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="int" Nullable="false" />
+          <Property Name="AppId" Type="uniqueidentifier" />
+          <Property Name="ResultTitle" Type="varchar(max)" />
+          <Property Name="ResultCount" Type="int" />
+          <Property Name="ResultSummary" Type="varchar(max)" />
+          <Property Name="VectorDetails" Type="varchar(max)" />
+          <Property Name="CveNumber" Type="varchar(max)" />
+          <Property Name="ThreatLevel" Type="varchar" MaxLength="50" />
+          <Property Name="Tags" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ShieldLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="SourceIp" Type="varchar" MaxLength="50" />
+          <Property Name="SourcePort" Type="varchar" MaxLength="50" />
+          <Property Name="DestIp" Type="varchar" MaxLength="50" />
+          <Property Name="DestPort" Type="varchar" MaxLength="50" />
+          <Property Name="Method" Type="varchar" MaxLength="50" />
+          <Property Name="Url" Type="varchar(max)" />
+          <Property Name="Host" Type="varchar" MaxLength="50" />
+          <Property Name="UserAgent" Type="varchar(max)" />
+          <Property Name="PostData" Type="varchar(max)" />
+          <Property Name="ResponseCode" Type="varchar" MaxLength="50" />
+          <Property Name="AttackId" Type="int" />
+          <Property Name="IpInfo" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Url" Type="varchar(max)" Nullable="false" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="LastScan" Type="datetime" />
+          <Property Name="Status" Type="varchar(max)" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="LoginUser" Type="varchar(max)" />
+          <Property Name="LoginPass" Type="varchar(max)" />
+          <Property Name="Technology" Type="varchar(max)" />
+          <Property Name="UserId" Type="nvarchar(max)" />
+          <Property Name="LoginUrl" Type="varchar(max)" />
+          <Property Name="LoginSuccess" Type="nchar" MaxLength="10" />
+          <Property Name="IPAddress" Type="varchar(max)" />
+          <Property Name="Server" Type="varchar(max)" />
+          <Property Name="PlanName" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.SkanJobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SkanJobs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SkanId" Type="varchar" MaxLength="50" />
+          <Property Name="SubscriberId" Type="varchar(max)" />
+          <Property Name="Url" Type="varchar(max)" />
+          <Property Name="PutTime" Type="datetime" />
+          <Property Name="CurrentStatus" Type="varchar" MaxLength="50" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="RefId" Type="int" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="SkanResults">
+          <Key>
+            <PropertyRef Name="resultId" />
+          </Key>
+          <Property Name="resultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="href" Type="varchar(max)" />
+          <Property Name="id" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar(max)" />
+          <Property Name="url" Type="varchar(max)" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="skanid" Type="int" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PlanName" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="PaymentMade" Type="int" />
+          <Property Name="PaymentPending" Type="int" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="PaymentDueDate" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.sysdiagrams' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="principal_id" />
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Preferences_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="0..1" />
+          <End Role="Preferences" Type="Self.Preferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="SiteId" />
+            </Principal>
+            <Dependent Role="Preferences">
+              <PropertyRef Name="Site" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShieldLog_ToTable">
+          <End Role="BugDB" Type="Self.BugDB" Multiplicity="0..1" />
+          <End Role="ShieldLog" Type="Self.ShieldLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BugDB">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShieldLog">
+              <PropertyRef Name="AttackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddNewApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="appName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="appTitle" Type="varchar(max)" Mode="In" />
+          <Parameter Name="appType" Type="varchar" Mode="In" />
+          <Parameter Name="url" Type="varchar(max)" Mode="In" />
+          <Parameter Name="submittedDate" Type="datetime" Mode="In" />
+          <Parameter Name="userId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AddNewSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="url" Type="varchar(max)" Mode="In" />
+          <Parameter Name="IPAddress" Type="varchar(max)" Mode="In" />
+          <Parameter Name="userId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AddNewSiteAndPreferences" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="url" Type="varchar(max)" Mode="In" />
+          <Parameter Name="IPAddress" Type="varchar(max)" Mode="In" />
+          <Parameter Name="userId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CheckEmailConfirmedStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CheckEmailConfirmStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CheckEmailStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CheckEmailStatus1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CreateNewCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="companyName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="address1" Type="varchar(max)" Mode="In" />
+          <Parameter Name="address2" Type="varchar(max)" Mode="In" />
+          <Parameter Name="address3" Type="varchar(max)" Mode="In" />
+          <Parameter Name="city" Type="varchar(max)" Mode="In" />
+          <Parameter Name="state" Type="varchar(max)" Mode="In" />
+          <Parameter Name="country" Type="varchar(max)" Mode="In" />
+          <Parameter Name="zipCode" Type="varchar" Mode="In" />
+          <Parameter Name="website" Type="varchar(max)" Mode="In" />
+          <Parameter Name="phone" Type="varchar(max)" Mode="In" />
+          <Parameter Name="email" Type="varchar(max)" Mode="In" />
+          <Parameter Name="notes" Type="varchar(max)" Mode="In" />
+          <Parameter Name="created" Type="datetime" Mode="In" />
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="CreateNewSubscription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="planName" Type="varchar" Mode="In" />
+          <Parameter Name="startDate" Type="datetime" Mode="In" />
+          <Parameter Name="endDate" Type="datetime" Mode="In" />
+          <Parameter Name="paymentMade" Type="int" Mode="In" />
+          <Parameter Name="paymentPending" Type="int" Mode="In" />
+          <Parameter Name="paymentDate" Type="datetime" Mode="In" />
+          <Parameter Name="paymentDueDate" Type="datetime" Mode="In" />
+          <Parameter Name="customerId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="DeleteSkanbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="FindAppbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="appId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="FindAppsByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetAttackIp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Url" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetAttacksByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date" Type="datetime" Mode="In" />
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetLogsPerMinute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetLogsPerSecond" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetLogsPerSecond2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetNewApps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetResultItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="appId" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetScanStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="url" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetSkanDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetSkanDetailsbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetSkanResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="Time" Type="datetime" Mode="In" />
+          <Parameter Name="SourceIp" Type="varchar" Mode="In" />
+          <Parameter Name="SourcePort" Type="varchar" Mode="In" />
+          <Parameter Name="DestIp" Type="varchar" Mode="In" />
+          <Parameter Name="DestPort" Type="varchar" Mode="In" />
+          <Parameter Name="Method" Type="varchar" Mode="In" />
+          <Parameter Name="Url" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Host" Type="varchar" Mode="In" />
+          <Parameter Name="UserAgent" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PostData" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ResponseCode" Type="varchar" Mode="In" />
+          <Parameter Name="AttackId" Type="varchar" Mode="In" />
+          <Parameter Name="IpInfo" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="InsertLogFromRabbit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LogDetails" Type="ntext" Mode="In" />
+          <Parameter Name="Url" Type="nvarchar" Mode="In" />
+          <Parameter Name="TimeStamp" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="IPAttacksBlocked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ip" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="IPAttackTypeCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ip" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="IpAttackUrlCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ip" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="PutDomainCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="domainName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="requestIp" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="PutEmailCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="emailId" Type="varchar(max)" Mode="In" />
+          <Parameter Name="requestIp" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="PutSkcanJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="varchar" Mode="In" />
+          <Parameter Name="domainName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="requestIp" Type="varchar(max)" Mode="In" />
+          <Parameter Name="subscriberId" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="RecentAttacksBlocked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="RecentAttackTypeCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="RecentAttackUrlCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackByCustomDateDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sdate" Type="datetime" Mode="In" />
+          <Parameter Name="edate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackByCustomDateDetails1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sdate" Type="datetime" Mode="In" />
+          <Parameter Name="edate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackByURL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackByURLDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="url" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackCountByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackCountByHour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sdate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackType_Today" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackTypeByHost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sdate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="appName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="appTitle" Type="varchar(max)" Mode="In" />
+          <Parameter Name="appType" Type="varchar" Mode="In" />
+          <Parameter Name="url" Type="varchar(max)" Mode="In" />
+          <Parameter Name="lastScan" Type="datetime" Mode="In" />
+          <Parameter Name="reportUrl" Type="varchar(max)" Mode="In" />
+          <Parameter Name="criticalbugs" Type="int" Mode="In" />
+          <Parameter Name="warningbugs" Type="int" Mode="In" />
+          <Parameter Name="infobugs" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="url" Type="varchar(max)" Mode="In" />
+          <Parameter Name="IPAddress" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Server" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PlanName" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="BugSkanDBModelStoreContainer">
+          <EntitySet Name="AccessLog" EntityType="Self.AccessLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BugDB" EntityType="Self.BugDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Preferences" EntityType="Self.Preferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShieldLog" EntityType="Self.ShieldLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SkanResults" EntityType="Self.SkanResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [__MigrationHistory].[MigrationId] AS [MigrationId], 
+    [__MigrationHistory].[ContextKey] AS [ContextKey], 
+    [__MigrationHistory].[Model] AS [Model], 
+    [__MigrationHistory].[ProductVersion] AS [ProductVersion]
+    FROM [dbo].[__MigrationHistory] AS [__MigrationHistory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="App" EntityType="Self.App" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [App].[Id] AS [Id], 
+    [App].[AppName] AS [AppName], 
+    [App].[AppTitle] AS [AppTitle], 
+    [App].[AppType] AS [AppType], 
+    [App].[Url] AS [Url], 
+    [App].[SubmittedDate] AS [SubmittedDate], 
+    [App].[LastScan] AS [LastScan], 
+    [App].[UserId] AS [UserId], 
+    [App].[ReportUrl] AS [ReportUrl], 
+    [App].[Critical] AS [Critical], 
+    [App].[Warning] AS [Warning], 
+    [App].[Info] AS [Info]
+    FROM [dbo].[App] AS [App]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetRoles].[Id] AS [Id], 
+    [AspNetRoles].[Name] AS [Name]
+    FROM [dbo].[AspNetRoles] AS [AspNetRoles]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetUserClaims].[Id] AS [Id], 
+    [AspNetUserClaims].[UserId] AS [UserId], 
+    [AspNetUserClaims].[ClaimType] AS [ClaimType], 
+    [AspNetUserClaims].[ClaimValue] AS [ClaimValue]
+    FROM [dbo].[AspNetUserClaims] AS [AspNetUserClaims]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetUserLogins].[LoginProvider] AS [LoginProvider], 
+    [AspNetUserLogins].[ProviderKey] AS [ProviderKey], 
+    [AspNetUserLogins].[UserId] AS [UserId]
+    FROM [dbo].[AspNetUserLogins] AS [AspNetUserLogins]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetUserRoles].[UserId] AS [UserId], 
+    [AspNetUserRoles].[RoleId] AS [RoleId]
+    FROM [dbo].[AspNetUserRoles] AS [AspNetUserRoles]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetUsers].[Id] AS [Id], 
+    [AspNetUsers].[Email] AS [Email], 
+    [AspNetUsers].[EmailConfirmed] AS [EmailConfirmed], 
+    [AspNetUsers].[PasswordHash] AS [PasswordHash], 
+    [AspNetUsers].[SecurityStamp] AS [SecurityStamp], 
+    [AspNetUsers].[PhoneNumber] AS [PhoneNumber], 
+    [AspNetUsers].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed], 
+    [AspNetUsers].[TwoFactorEnabled] AS [TwoFactorEnabled], 
+    [AspNetUsers].[LockoutEndDateUtc] AS [LockoutEndDateUtc], 
+    [AspNetUsers].[LockoutEnabled] AS [LockoutEnabled], 
+    [AspNetUsers].[AccessFailedCount] AS [AccessFailedCount], 
+    [AspNetUsers].[UserName] AS [UserName], 
+    [AspNetUsers].[TempConfCode] AS [TempConfCode]
+    FROM [dbo].[AspNetUsers] AS [AspNetUsers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Bugs" EntityType="Self.Bugs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Bugs].[Id] AS [Id], 
+    [Bugs].[Title] AS [Title], 
+    [Bugs].[Description] AS [Description], 
+    [Bugs].[Links] AS [Links], 
+    [Bugs].[VideoUrl] AS [VideoUrl], 
+    [Bugs].[TimeStamp] AS [TimeStamp]
+    FROM [dbo].[Bugs] AS [Bugs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DomainRequest" EntityType="Self.DomainRequest" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DomainRequest].[Id] AS [Id], 
+    [DomainRequest].[domain] AS [domain], 
+    [DomainRequest].[requestip] AS [requestip], 
+    [DomainRequest].[status] AS [status], 
+    [DomainRequest].[verified] AS [verified]
+    FROM [dbo].[DomainRequest] AS [DomainRequest]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EMailRequest" EntityType="Self.EMailRequest" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EMailRequest].[Id] AS [Id], 
+    [EMailRequest].[EmailId] AS [EmailId], 
+    [EMailRequest].[requestip] AS [requestip], 
+    [EMailRequest].[status] AS [status], 
+    [EMailRequest].[verified] AS [verified]
+    FROM [dbo].[EMailRequest] AS [EMailRequest]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MailJobs" EntityType="Self.MailJobs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MailJobs].[Id] AS [Id], 
+    [MailJobs].[SubcriberId] AS [SubcriberId], 
+    [MailJobs].[JobId] AS [JobId]
+    FROM [dbo].[MailJobs] AS [MailJobs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ResultItems" EntityType="Self.ResultItems" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ResultItems].[ResultId] AS [ResultId], 
+    [ResultItems].[AppId] AS [AppId], 
+    [ResultItems].[ResultTitle] AS [ResultTitle], 
+    [ResultItems].[ResultCount] AS [ResultCount], 
+    [ResultItems].[ResultSummary] AS [ResultSummary], 
+    [ResultItems].[VectorDetails] AS [VectorDetails], 
+    [ResultItems].[CveNumber] AS [CveNumber], 
+    [ResultItems].[ThreatLevel] AS [ThreatLevel], 
+    [ResultItems].[Tags] AS [Tags]
+    FROM [dbo].[ResultItems] AS [ResultItems]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SkanJobs" EntityType="Self.SkanJobs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SkanJobs].[Id] AS [Id], 
+    [SkanJobs].[SkanId] AS [SkanId], 
+    [SkanJobs].[SubscriberId] AS [SubscriberId], 
+    [SkanJobs].[Url] AS [Url], 
+    [SkanJobs].[PutTime] AS [PutTime], 
+    [SkanJobs].[CurrentStatus] AS [CurrentStatus], 
+    [SkanJobs].[StartTime] AS [StartTime], 
+    [SkanJobs].[EndTime] AS [EndTime], 
+    [SkanJobs].[RefId] AS [RefId], 
+    [SkanJobs].[Notes] AS [Notes]
+    FROM [dbo].[SkanJobs] AS [SkanJobs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sysdiagrams].[name] AS [name], 
+    [sysdiagrams].[principal_id] AS [principal_id], 
+    [sysdiagrams].[diagram_id] AS [diagram_id], 
+    [sysdiagrams].[version] AS [version], 
+    [sysdiagrams].[definition] AS [definition]
+    FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Preferences_Site" Association="Self.FK_Preferences_Site">
+            <End Role="Site" EntitySet="Site" />
+            <End Role="Preferences" EntitySet="Preferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShieldLog_ToTable" Association="Self.FK_ShieldLog_ToTable">
+            <End Role="BugDB" EntitySet="BugDB" />
+            <End Role="ShieldLog" EntitySet="ShieldLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BugSkanDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BugSkanEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="AddNewApp">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="appName" Mode="In" Type="String" />
+            <Parameter Name="appTitle" Mode="In" Type="String" />
+            <Parameter Name="appType" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="submittedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailStatus" ReturnType="Collection(BugSkanDBModel.CheckEmailStatus_Result)">
+          <Parameter Name="emailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateNewCustomer">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="companyName" Mode="In" Type="String" />
+            <Parameter Name="address1" Mode="In" Type="String" />
+            <Parameter Name="address2" Mode="In" Type="String" />
+            <Parameter Name="address3" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="state" Mode="In" Type="String" />
+            <Parameter Name="country" Mode="In" Type="String" />
+            <Parameter Name="zipCode" Mode="In" Type="String" />
+            <Parameter Name="website" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="notes" Mode="In" Type="String" />
+            <Parameter Name="created" Mode="In" Type="DateTime" />
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="CreateNewSubscription">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="planName" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="paymentMade" Mode="In" Type="Int32" />
+            <Parameter Name="paymentPending" Mode="In" Type="Int32" />
+            <Parameter Name="paymentDate" Mode="In" Type="DateTime" />
+            <Parameter Name="paymentDueDate" Mode="In" Type="DateTime" />
+            <Parameter Name="customerId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSkanbyId">
+          <Parameter Name="Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FindAppbyId" ReturnType="Collection(BugSkanDBModel.FindAppbyId_Result)">
+          <Parameter Name="appId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="FindAppsByUser" ReturnType="Collection(BugSkanDBModel.FindAppsByUser_Result)">
+          <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAttackIp" ReturnType="Collection(BugSkanDBModel.GetAttackIp_Result)">
+            <Parameter Name="Url" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetAttacksByDate" ReturnType="Collection(BugSkanDBModel.GetAttacksByDate_Result)">
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLogsPerMinute" ReturnType="Collection(BugSkanDBModel.GetLogsPerMinute_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLogsPerSecond" ReturnType="Collection(BugSkanDBModel.GetLogsPerSecond_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLogsPerSecond2" ReturnType="Collection(BugSkanDBModel.GetLogsPerSecond2_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetNewApps" ReturnType="Collection(Guid)" />
+          <FunctionImport Name="GetResultItems" ReturnType="Collection(BugSkanDBModel.GetResultItems_Result)">
+          <Parameter Name="appId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetScanStatus" ReturnType="Collection(BugSkanDBModel.GetScanStatus_Result)">
+          <Parameter Name="url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSkanDetails" ReturnType="Collection(BugSkanDBModel.GetSkanDetails_Result)">
+          <Parameter Name="Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSkanDetailsbyId" ReturnType="Collection(BugSkanDBModel.GetSkanDetailsbyId_Result)">
+          <Parameter Name="Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSkanResult" ReturnType="Collection(BugSkanDBModel.GetSkanResult_Result)">
+          <Parameter Name="Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertLog">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Time" Mode="In" Type="DateTime" />
+            <Parameter Name="SourceIp" Mode="In" Type="String" />
+            <Parameter Name="SourcePort" Mode="In" Type="String" />
+            <Parameter Name="DestIp" Mode="In" Type="String" />
+            <Parameter Name="DestPort" Mode="In" Type="String" />
+            <Parameter Name="Method" Mode="In" Type="String" />
+            <Parameter Name="Url" Mode="In" Type="String" />
+            <Parameter Name="Host" Mode="In" Type="String" />
+            <Parameter Name="UserAgent" Mode="In" Type="String" />
+            <Parameter Name="PostData" Mode="In" Type="String" />
+            <Parameter Name="ResponseCode" Mode="In" Type="String" />
+            <Parameter Name="AttackId" Mode="In" Type="String" />
+            <Parameter Name="IpInfo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertLogFromRabbit">
+            <Parameter Name="LogDetails" Mode="In" Type="String" />
+            <Parameter Name="Url" Mode="In" Type="String" />
+            <Parameter Name="TimeStamp" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="PutDomainCheck">
+            <Parameter Name="domainName" Mode="In" Type="String" />
+            <Parameter Name="requestIp" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PutEmailCheck">
+            <Parameter Name="emailId" Mode="In" Type="String" />
+            <Parameter Name="requestIp" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PutSkcanJob">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="domainName" Mode="In" Type="String" />
+            <Parameter Name="requestIp" Mode="In" Type="String" />
+            <Parameter Name="subscriberId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackByCustomDateDetails" ReturnType="Collection(BugSkanDBModel.Rpt_AttackByCustomDateDetails_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+            <Parameter Name="edate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackByCustomDateDetails1" ReturnType="Collection(BugSkanDBModel.Rpt_AttackByCustomDateDetails1_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+            <Parameter Name="edate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackByURL" ReturnType="Collection(BugSkanDBModel.Rpt_AttackByURL_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackByURLDetails" ReturnType="Collection(BugSkanDBModel.Rpt_AttackByURLDetails_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackCountByDate" ReturnType="Collection(BugSkanDBModel.Rpt_AttackCountByDate_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackCountByHour" ReturnType="Collection(BugSkanDBModel.Rpt_AttackCountByHour_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackType_Today" ReturnType="Collection(BugSkanDBModel.Rpt_AttackType_Today_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackTypeByHost" ReturnType="Collection(BugSkanDBModel.Rpt_AttackTypeByHost_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BugSkanDBModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BugSkanDBModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="UpdateApp">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="appName" Mode="In" Type="String" />
+            <Parameter Name="appTitle" Mode="In" Type="String" />
+            <Parameter Name="appType" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastScan" Mode="In" Type="DateTime" />
+            <Parameter Name="reportUrl" Mode="In" Type="String" />
+            <Parameter Name="criticalbugs" Mode="In" Type="Int32" />
+            <Parameter Name="warningbugs" Mode="In" Type="Int32" />
+            <Parameter Name="infobugs" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSite">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="IPAddress" Mode="In" Type="String" />
+            <Parameter Name="Server" Mode="In" Type="String" />
+            <Parameter Name="PlanName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSite">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="IPAddress" Mode="In" Type="String" />
+            <Parameter Name="Server" Mode="In" Type="String" />
+            <Parameter Name="PlanName" Mode="In" Type="String" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSite1">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="IPAddress" Mode="In" Type="String" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSite2">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="IPAddress" Mode="In" Type="String" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSiteAndPreferences">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="IPAddress" Mode="In" Type="String" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailStatus1" ReturnType="Collection(Boolean)">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailConfirmedStatus" ReturnType="Collection(Boolean)">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailConfirmStatus" ReturnType="Collection(Boolean)">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailStatus2">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewApp1">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="appName" Mode="In" Type="String" />
+            <Parameter Name="appTitle" Mode="In" Type="String" />
+            <Parameter Name="appType" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="submittedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSite3">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="IPAddress" Mode="In" Type="String" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSiteAndPreferences1">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="IPAddress" Mode="In" Type="String" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailConfirmedStatus1" ReturnType="Collection(Boolean)">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailConfirmStatus1" ReturnType="Collection(Boolean)">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailStatus3">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckEmailStatus11">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateNewCustomer1">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="companyName" Mode="In" Type="String" />
+            <Parameter Name="address1" Mode="In" Type="String" />
+            <Parameter Name="address2" Mode="In" Type="String" />
+            <Parameter Name="address3" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="state" Mode="In" Type="String" />
+            <Parameter Name="country" Mode="In" Type="String" />
+            <Parameter Name="zipCode" Mode="In" Type="String" />
+            <Parameter Name="website" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="notes" Mode="In" Type="String" />
+            <Parameter Name="created" Mode="In" Type="DateTime" />
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="CreateNewSubscription1">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="planName" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="paymentMade" Mode="In" Type="Int32" />
+            <Parameter Name="paymentPending" Mode="In" Type="Int32" />
+            <Parameter Name="paymentDate" Mode="In" Type="DateTime" />
+            <Parameter Name="paymentDueDate" Mode="In" Type="DateTime" />
+            <Parameter Name="customerId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSkanbyId1">
+          <Parameter Name="Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FindAppbyId1" ReturnType="Collection(BugSkanDBModel.FindAppbyId1_Result)">
+          <Parameter Name="appId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="FindAppsByUser1" ReturnType="Collection(BugSkanDBModel.FindAppsByUser1_Result)">
+          <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAttackIp1" ReturnType="Collection(BugSkanDBModel.GetAttackIp1_Result)">
+            <Parameter Name="Url" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetAttacksByDate1" ReturnType="Collection(BugSkanDBModel.GetAttacksByDate1_Result)">
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLogsPerMinute1" ReturnType="Collection(BugSkanDBModel.GetLogsPerMinute1_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLogsPerSecond1" ReturnType="Collection(BugSkanDBModel.GetLogsPerSecond1_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLogsPerSecond21" ReturnType="Collection(BugSkanDBModel.GetLogsPerSecond21_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetNewApps1" ReturnType="Collection(Guid)" />
+          <FunctionImport Name="GetResultItems1" ReturnType="Collection(BugSkanDBModel.GetResultItems1_Result)">
+          <Parameter Name="appId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetScanStatus1" ReturnType="Collection(BugSkanDBModel.GetScanStatus1_Result)">
+          <Parameter Name="url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSkanDetails1" ReturnType="Collection(BugSkanDBModel.GetSkanDetails1_Result)">
+          <Parameter Name="Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSkanDetailsbyId1" ReturnType="Collection(BugSkanDBModel.GetSkanDetailsbyId1_Result)">
+          <Parameter Name="Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSkanResult1" ReturnType="Collection(BugSkanDBModel.GetSkanResult1_Result)">
+          <Parameter Name="Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertLog1">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Time" Mode="In" Type="DateTime" />
+            <Parameter Name="SourceIp" Mode="In" Type="String" />
+            <Parameter Name="SourcePort" Mode="In" Type="String" />
+            <Parameter Name="DestIp" Mode="In" Type="String" />
+            <Parameter Name="DestPort" Mode="In" Type="String" />
+            <Parameter Name="Method" Mode="In" Type="String" />
+            <Parameter Name="Url" Mode="In" Type="String" />
+            <Parameter Name="Host" Mode="In" Type="String" />
+            <Parameter Name="UserAgent" Mode="In" Type="String" />
+            <Parameter Name="PostData" Mode="In" Type="String" />
+            <Parameter Name="ResponseCode" Mode="In" Type="String" />
+            <Parameter Name="AttackId" Mode="In" Type="String" />
+            <Parameter Name="IpInfo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertLogFromRabbit1">
+            <Parameter Name="LogDetails" Mode="In" Type="String" />
+            <Parameter Name="Url" Mode="In" Type="String" />
+            <Parameter Name="TimeStamp" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="PutDomainCheck1">
+            <Parameter Name="domainName" Mode="In" Type="String" />
+            <Parameter Name="requestIp" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PutEmailCheck1">
+            <Parameter Name="emailId" Mode="In" Type="String" />
+            <Parameter Name="requestIp" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PutSkcanJob1">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="domainName" Mode="In" Type="String" />
+            <Parameter Name="requestIp" Mode="In" Type="String" />
+            <Parameter Name="subscriberId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackByCustomDateDetails2" ReturnType="Collection(BugSkanDBModel.Rpt_AttackByCustomDateDetails2_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+            <Parameter Name="edate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackByCustomDateDetails11" ReturnType="Collection(BugSkanDBModel.Rpt_AttackByCustomDateDetails11_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+            <Parameter Name="edate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackByURL1" ReturnType="Collection(BugSkanDBModel.Rpt_AttackByURL1_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackByURLDetails1" ReturnType="Collection(BugSkanDBModel.Rpt_AttackByURLDetails1_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackCountByDate1" ReturnType="Collection(BugSkanDBModel.Rpt_AttackCountByDate1_Result)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackCountByHour1" ReturnType="Collection(BugSkanDBModel.Rpt_AttackCountByHour1_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackType_Today1" ReturnType="Collection(BugSkanDBModel.Rpt_AttackType_Today1_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackTypeByHost1" ReturnType="Collection(BugSkanDBModel.Rpt_AttackTypeByHost1_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(BugSkanDBModel.sp_helpdiagramdefinition1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(BugSkanDBModel.sp_helpdiagrams1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams1" />
+          <FunctionImport Name="UpdateApp1">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="appName" Mode="In" Type="String" />
+            <Parameter Name="appTitle" Mode="In" Type="String" />
+            <Parameter Name="appType" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastScan" Mode="In" Type="DateTime" />
+            <Parameter Name="reportUrl" Mode="In" Type="String" />
+            <Parameter Name="criticalbugs" Mode="In" Type="Int32" />
+            <Parameter Name="warningbugs" Mode="In" Type="Int32" />
+            <Parameter Name="infobugs" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSite1">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="IPAddress" Mode="In" Type="String" />
+            <Parameter Name="Server" Mode="In" Type="String" />
+            <Parameter Name="PlanName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="AccessLogs" EntityType="BugSkanDBModel.AccessLog" />
+          <EntitySet Name="BugDBs" EntityType="BugSkanDBModel.BugDB" />
+          <EntitySet Name="Customers" EntityType="BugSkanDBModel.Customer" />
+          <EntitySet Name="Preferences" EntityType="BugSkanDBModel.Preference" />
+          <EntitySet Name="ShieldLogs" EntityType="BugSkanDBModel.ShieldLog" />
+          <EntitySet Name="Sites" EntityType="BugSkanDBModel.Site" />
+          <EntitySet Name="SkanResults" EntityType="BugSkanDBModel.SkanResult" />
+          <EntitySet Name="Subscriptions" EntityType="BugSkanDBModel.Subscription" />
+          <EntitySet Name="C__MigrationHistory" EntityType="BugSkanDBModel.C__MigrationHistory" />
+          <EntitySet Name="Apps" EntityType="BugSkanDBModel.App" />
+          <EntitySet Name="AspNetRoles" EntityType="BugSkanDBModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="BugSkanDBModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="BugSkanDBModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUserRoles" EntityType="BugSkanDBModel.AspNetUserRole" />
+          <EntitySet Name="AspNetUsers" EntityType="BugSkanDBModel.AspNetUser" />
+          <EntitySet Name="Bugs" EntityType="BugSkanDBModel.Bug" />
+          <EntitySet Name="DomainRequests" EntityType="BugSkanDBModel.DomainRequest" />
+          <EntitySet Name="EMailRequests" EntityType="BugSkanDBModel.EMailRequest" />
+          <EntitySet Name="MailJobs" EntityType="BugSkanDBModel.MailJob" />
+          <EntitySet Name="ResultItems" EntityType="BugSkanDBModel.ResultItem" />
+          <EntitySet Name="SkanJobs" EntityType="BugSkanDBModel.SkanJob" />
+          <EntitySet Name="sysdiagrams" EntityType="BugSkanDBModel.sysdiagram" />
+          <AssociationSet Name="FK_ShieldLog_ToTable" Association="BugSkanDBModel.FK_ShieldLog_ToTable">
+            <End Role="BugDB" EntitySet="BugDBs" />
+            <End Role="ShieldLog" EntitySet="ShieldLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Preferences_Site" Association="BugSkanDBModel.FK_Preferences_Site">
+            <End Role="Site" EntitySet="Sites" />
+            <End Role="Preference" EntitySet="Preferences" />
+          </AssociationSet>
+          <FunctionImport Name="RecentAttacksBlocked" ReturnType="Collection(BugSkanDBModel.RecentAttacksBlocked_Result1)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RecentAttackUrlCount" ReturnType="Collection(BugSkanDBModel.RecentAttackUrlCount_Result1)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RecentAttackTypeCount" ReturnType="Collection(BugSkanDBModel.RecentAttackTypeCount_Result1)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IPAttacksBlocked" ReturnType="Collection(BugSkanDBModel.IPAttacksBlocked_Result2)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="ip" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IPAttackTypeCount" ReturnType="Collection(BugSkanDBModel.IPAttackTypeCount_Result1)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="ip" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IpAttackUrlCount" ReturnType="Collection(BugSkanDBModel.IpAttackUrlCount_Result1)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="ip" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Notifications" EntityType="BugSkanDBModel.Notification" />
+          </EntityContainer>
+        <ComplexType Name="CheckEmailStatus_Result">
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="verified" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FindAppbyId_Result">
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="AppName" Nullable="true" />
+          <Property Type="String" Name="AppTitle" Nullable="true" />
+          <Property Type="String" Name="AppType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="SubmittedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastScan" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Critical" Nullable="true" />
+          <Property Type="Int32" Name="Warning" Nullable="true" />
+          <Property Type="Int32" Name="Info" Nullable="true" />
+          <Property Type="String" Name="ReportUrl" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FindAppsByUser_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="AppName" Nullable="true" />
+          <Property Type="String" Name="AppTitle" Nullable="true" />
+          <Property Type="String" Name="AppType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="SubmittedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastScan" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportUrl" Nullable="true" />
+          <Property Type="Int32" Name="Critical" Nullable="true" />
+          <Property Type="Int32" Name="Warning" Nullable="true" />
+          <Property Type="Int32" Name="Info" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAttackIp_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SourceIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourcePort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestPort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Method" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="String" Name="Host" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserAgent" Nullable="true" />
+          <Property Type="String" Name="PostData" Nullable="true" />
+          <Property Type="String" Name="ResponseCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AttackId" Nullable="true" />
+          <Property Type="String" Name="IpInfo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAttacksByDate_Result">
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="Int32" Name="Column2" Nullable="true" />
+          <Property Type="Int32" Name="Attacks" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLogsPerMinute_Result">
+          <Property Type="DateTime" Name="theTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLogsPerSecond_Result">
+          <Property Type="DateTime" Name="theTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLogsPerSecond2_Result">
+          <Property Type="DateTime" Name="theTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetResultItems_Result">
+          <Property Type="Int32" Name="ResultId" Nullable="false" />
+          <Property Type="String" Name="ResultTitle" Nullable="true" />
+          <Property Type="Int32" Name="ResultCount" Nullable="true" />
+          <Property Type="String" Name="ResultSummary" Nullable="true" />
+          <Property Type="String" Name="VectorDetails" Nullable="true" />
+          <Property Type="String" Name="CveNumber" Nullable="true" />
+          <Property Type="String" Name="ThreatLevel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Tags" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetScanStatus_Result">
+          <Property Type="DateTime" Name="LastScan" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Status" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSkanDetails_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SkanId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SubscriberId" Nullable="true" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="PutTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="RefId" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSkanDetailsbyId_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SkanId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SubscriberId" Nullable="true" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="PutTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="RefId" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSkanResult_Result">
+          <Property Type="Int32" Name="resultId" Nullable="false" />
+          <Property Type="String" Name="href" Nullable="true" />
+          <Property Type="String" Name="id" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" />
+          <Property Type="String" Name="description" Nullable="true" />
+          <Property Type="Int32" Name="skanid" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IPAttacksBlocked_Result">
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IPAttackTypeCount_Result">
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IpAttackUrlCount_Result">
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RecentAttacksBlocked_Result">
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RecentAttackTypeCount_Result">
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RecentAttackUrlCount_Result">
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackByCustomDateDetails_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Links" Nullable="true" />
+          <Property Type="String" Name="VideoUrl" Nullable="true" />
+          <Property Type="DateTime" Name="TimeStamp" Nullable="true" Precision="23" />
+          <Property Type="String" Name="id1" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SourceIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourcePort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestPort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Method" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="String" Name="Host" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserAgent" Nullable="true" />
+          <Property Type="String" Name="PostData" Nullable="true" />
+          <Property Type="String" Name="ResponseCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AttackId" Nullable="true" />
+          <Property Type="String" Name="IpInfo" Nullable="true" />
+          <Property Type="String" Name="attacktype" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackByCustomDateDetails1_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Links" Nullable="true" />
+          <Property Type="String" Name="VideoUrl" Nullable="true" />
+          <Property Type="DateTime" Name="TimeStamp" Nullable="true" Precision="23" />
+          <Property Type="String" Name="id1" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SourceIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourcePort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestPort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Method" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="String" Name="Host" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserAgent" Nullable="true" />
+          <Property Type="String" Name="PostData" Nullable="true" />
+          <Property Type="String" Name="ResponseCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AttackId" Nullable="true" />
+          <Property Type="String" Name="IpInfo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackByURL_Result">
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackByURLDetails_Result">
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="responsecode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sourceip" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ipinfo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackCountByDate_Result">
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackCountByHour_Result">
+          <Property Type="DateTime" Name="ForDate" Nullable="true" />
+          <Property Type="Int32" Name="OnHour" Nullable="true" />
+          <Property Type="Int32" Name="Totals" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackType_Today_Result">
+          <Property Type="String" Name="name" Nullable="true" />
+          <Property Type="Int32" Name="y" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackTypeByHost_Result">
+          <Property Type="Int32" Name="attackid" Nullable="true" />
+          <Property Type="String" Name="title" Nullable="true" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FindAppbyId1_Result">
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="AppName" Nullable="true" />
+          <Property Type="String" Name="AppTitle" Nullable="true" />
+          <Property Type="String" Name="AppType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="SubmittedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastScan" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Critical" Nullable="true" />
+          <Property Type="Int32" Name="Warning" Nullable="true" />
+          <Property Type="Int32" Name="Info" Nullable="true" />
+          <Property Type="String" Name="ReportUrl" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FindAppsByUser1_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="AppName" Nullable="true" />
+          <Property Type="String" Name="AppTitle" Nullable="true" />
+          <Property Type="String" Name="AppType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="SubmittedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastScan" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportUrl" Nullable="true" />
+          <Property Type="Int32" Name="Critical" Nullable="true" />
+          <Property Type="Int32" Name="Warning" Nullable="true" />
+          <Property Type="Int32" Name="Info" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAttackIp1_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SourceIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourcePort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestPort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Method" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="String" Name="Host" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserAgent" Nullable="true" />
+          <Property Type="String" Name="PostData" Nullable="true" />
+          <Property Type="String" Name="ResponseCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AttackId" Nullable="true" />
+          <Property Type="String" Name="IpInfo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAttacksByDate1_Result">
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="Int32" Name="Column2" Nullable="true" />
+          <Property Type="Int32" Name="Attacks" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLogsPerMinute1_Result">
+          <Property Type="DateTime" Name="theTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLogsPerSecond1_Result">
+          <Property Type="DateTime" Name="theTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLogsPerSecond21_Result">
+          <Property Type="DateTime" Name="theTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetResultItems1_Result">
+          <Property Type="Int32" Name="ResultId" Nullable="false" />
+          <Property Type="String" Name="ResultTitle" Nullable="true" />
+          <Property Type="Int32" Name="ResultCount" Nullable="true" />
+          <Property Type="String" Name="ResultSummary" Nullable="true" />
+          <Property Type="String" Name="VectorDetails" Nullable="true" />
+          <Property Type="String" Name="CveNumber" Nullable="true" />
+          <Property Type="String" Name="ThreatLevel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Tags" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetScanStatus1_Result">
+          <Property Type="DateTime" Name="LastScan" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Status" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSkanDetails1_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SkanId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SubscriberId" Nullable="true" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="PutTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="RefId" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSkanDetailsbyId1_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SkanId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SubscriberId" Nullable="true" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="PutTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="RefId" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSkanResult1_Result">
+          <Property Type="Int32" Name="resultId" Nullable="false" />
+          <Property Type="String" Name="href" Nullable="true" />
+          <Property Type="String" Name="id" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" />
+          <Property Type="String" Name="description" Nullable="true" />
+          <Property Type="Int32" Name="skanid" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IPAttacksBlocked1_Result">
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IPAttackTypeCount1_Result">
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IpAttackUrlCount1_Result">
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RecentAttacksBlocked1_Result">
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RecentAttackTypeCount1_Result">
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RecentAttackUrlCount1_Result">
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackByCustomDateDetails2_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Links" Nullable="true" />
+          <Property Type="String" Name="VideoUrl" Nullable="true" />
+          <Property Type="DateTime" Name="TimeStamp" Nullable="true" Precision="23" />
+          <Property Type="String" Name="id1" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SourceIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourcePort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestPort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Method" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="String" Name="Host" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserAgent" Nullable="true" />
+          <Property Type="String" Name="PostData" Nullable="true" />
+          <Property Type="String" Name="ResponseCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AttackId" Nullable="true" />
+          <Property Type="String" Name="IpInfo" Nullable="true" />
+          <Property Type="String" Name="attacktype" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackByCustomDateDetails11_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Links" Nullable="true" />
+          <Property Type="String" Name="VideoUrl" Nullable="true" />
+          <Property Type="DateTime" Name="TimeStamp" Nullable="true" Precision="23" />
+          <Property Type="String" Name="id1" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SourceIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SourcePort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestIp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DestPort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Method" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="String" Name="Host" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserAgent" Nullable="true" />
+          <Property Type="String" Name="PostData" Nullable="true" />
+          <Property Type="String" Name="ResponseCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AttackId" Nullable="true" />
+          <Property Type="String" Name="IpInfo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackByURL1_Result">
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackByURLDetails1_Result">
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="responsecode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sourceip" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ipinfo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackCountByDate1_Result">
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackCountByHour1_Result">
+          <Property Type="DateTime" Name="ForDate" Nullable="true" />
+          <Property Type="Int32" Name="OnHour" Nullable="true" />
+          <Property Type="Int32" Name="Totals" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackType_Today1_Result">
+          <Property Type="String" Name="name" Nullable="true" />
+          <Property Type="Int32" Name="y" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackTypeByHost1_Result">
+          <Property Type="Int32" Name="attackid" Nullable="true" />
+          <Property Type="String" Name="title" Nullable="true" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition1_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams1_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="AccessLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BugDB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Links" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ShieldLogs" Relationship="BugSkanDBModel.FK_ShieldLog_ToTable" FromRole="BugDB" ToRole="ShieldLog" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Preference">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Site" Type="Guid" />
+          <Property Name="NotificationEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Site1" Relationship="BugSkanDBModel.FK_Preferences_Site" FromRole="Preference" ToRole="Site" />
+        </EntityType>
+        <EntityType Name="ShieldLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="SourceIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SourcePort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestPort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResponseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttackId" Type="Int32" />
+          <Property Name="IpInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BugDB" Relationship="BugSkanDBModel.FK_ShieldLog_ToTable" FromRole="ShieldLog" ToRole="BugDB" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastScan" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LoginUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LoginPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Technology" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LoginUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LoginSuccess" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Server" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlanName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Preferences" Relationship="BugSkanDBModel.FK_Preferences_Site" FromRole="Site" ToRole="Preference" />
+        </EntityType>
+        <EntityType Name="SkanResult">
+          <Key>
+            <PropertyRef Name="resultId" />
+          </Key>
+          <Property Name="resultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="href" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="skanid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PlanName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentMade" Type="Int32" />
+          <Property Name="PaymentPending" Type="Int32" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentDueDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+            <PropertyRef Name="Model" />
+            <PropertyRef Name="ProductVersion" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AppName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AppTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AppType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SubmittedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastScan" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ReportUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Critical" Type="Int32" />
+          <Property Name="Warning" Type="Int32" />
+          <Property Name="Info" Type="Int32" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="PhoneNumberConfirmed" />
+            <PropertyRef Name="TwoFactorEnabled" />
+            <PropertyRef Name="LockoutEnabled" />
+            <PropertyRef Name="AccessFailedCount" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="TempConfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Bug">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Links" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DomainRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="domain" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="requestip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="verified" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="EMailRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="requestip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="verified" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MailJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SubcriberId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ResultItem">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="Int32" Nullable="false" />
+          <Property Name="AppId" Type="Guid" />
+          <Property Name="ResultTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResultCount" Type="Int32" />
+          <Property Name="ResultSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VectorDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CveNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ThreatLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SkanJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SkanId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubscriberId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PutTime" Type="DateTime" Precision="3" />
+          <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="RefId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="principal_id" />
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_ShieldLog_ToTable">
+          <End Type="BugSkanDBModel.BugDB" Role="BugDB" Multiplicity="0..1" />
+          <End Type="BugSkanDBModel.ShieldLog" Role="ShieldLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BugDB">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShieldLog">
+              <PropertyRef Name="AttackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Preferences_Site">
+          <End Type="BugSkanDBModel.Site" Role="Site" Multiplicity="0..1" />
+          <End Type="BugSkanDBModel.Preference" Role="Preference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="SiteId" />
+            </Principal>
+            <Dependent Role="Preference">
+              <PropertyRef Name="Site" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="RecentAttacksBlocked_Result1">
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RecentAttackUrlCount_Result1">
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RecentAttackTypeCount_Result1">
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IPAttacksBlocked_Result1">
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IPAttacksBlocked_Result2">
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IPAttackTypeCount_Result1">
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="IpAttackUrlCount_Result1">
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="Int32" Name="AttackCount" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NotificationContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NotificationDate" Type="DateTime" Precision="3" />
+          <Property Name="NotificationEmails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="ViewDate" Type="DateTime" Precision="3" />
+          <Property Name="EventId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BugSkanDBModelStoreContainer" CdmEntityContainer="BugSkanEntities">
+    <FunctionImportMapping FunctionImportName="AddNewApp1" FunctionName="BugSkanDBModel.Store.AddNewApp" />
+          <FunctionImportMapping FunctionImportName="AddNewSite3" FunctionName="BugSkanDBModel.Store.AddNewSite" />
+          <FunctionImportMapping FunctionImportName="AddNewSiteAndPreferences1" FunctionName="BugSkanDBModel.Store.AddNewSiteAndPreferences" />
+          <FunctionImportMapping FunctionImportName="CheckEmailConfirmedStatus1" FunctionName="BugSkanDBModel.Store.CheckEmailConfirmedStatus" />
+          <FunctionImportMapping FunctionImportName="CheckEmailConfirmStatus1" FunctionName="BugSkanDBModel.Store.CheckEmailConfirmStatus" />
+          <FunctionImportMapping FunctionImportName="CheckEmailStatus3" FunctionName="BugSkanDBModel.Store.CheckEmailStatus" />
+          <FunctionImportMapping FunctionImportName="CheckEmailStatus11" FunctionName="BugSkanDBModel.Store.CheckEmailStatus1" />
+          <FunctionImportMapping FunctionImportName="CreateNewCustomer1" FunctionName="BugSkanDBModel.Store.CreateNewCustomer" />
+          <FunctionImportMapping FunctionImportName="CreateNewSubscription1" FunctionName="BugSkanDBModel.Store.CreateNewSubscription" />
+          <FunctionImportMapping FunctionImportName="DeleteSkanbyId1" FunctionName="BugSkanDBModel.Store.DeleteSkanbyId" />
+          <FunctionImportMapping FunctionImportName="FindAppbyId1" FunctionName="BugSkanDBModel.Store.FindAppbyId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.FindAppbyId1_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="AppTitle" ColumnName="AppTitle" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+                <ScalarProperty Name="Critical" ColumnName="Critical" />
+                <ScalarProperty Name="Warning" ColumnName="Warning" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="ReportUrl" ColumnName="ReportUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FindAppsByUser1" FunctionName="BugSkanDBModel.Store.FindAppsByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.FindAppsByUser1_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="AppTitle" ColumnName="AppTitle" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+                <ScalarProperty Name="ReportUrl" ColumnName="ReportUrl" />
+                <ScalarProperty Name="Critical" ColumnName="Critical" />
+                <ScalarProperty Name="Warning" ColumnName="Warning" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAttackIp1" FunctionName="BugSkanDBModel.Store.GetAttackIp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetAttackIp1_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="SourceIp" ColumnName="SourceIp" />
+                <ScalarProperty Name="SourcePort" ColumnName="SourcePort" />
+                <ScalarProperty Name="DestIp" ColumnName="DestIp" />
+                <ScalarProperty Name="DestPort" ColumnName="DestPort" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="PostData" ColumnName="PostData" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+                <ScalarProperty Name="IpInfo" ColumnName="IpInfo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAttacksByDate1" FunctionName="BugSkanDBModel.Store.GetAttacksByDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetAttacksByDate1_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+                <ScalarProperty Name="Attacks" ColumnName="Attacks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLogsPerMinute1" FunctionName="BugSkanDBModel.Store.GetLogsPerMinute">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetLogsPerMinute1_Result">
+                <ScalarProperty Name="theTime" ColumnName="theTime" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLogsPerSecond1" FunctionName="BugSkanDBModel.Store.GetLogsPerSecond">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetLogsPerSecond1_Result">
+                <ScalarProperty Name="theTime" ColumnName="theTime" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLogsPerSecond21" FunctionName="BugSkanDBModel.Store.GetLogsPerSecond2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetLogsPerSecond21_Result">
+                <ScalarProperty Name="theTime" ColumnName="theTime" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetNewApps1" FunctionName="BugSkanDBModel.Store.GetNewApps" />
+          <FunctionImportMapping FunctionImportName="GetResultItems1" FunctionName="BugSkanDBModel.Store.GetResultItems">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetResultItems1_Result">
+                <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+                <ScalarProperty Name="ResultTitle" ColumnName="ResultTitle" />
+                <ScalarProperty Name="ResultCount" ColumnName="ResultCount" />
+                <ScalarProperty Name="ResultSummary" ColumnName="ResultSummary" />
+                <ScalarProperty Name="VectorDetails" ColumnName="VectorDetails" />
+                <ScalarProperty Name="CveNumber" ColumnName="CveNumber" />
+                <ScalarProperty Name="ThreatLevel" ColumnName="ThreatLevel" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetScanStatus1" FunctionName="BugSkanDBModel.Store.GetScanStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetScanStatus1_Result">
+                <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSkanDetails1" FunctionName="BugSkanDBModel.Store.GetSkanDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetSkanDetails1_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SkanId" ColumnName="SkanId" />
+                <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="PutTime" ColumnName="PutTime" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSkanDetailsbyId1" FunctionName="BugSkanDBModel.Store.GetSkanDetailsbyId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetSkanDetailsbyId1_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SkanId" ColumnName="SkanId" />
+                <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="PutTime" ColumnName="PutTime" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSkanResult1" FunctionName="BugSkanDBModel.Store.GetSkanResult">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.GetSkanResult1_Result">
+                <ScalarProperty Name="resultId" ColumnName="resultId" />
+                <ScalarProperty Name="href" ColumnName="href" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="skanid" ColumnName="skanid" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertLog1" FunctionName="BugSkanDBModel.Store.InsertLog" />
+          <FunctionImportMapping FunctionImportName="InsertLogFromRabbit1" FunctionName="BugSkanDBModel.Store.InsertLogFromRabbit" />
+          <FunctionImportMapping FunctionImportName="PutDomainCheck1" FunctionName="BugSkanDBModel.Store.PutDomainCheck" />
+          <FunctionImportMapping FunctionImportName="PutEmailCheck1" FunctionName="BugSkanDBModel.Store.PutEmailCheck" />
+          <FunctionImportMapping FunctionImportName="PutSkcanJob1" FunctionName="BugSkanDBModel.Store.PutSkcanJob" />
+          <FunctionImportMapping FunctionImportName="Rpt_AttackByCustomDateDetails2" FunctionName="BugSkanDBModel.Store.Rpt_AttackByCustomDateDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackByCustomDateDetails2_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Links" ColumnName="Links" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="id1" ColumnName="id1" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="SourceIp" ColumnName="SourceIp" />
+                <ScalarProperty Name="SourcePort" ColumnName="SourcePort" />
+                <ScalarProperty Name="DestIp" ColumnName="DestIp" />
+                <ScalarProperty Name="DestPort" ColumnName="DestPort" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="PostData" ColumnName="PostData" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+                <ScalarProperty Name="IpInfo" ColumnName="IpInfo" />
+                <ScalarProperty Name="attacktype" ColumnName="attacktype" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackByCustomDateDetails11" FunctionName="BugSkanDBModel.Store.Rpt_AttackByCustomDateDetails1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackByCustomDateDetails11_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Links" ColumnName="Links" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="id1" ColumnName="id1" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="SourceIp" ColumnName="SourceIp" />
+                <ScalarProperty Name="SourcePort" ColumnName="SourcePort" />
+                <ScalarProperty Name="DestIp" ColumnName="DestIp" />
+                <ScalarProperty Name="DestPort" ColumnName="DestPort" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="PostData" ColumnName="PostData" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+                <ScalarProperty Name="IpInfo" ColumnName="IpInfo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackByURL1" FunctionName="BugSkanDBModel.Store.Rpt_AttackByURL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackByURL1_Result">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackByURLDetails1" FunctionName="BugSkanDBModel.Store.Rpt_AttackByURLDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackByURLDetails1_Result">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="responsecode" ColumnName="responsecode" />
+                <ScalarProperty Name="sourceip" ColumnName="sourceip" />
+                <ScalarProperty Name="ipinfo" ColumnName="ipinfo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackCountByDate1" FunctionName="BugSkanDBModel.Store.Rpt_AttackCountByDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackCountByDate1_Result">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackCountByHour1" FunctionName="BugSkanDBModel.Store.Rpt_AttackCountByHour">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackCountByHour1_Result">
+                <ScalarProperty Name="ForDate" ColumnName="ForDate" />
+                <ScalarProperty Name="OnHour" ColumnName="OnHour" />
+                <ScalarProperty Name="Totals" ColumnName="Totals" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackType_Today1" FunctionName="BugSkanDBModel.Store.Rpt_AttackType_Today">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackType_Today1_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="y" ColumnName="y" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackTypeByHost1" FunctionName="BugSkanDBModel.Store.Rpt_AttackTypeByHost">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackTypeByHost1_Result">
+                <ScalarProperty Name="attackid" ColumnName="attackid" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="BugSkanDBModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="BugSkanDBModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="BugSkanDBModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition1" FunctionName="BugSkanDBModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.sp_helpdiagramdefinition1_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="BugSkanDBModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.sp_helpdiagrams1_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="BugSkanDBModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="BugSkanDBModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="UpdateApp1" FunctionName="BugSkanDBModel.Store.UpdateApp" />
+          <FunctionImportMapping FunctionImportName="UpdateSite1" FunctionName="BugSkanDBModel.Store.UpdateSite" />
+          <EntitySetMapping Name="AccessLogs">
+            <EntityTypeMapping TypeName="BugSkanDBModel.AccessLog">
+              <MappingFragment StoreEntitySet="AccessLog">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="LogDetails" ColumnName="LogDetails" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BugDBs">
+            <EntityTypeMapping TypeName="BugSkanDBModel.BugDB">
+              <MappingFragment StoreEntitySet="BugDB">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="Links" ColumnName="Links" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Preferences">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Preference">
+              <MappingFragment StoreEntitySet="Preferences">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NotificationEmail" ColumnName="NotificationEmail" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShieldLogs">
+            <EntityTypeMapping TypeName="BugSkanDBModel.ShieldLog">
+              <MappingFragment StoreEntitySet="ShieldLog">
+                <ScalarProperty Name="IpInfo" ColumnName="IpInfo" />
+                <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="PostData" ColumnName="PostData" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="DestPort" ColumnName="DestPort" />
+                <ScalarProperty Name="DestIp" ColumnName="DestIp" />
+                <ScalarProperty Name="SourcePort" ColumnName="SourcePort" />
+                <ScalarProperty Name="SourceIp" ColumnName="SourceIp" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sites">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Site">
+              <MappingFragment StoreEntitySet="Site">
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="Server" ColumnName="Server" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="LoginSuccess" ColumnName="LoginSuccess" />
+                <ScalarProperty Name="LoginUrl" ColumnName="LoginUrl" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Technology" ColumnName="Technology" />
+                <ScalarProperty Name="LoginPass" ColumnName="LoginPass" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkanResults">
+            <EntityTypeMapping TypeName="BugSkanDBModel.SkanResult">
+              <MappingFragment StoreEntitySet="SkanResults">
+                <ScalarProperty Name="skanid" ColumnName="skanid" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="href" ColumnName="href" />
+                <ScalarProperty Name="resultId" ColumnName="resultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PaymentDueDate" ColumnName="PaymentDueDate" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentPending" ColumnName="PaymentPending" />
+                <ScalarProperty Name="PaymentMade" ColumnName="PaymentMade" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="BugSkanDBModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Apps">
+            <EntityTypeMapping TypeName="BugSkanDBModel.App">
+              <MappingFragment StoreEntitySet="App">
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Warning" ColumnName="Warning" />
+                <ScalarProperty Name="Critical" ColumnName="Critical" />
+                <ScalarProperty Name="ReportUrl" ColumnName="ReportUrl" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+                <ScalarProperty Name="AppTitle" ColumnName="AppTitle" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="BugSkanDBModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="BugSkanDBModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="BugSkanDBModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="BugSkanDBModel.AspNetUserRole">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="BugSkanDBModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="TempConfCode" ColumnName="TempConfCode" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bugs">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Bug">
+              <MappingFragment StoreEntitySet="Bugs">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="Links" ColumnName="Links" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DomainRequests">
+            <EntityTypeMapping TypeName="BugSkanDBModel.DomainRequest">
+              <MappingFragment StoreEntitySet="DomainRequest">
+                <ScalarProperty Name="verified" ColumnName="verified" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="requestip" ColumnName="requestip" />
+                <ScalarProperty Name="domain" ColumnName="domain" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMailRequests">
+            <EntityTypeMapping TypeName="BugSkanDBModel.EMailRequest">
+              <MappingFragment StoreEntitySet="EMailRequest">
+                <ScalarProperty Name="verified" ColumnName="verified" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="requestip" ColumnName="requestip" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailJobs">
+            <EntityTypeMapping TypeName="BugSkanDBModel.MailJob">
+              <MappingFragment StoreEntitySet="MailJobs">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="SubcriberId" ColumnName="SubcriberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultItems">
+            <EntityTypeMapping TypeName="BugSkanDBModel.ResultItem">
+              <MappingFragment StoreEntitySet="ResultItems">
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="ThreatLevel" ColumnName="ThreatLevel" />
+                <ScalarProperty Name="CveNumber" ColumnName="CveNumber" />
+                <ScalarProperty Name="VectorDetails" ColumnName="VectorDetails" />
+                <ScalarProperty Name="ResultSummary" ColumnName="ResultSummary" />
+                <ScalarProperty Name="ResultCount" ColumnName="ResultCount" />
+                <ScalarProperty Name="ResultTitle" ColumnName="ResultTitle" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkanJobs">
+            <EntityTypeMapping TypeName="BugSkanDBModel.SkanJob">
+              <MappingFragment StoreEntitySet="SkanJobs">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="PutTime" ColumnName="PutTime" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+                <ScalarProperty Name="SkanId" ColumnName="SkanId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BugSkanDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RecentAttacksBlocked" FunctionName="BugSkanDBModel.Store.RecentAttacksBlocked">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.RecentAttacksBlocked_Result1">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="AttackCount" ColumnName="AttackCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RecentAttackUrlCount" FunctionName="BugSkanDBModel.Store.RecentAttackUrlCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.RecentAttackUrlCount_Result1">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="AttackCount" ColumnName="AttackCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RecentAttackTypeCount" FunctionName="BugSkanDBModel.Store.RecentAttackTypeCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.RecentAttackTypeCount_Result1">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AttackCount" ColumnName="AttackCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IPAttacksBlocked" FunctionName="BugSkanDBModel.Store.IPAttacksBlocked">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.IPAttacksBlocked_Result2">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="AttackCount" ColumnName="AttackCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IPAttackTypeCount" FunctionName="BugSkanDBModel.Store.IPAttackTypeCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.IPAttackTypeCount_Result1">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AttackCount" ColumnName="AttackCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IpAttackUrlCount" FunctionName="BugSkanDBModel.Store.IpAttackUrlCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.IpAttackUrlCount_Result1">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="AttackCount" ColumnName="AttackCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="NotificationEmails" ColumnName="NotificationEmails" />
+                <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+                <ScalarProperty Name="NotificationContent" ColumnName="NotificationContent" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

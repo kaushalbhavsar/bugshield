@@ -1,0 +1,528 @@
+﻿<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script>
+
+    /* global document */
+    // Load the fonts
+    Highcharts.createElement('link', {
+        href: 'https://fonts.googleapis.com/css?family=Signika:400,700',
+        rel: 'stylesheet',
+        type: 'text/css'
+    }, null, document.getElementsByTagName('head')[0]);
+
+    // Add the background image to the container
+    Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function (proceed) {
+        proceed.call(this);
+        this.container.style.background = 'url(http://www.highcharts.com/samples/graphics/sand.png)';
+    });
+
+
+    Highcharts.theme = {
+        colors: ['#f45b5b', '#8085e9', '#8d4654', '#7798BF', '#aaeeee', '#ff0066', '#eeaaee',
+           '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+        chart: {
+            backgroundColor: null,
+            style: {
+                fontFamily: 'Signika, serif'
+            }
+        },
+        title: {
+            style: {
+                color: 'black',
+                fontSize: '16px',
+                fontWeight: 'bold'
+            }
+        },
+        subtitle: {
+            style: {
+                color: 'black'
+            }
+        },
+        tooltip: {
+            borderWidth: 0
+        },
+        legend: {
+            itemStyle: {
+                fontWeight: 'bold',
+                fontSize: '13px'
+            }
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#6e6e70'
+                }
+            }
+        },
+        yAxis: {
+            labels: {
+                style: {
+                    color: '#6e6e70'
+                }
+            }
+        },
+        plotOptions: {
+            series: {
+                shadow: true
+            },
+            candlestick: {
+                lineColor: '#404048'
+            },
+            map: {
+                shadow: false
+            }
+        },
+
+        // Highstock specific
+        navigator: {
+            xAxis: {
+                gridLineColor: '#D0D0D8'
+            }
+        },
+        rangeSelector: {
+            buttonTheme: {
+                fill: 'white',
+                stroke: '#C0C0C8',
+                'stroke-width': 1,
+                states: {
+                    select: {
+                        fill: '#D0D0D8'
+                    }
+                }
+            }
+        },
+        scrollbar: {
+            trackBorderColor: '#C0C0C8'
+        },
+
+        // General
+        background2: '#E0E0E8'
+
+    };
+
+    // Apply the theme
+    Highcharts.setOptions(Highcharts.theme);
+
+$(document).ready(function () {
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+    
+    Highcharts.chart('container', {
+        credits:{
+            enabled:false
+        },
+        chart: {
+            type: 'line',
+            animation: Highcharts.svg, // don't animate in old IE
+            marginRight: 10,
+            events: {
+                load: function () {
+
+                    // set up the updating of the chart each second
+                    var series = this.series[0];
+                    setInterval(function () {
+                        var x = (new Date()).getTime(), // current time
+                            y = Math.random();
+                        series.addPoint([x, y], true, true);
+                    }, 1000);
+       
+                }
+               
+            }
+        },
+
+        title: {
+            text: 'Realtime Events'
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: 'Events'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br />' +
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br />' +
+                    Highcharts.numberFormat(this.y, 2);
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        series: [{
+            name: 'Attackers',
+            data: (function () {
+                // generate an array of random data
+                var data1 = [],
+                    time1 = (new Date()).getTime(),
+                    j;
+
+                for (j = -19; j <= 0; j += 1) {
+                    data1.push({
+                        x: time1 + j * 1000,
+                        y: Math.random()
+                    });
+                }
+                return data1;
+            }())
+                        
+        }, {
+            name: 'Visitors',
+            data: (function () {
+                // generate an array of random data
+                var data = [],
+                    time = (new Date()).getTime(),
+                    i;
+
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                return data;
+            }())
+        }],
+     
+    });
+});
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ @*<table style="width: 100%">
+            <tr>
+                <td style="width: 50%; text-align: center">
+                    <canvas id="canvasForLineChart" height="200" width="400">Chart is Loading...</canvas>
+
+                </td>
+                <td style="width: 50%; text-align: center">
+                    <canvas id="canvasForPieChart" height="200" width="400">Chart is Loading...</canvas>
+                </td>
+            </tr>
+        </table>
+        <script>
+
+            function checkHTML5() {
+                var canvasForLineChart = document.getElementById("canvasForLineChart");
+                if (canvasForLineChart == null || canvasForLineChart == "") {
+                    document.write("Browser doesn't support HTML5 2D Context");
+                    return false;
+                }
+                if (canvasForLineChart.getContext) {
+
+                }
+                else {
+                    document.write("Browser doesn't support HTML5 2D Context");
+                    return false;
+                }
+            }
+
+            $(function () {
+                //If not HTML5 Support the Exit
+                if (checkHTML5() == false) return;
+
+                //Create the Hub
+                var chartHub = $.connection.chartHub;
+
+
+                //Call InitChartData
+                $.connection.hub.start().done(function () {
+                    chartHub.server.initChartData();
+
+                });
+
+                //Call to Update LineChart from Server
+                chartHub.client.updateChart = function (line_data,pie_data) {
+                    UpdateLineChart(line_data);  //Call the LineChart Update method
+                    UpdatePieChart(pie_data);     //Call the PieChart Update method
+                };
+
+
+            });
+        </script>
+        <script type="text/javascript">
+
+               ////////////////////////////////////////////////////////////////////////////////////////////////////////
+               //Line Chart JSON Config (Line Chart Has fixed 1 data series here)
+               var lineChartData = {
+                   labels: ["January", "February", "March", "April", "May", "June", "July"],
+                   datasets: [
+                    {
+                        fillColor: "",
+                        data: [0]
+                    }
+                   ]
+
+               }
+
+               //Pie Chart JSON Config (Pie Chart Has fixed 3 Values/Slices here)
+               var pieChartdata = [
+                            {
+                                value: 0,
+                                color: "#F7464A",
+                                label: "East"
+                            },
+                            {
+                                value: 0,
+                                color: "#46BFBD",
+                                label: "West"
+                            },
+                            {
+                                value: 0,
+                                color: "#FDB45C",
+                                label: "North"
+                            },
+                            {
+                                value: 0,
+                                color: "#FE94DC",
+                                label: "South"
+                            }
+               ]
+
+               ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+               //PieChart Update method
+               function UpdatePieChart(data) {
+                   //Set data returned from Server
+                   pieChartdata[0].value = data.value[0];
+                   pieChartdata[1].value = data.value[1];
+                   pieChartdata[2].value = data.value[2];
+                   //Update the Line Chart
+                   var canvasForPieChart = document.getElementById("canvasForPieChart");
+                   var context2DPie = canvasForPieChart.getContext("2d");
+                   new Chart(context2DPie).Pie(pieChartdata);
+
+               }
+
+               //LineChart Update method
+               function UpdateLineChart(data) {
+                   //Set data returned from Server
+                   lineChartData.datasets[0].fillColor = data.colorString;
+                   lineChartData.datasets[0].data = data.lineChartData;
+                   //Update the Pie Chart
+                   var canvasForLineChart = document.getElementById("canvasForLineChart");
+                   var context2DLine = canvasForLineChart.getContext("2d");
+                   new Chart(context2DLine).Line(lineChartData);
+               }
+
+        </script>*@
+
+
+
+
+
+
+    @*<canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+        $(function (){
+            //var ctx = document.getElementById("#myChart");
+            var ctx = $("#myChart");
+
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+
+            });
+        });
+    </script>*@
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            @*
+            @model IEnumerable<BUGSKAN.Portal.Models.Rpt_AttackByURL_Result>
+        @{
+
+            Layout = "~/Views/Shared/_Inner.cshtml";
+            ViewBag.title = "Attacks By URL";
+        }
+        <!doctype html>
+        <html>
+        <head>
+            <title>Pie Chart</title>
+            <script src="../dist/Chart.bundle.js"></script>
+            <script src="utils.js"></script>
+        </head>
+        <body>
+            <div id="canvas-holder" style="width:40%">
+                <canvas id="chart-area" />
+            </div>
+            <script>
+
+            var config = {
+                type: 'pie',
+                url: "/Attacks/AjaxMethodForUrl",
+                data: '{}',
+                //data: {
+                //    datasets: [{
+                //        data: [
+                //            randomScalingFactor(),
+                //            randomScalingFactor(),
+                //            randomScalingFactor(),
+                //            randomScalingFactor(),
+                //            randomScalingFactor(),
+                //        ],
+                //        backgroundColor: [
+                //            window.chartColors.red,
+                //            window.chartColors.orange,
+                //            window.chartColors.yellow,
+                //            window.chartColors.green,
+                //            window.chartColors.blue,
+                //        ],
+                //        label: 'Dataset 1'
+                //    }],
+                //    labels: [
+                //        "Red",
+                //        "Orange",
+                //        "Yellow",
+                //        "Green",
+                //        "Blue"
+                //    ]
+                //},
+                options: {
+                    responsive: true
+                }
+            };
+
+            window.onload = function() {
+                var ctx = document.getElementById("#chart-area").getContext("2d");
+                window.myPie = new Chart(ctx, config);
+            };
+
+            </script>
+        </body>
+        </html>*@

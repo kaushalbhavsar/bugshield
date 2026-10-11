@@ -1,0 +1,695 @@
+﻿@model PagedList.IPagedList<BUGSKAN.Portal.Models.ShieldLog>
+@using MaxMind.GeoIP2.Responses;
+@using Newtonsoft.Json;
+@using BUGSKAN.Portal.Models;
+
+@{
+    ViewBag.Title = "Attacks from " + ViewBag.SourceIp;
+    Layout = "~/Views/Shared/_Inner.cshtml";
+}
+
+<div class="col-md-12">
+    <h4 class="title">
+        <b>@ViewBag.TotalAttackNo</b> attacks till now and <b>@ViewBag.AttackNo</b> today from @{
+            if (ViewBag.IpInfo != null)
+            {
+
+                CityResponse city = (CityResponse)JsonConvert.DeserializeObject<CityResponse>
+                    (ViewBag.IpInfo);
+
+
+
+                <span class="flag-icon flag-icon-@city.Country.IsoCode.ToLower()"></span> @city.Country.Name
+                Html.Display(city.Country.Name);
+            }
+        } on <b>@HttpContext.Current.Session["CurrentSite"].ToString()</b>
+    </h4>
+
+
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                // Get the CSV and create the chart
+                var options = {
+
+                    chart: {
+                        renderTo: 'container',
+                        type: 'line'
+
+                    },
+
+
+                    title: {
+                        text: 'Attacks from @ViewBag.SourceIp'
+                    },
+
+
+
+                    xAxis: [{
+                        title: {
+                            text: 'Date'
+                        },
+                        type: 'category',
+
+                        labels: {
+                            format: Highcharts.dateFormat('%A, %b %e, %Y', this.x)
+                        },
+
+                    }],
+
+                    yAxis: [{ // left y axis
+                        title: {
+                            text: 'No. of attacks blocked'
+                        },
+                        labels: {
+                            align: 'left',
+                            x: 3,
+                            y: 16,
+                            format: '{value:.,0f}'
+                        },
+                        showFirstLabel: false
+                    }, { // right y axis
+                        linkedTo: 0,
+                        gridLineWidth: 0,
+                        opposite: true,
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            align: 'right',
+                            x: -3,
+                            y: 16,
+                            format: '{value:.,0f}'
+                        },
+                        showFirstLabel: false
+                    }],
+
+                    legend: {
+                        align: 'left',
+                        verticalAlign: 'top',
+                        y: 20,
+                        floating: true,
+                        borderWidth: 0
+                    },
+
+                    tooltip: {
+                        shared: true,
+                        crosshairs: true
+                    },
+
+                    plotOptions: {
+                        series: {
+                            name: 'No. of attacks blocked',
+                            color: '#d40000',
+                            cursor: 'pointer',
+                            point: {
+                                events: {
+                                    click: function (e) {
+                                        hs.htmlExpand(null, {
+                                            pageOrigin: {
+                                                x: e.pageX || e.clientX,
+                                                y: e.pageY || e.clientY
+                                            },
+                                            headingText: this.series.name,
+                                            maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                this.y + ' visits',
+                                            width: 200
+                                        });
+                                    }
+                                }
+                            },
+                            marker: {
+                                lineWidth: 1
+                            }
+                        }
+                    },
+
+                    series: [{
+
+                    }],
+                    lang: {
+                        noData: "No Attacks"
+                    },
+                }
+                $.getJSON('/Graph/IPAttacksBlocked?ip=@ViewBag.SourceIp', function (data) {
+                    options.series[0].data = data;
+                    var chart = new Highcharts.Chart(options);
+                });
+            });
+
+        </script>
+
+
+        <div id="container" style="height:33%;width:100%">
+            <table style="width:100%">
+                <tr style="height:33%;width:100%"><td>&nbsp;</td></tr>
+                <tr style="height:33%;width:100%">
+                    <td style="vertical-align:middle;text-align:center"><img src="/Hourglass/bugskan_loader.gif" style="width:72px" alt="" /></td>
+                </tr>
+                <tr style="height:33%;width:100%"><td>&nbsp;</td></tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-lg-6 col-md-12">
+        <div class="card" style="height:420px;">
+
+            <div class="content table-responsive">
+
+                <div class="col-md-12">
+
+
+                    <script type="text/javascript">
+
+                        $(document).ready(function () {
+                            // Get the CSV and create the chart
+                            var options = {
+
+                                chart: {
+                                    renderTo: 'piecontainer',
+                                    type: 'pie'
+
+                                },
+
+
+                                title: {
+                                    text: 'Attacks types'
+                                },
+
+
+
+                                xAxis: [{
+                                    title: {
+                                        text: 'Date'
+                                    },
+                                    type: 'category',
+
+                                    labels: {
+                                        format: Highcharts.dateFormat('%A, %b %e, %Y', this.x)
+                                    },
+
+                                }],
+
+                                yAxis: [{ // left y axis
+                                    title: {
+                                        text: 'No. of attacks blocked'
+                                    },
+                                    labels: {
+                                        align: 'left',
+                                        x: 3,
+                                        y: 16,
+                                        format: '{value:.,0f}'
+                                    },
+                                    showFirstLabel: false
+                                }, { // right y axis
+                                    linkedTo: 0,
+                                    gridLineWidth: 0,
+                                    opposite: true,
+                                    title: {
+                                        text: null
+                                    },
+                                    labels: {
+                                        align: 'right',
+                                        x: -3,
+                                        y: 16,
+                                        format: '{value:.,0f}'
+                                    },
+                                    showFirstLabel: false
+                                }],
+
+                                legend: {
+                                    align: 'left',
+                                    verticalAlign: 'top',
+                                    y: 20,
+                                    floating: true,
+                                    borderWidth: 0
+                                },
+
+                                tooltip: {
+                                    shared: true,
+                                    crosshairs: true
+                                },
+
+                                plotOptions: {
+                                    series: {
+                                        name: 'Attacks',
+                                        color: '#d40000',
+                                        cursor: 'pointer',
+                                        point: {
+                                            events: {
+                                                click: function (e) {
+                                                    hs.htmlExpand(null, {
+                                                        pageOrigin: {
+                                                            x: e.pageX || e.clientX,
+                                                            y: e.pageY || e.clientY
+                                                        },
+                                                        headingText: this.series.name,
+                                                        maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                            this.y + ' visits',
+                                                        width: 200
+                                                    });
+                                                }
+                                            }
+                                        },
+                                        marker: {
+                                            lineWidth: 1
+                                        }
+                                    }
+                                },
+
+                                series: [{
+
+                                }],
+                                lang: {
+                                    noData: "No Attacks"
+                                },
+                            }
+                            $.getJSON('/Graph/IpAttackTypeCount?Ip=@ViewBag.SourceIp', function (data) {
+                                options.series[0].data = data;
+                                var chart = new Highcharts.Chart(options);
+                            });
+                        });
+
+                    </script>
+
+
+                    <div id="piecontainer" style="height:33%;width:100%">
+            <table style="width:100%">
+                <tr style="height:33%;width:100%"><td>&nbsp;</td></tr>
+                <tr style="height:33%;width:100%">
+                    <td style="vertical-align:middle;text-align:center"><img src="/Hourglass/bugskan_loader.gif" style="width:72px" alt="" /></td>
+                </tr>
+                <tr style="height:33%;width:100%"><td>&nbsp;</td></tr>
+            </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+        <div class="card" style="height:420px;">
+
+            <div class="content table-responsive">
+
+                <div class="col-md-12">
+
+
+                    <script type="text/javascript">
+
+                        $(document).ready(function () {
+                            // Get the CSV and create the chart
+                            var options = {
+
+                                chart: {
+                                    renderTo: 'barcontainer',
+                                    type: 'bar'
+
+                                },
+
+
+                                title: {
+                                    text: 'Top 10 Target Urls'
+                                },
+
+
+
+                                xAxis: [{
+                                    title: {
+                                        text: 'URL'
+                                    },
+                                    type: 'category',
+
+                                    labels: {
+                                        formatter: function () {
+                                            var text = this.value,
+                                                formatted = text.length > 25 ? text.substring(0, 25) + '...' : text;
+
+                                            return '<div class="js-ellipse" style="width:150px; overflow:hidden" title="' + text + '">' + formatted + '</div>';
+                                        },
+                                        useHTML: true
+                                    },
+
+                                }],
+
+                                yAxis: [{ // left y axis
+                                    title: {
+                                        text: 'No. of attacks blocked'
+                                    },
+                                    labels: {
+                                        align: 'left',
+                                        x: 3,
+                                        y: 16,
+                                        format: '{value:.,0f}'
+                                    },
+                                    showFirstLabel: false
+                                }, { // right y axis
+                                    linkedTo: 0,
+                                    gridLineWidth: 0,
+                                    opposite: true,
+                                    title: {
+                                        text: null
+                                    },
+                                    labels: {
+                                        align: 'right',
+                                        x: -3,
+                                        y: 16,
+                                        format: '{value:.,0f}'
+                                    },
+                                    showFirstLabel: false
+                                }],
+
+                                legend: {
+                                    align: 'left',
+                                    verticalAlign: 'top',
+                                    y: 20,
+                                    floating: true,
+                                    borderWidth: 0
+                                },
+
+                                tooltip: {
+                                    shared: true,
+                                    crosshairs: true
+                                },
+
+                                plotOptions: {
+                                    series: {
+                                        name: 'No. of attacks blocked',
+                                        color: '#d40000',
+                                        cursor: 'pointer',
+                                        point: {
+                                            events: {
+                                                click: function (e) {
+                                                    hs.htmlExpand(null, {
+                                                        pageOrigin: {
+                                                            x: e.pageX || e.clientX,
+                                                            y: e.pageY || e.clientY
+                                                        },
+                                                        headingText: this.series.name,
+                                                        maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                            this.y + ' visits',
+                                                        width: 200
+                                                    });
+                                                }
+                                            }
+                                        },
+                                        marker: {
+                                            lineWidth: 1
+                                        }
+                                    }
+                                },
+
+                                series: [{
+
+                                }],
+                                lang: {
+                                    noData: "No Attacks"
+                                },
+                            }
+                            $.getJSON('/Graph/IpAttackUrlCount?ip=@ViewBag.SourceIp', function (data) {
+                                options.series[0].data = data;
+                                var chart = new Highcharts.Chart(options);
+                            });
+                        });
+
+                    </script>
+
+
+                    <div id="barcontainer" style="height:33%;width:100%">
+            <table style="width:100%">
+                <tr style="height:33%;width:100%"><td>&nbsp;</td></tr>
+                <tr style="height:33%;width:100%">
+                    <td style="vertical-align:middle;text-align:center"><img src="/Hourglass/bugskan_loader.gif" style="width:72px" alt="" /></td>
+                </tr>
+                <tr style="height:33%;width:100%"><td>&nbsp;</td></tr>
+            </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+
+            <div class="col-md-6">
+
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <h4>Details of attacks</h4>
+                <div class="card">
+                    <div class="content">
+
+                        <table id="datatables" class="table table-striped table-no-bordered table-hover" style="width:100%;cellspacing:0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder=ViewBag.TimeSortParm , currentFilter=ViewBag.CurrentFilter})"><h5>Time <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder=ViewBag.MethodSortParm , currentFilter=ViewBag.CurrentFilter })"><h5>Method  <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder=ViewBag.UrlSortParm,currentFilter =ViewBag.CurrentFilter })"><h5>URL  <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+
+                                    @*
+                                        <th>
+                                            <div>
+                                                <a href="@Url.Action(" Index", new { sortOrder=ViewBag.HostSortParm,currentFilter =ViewBag.CurrentFilter })"><h5>Host  <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                            </div>
+                                        </th>*@
+
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder=ViewBag.AttackidSortParm,currentFilter =ViewBag.CurrentFilter })"><h5>Description  <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+
+                                    <th>
+
+                                    </th>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr class="table table-condensed table-striped table-bordered table-hover no-margin">
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Time)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Method)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Url)
+                                        </td>
+
+                                        <td>
+
+                                            @*Added relationship to Attack Database*@
+                                            @Html.DisplayFor(modelItem => item.BugDB.Title)
+                                        </td>
+                                        <td><a href="@Url.Action("DetailsForWeek", new { id=item.id })" class="btn btn-default"><i class="ti-arrow-right"></i></a></td>
+
+                                    </tr>
+                                }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    <a href="@Url.Action(@*ViewBag.Page,*@ "AttackThisWeek","Attacks"@*,new { host=ViewBag.SearchString }*@)" class="btn btn-transparent "><i class="glyphicon glyphicon-backward"></i> Back to List</a>
+    @*<a href="@Url.Action(" Index")" class="btn btn-default">Back to List</a>
+        @Html.ActionLink("Back to List", "Index") btn btn-info btn-fill btn-wd*@
+</p>
+
+
+
+
+
+
+
+
+
+    @*@model PagedList.IPagedList<BUGSKAN.Portal.Models.ShieldLog>
+@using MaxMind.GeoIP2.Responses;
+@using Newtonsoft.Json;
+@using BUGSKAN.Portal.Models;
+
+@{
+    ViewBag.Title = "IP Details for " + ViewBag.SourceIp;
+    Layout = "~/Views/Shared/_Inner.cshtml";
+}
+<table border="0" style="border-collapse: collapse; border: none;">
+    <tr>
+        <td width="10%"><b>IP</b></td>
+        <td>   </td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.SourceIp</td>
+
+    </tr>
+    <tr style="height: 10px !important">
+        <td colspan="3"></td>
+    </tr>
+    <tr>
+        <td><b>Country</b></td>
+        <td>   </td>
+        <td>
+            @{
+                if (ViewBag.IpInfo != null)
+                {
+
+                    CityResponse city = (CityResponse)JsonConvert.DeserializeObject<CityResponse>(ViewBag.IpInfo);
+
+
+
+                    @:<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="flag-icon flag-icon-@city.Country.IsoCode.ToLower()"></span> @city.Country.Name </p>
+                        Html.Display(city.Country.Name);
+            }
+
+            else
+            {
+
+            }
+            }
+        </td>
+    </tr>
+    <tr style="height: 10px !important">
+        <td colspan="3"></td>
+    </tr>
+    <tr>
+        <td><b><span style="white-space: nowrap;">Total Attacks</span></b></td>
+        <td></td>
+        <td><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.AttackNo</b> today and <b>@ViewBag.TotalAttackNo</b> till now </td>
+
+    </tr>
+    <tr style="height: 10px !important">
+        <td colspan="3"></td>
+    </tr>
+    <tr>
+        <td>  </td>
+        <td></td>
+
+    </tr>
+</table>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+
+                        <table id="datatables" class="table table-striped table-no-bordered table-hover" style="width:100%;cellspacing:0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder = ViewBag.TimeSortParm , currentFilter=ViewBag.CurrentFilter})"><h5>Time <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder = ViewBag.MethodSortParm , currentFilter=ViewBag.CurrentFilter })"><h5>Method  <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder = ViewBag.UrlSortParm,currentFilter=ViewBag.CurrentFilter })"><h5>URL  <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder = ViewBag.HostSortParm,currentFilter=ViewBag.CurrentFilter })"><h5>Host  <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+
+                                    <th>
+                                        <div>
+                                            <a href="@Url.Action("Index", new { sortOrder = ViewBag.AttackidSortParm,currentFilter=ViewBag.CurrentFilter })"><h5>Description  <i class="glyphicon glyphicon-sort"></i></h5></a>
+                                        </div>
+                                    </th>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr class="table table-condensed table-striped table-bordered table-hover no-margin">
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Time)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Method)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Url)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Host)
+                                        </td>
+                                        <td>
+
+                                            @*Added relationship to Attack Database*@
+                                           @* @Html.DisplayFor(modelItem => item.BugDB.Title)
+                                            </td>
+                                        </tr>
+                                    }
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>
+        <a href="@Url.Action("AttackThisWeek", "Attacks"@*,new { host = ViewBag.SearchString })" class="btn btn-transparent "><i class="glyphicon glyphicon-backward"></i> Back to List</a>
+</p>*@
+
+

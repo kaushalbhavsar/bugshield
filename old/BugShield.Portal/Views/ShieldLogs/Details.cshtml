@@ -1,0 +1,191 @@
+﻿@model BugShield.Portal.Models.ShieldLog
+
+
+
+<div>
+
+    <table class="table table-hover no-margin">
+
+      
+        <tr>
+            <td></td>
+            <td><b>@Html.DisplayNameFor(model => model.Time)</b></td>
+            <td>@Html.DisplayFor(model => model.Time)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><b>Source IP</b></td>
+            <td>@Html.DisplayFor(model => model.SourceIp)</td>
+        </tr>
+        @*<tr>
+                <td></td>
+                <td>@Html.DisplayNameFor(model => model.SourcePort)</td>
+                <td>@Html.DisplayFor(model => model.SourcePort)</td>
+            </tr>*@
+
+        @*<tr>
+                <td></td>
+                <td>@Html.DisplayNameFor(model => model.DestIp)</td>
+                <td>@Html.DisplayFor(model => model.DestIp)</td>
+            </tr>*@
+
+        
+        <tr>
+            <td></td>
+            <td><b>@Html.DisplayNameFor(model => model.Method)</b></td>
+            <td>@Html.DisplayFor(model => model.Method)</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><b> Code</b></td>
+            <td>@Html.DisplayFor(model => model.ResponseCode)</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><b>@Html.DisplayNameFor(model => model.Url)</b></td>
+            <td><code>@Html.DisplayFor(model => model.Host):@Html.DisplayFor(model => model.DestPort)@Html.DisplayFor(model => model.Url)</code></td>
+        </tr>
+       
+        <tr>
+            <td></td>
+            <td><b>User Agent</b></td>
+            <td>@Html.DisplayFor(model => model.UserAgent)</td>
+            <td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><b>@Html.DisplayNameFor(model => model.PostData)</b></td>
+            <td width="50%">
+                @{
+                    var newPostData = Model.PostData;
+                String PostData=newPostData.Replace("\\n", Environment.NewLine);
+
+                    @:<pre class="prettyprint">@PostData</pre>
+
+
+                }
+
+
+            </td>
+            <td width="20%"></td>
+        </tr>
+
+       
+      
+
+        <tr><td></td><td></td></tr>
+
+    </table>
+    @*<dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Time)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Time)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SourceIp)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SourceIp)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SourcePort)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SourcePort)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DestIp)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DestIp)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DestPort)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DestPort)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Method)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Method)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Url)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Url)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Host)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Host)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserAgent)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserAgent)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PostData)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PostData)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ResponseCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ResponseCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AttackId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BugDB.Title)
+            </dd>
+
+        </dl>*@
+</div>
+<p>
+    <a href="@Url.Action("Index",new { searchString = Model.Host})" class="btn btn-primary"><i class="glyphicon glyphicon-backward"></i> Back to List</a>
+
+</p>

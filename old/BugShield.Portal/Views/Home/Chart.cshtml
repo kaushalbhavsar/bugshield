@@ -1,0 +1,25 @@
+﻿<div class="col-md-6 col-sm-6 col-sx-12">
+    <div class="panel">
+        <div class="panel-heading">
+            <h4>Attacks this month</h4>
+            <ul class="links">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-area-chart"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <div id="placeholder" class="chart-height">
+
+                <img src="/img/hourglass.svg" class="hourglass" />
+                @{Html.RenderPartial("BarChart");
+                }
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BugSkanDBModelStoreContainer" CdmEntityContainer="BugSkanDBEntities">
+    <EntitySetMapping Name="BugDBs">
+      <EntityTypeMapping TypeName="BugSkanDBModel.BugDB">
+        <MappingFragment StoreEntitySet="BugDB">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Links" ColumnName="Links" />
+          <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bugs">
+      <EntityTypeMapping TypeName="BugSkanDBModel.Bug">
+        <MappingFragment StoreEntitySet="Bugs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Links" ColumnName="Links" />
+          <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="BugSkanDBModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DomainRequests">
+      <EntityTypeMapping TypeName="BugSkanDBModel.DomainRequest">
+        <MappingFragment StoreEntitySet="DomainRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="domain" ColumnName="domain" />
+          <ScalarProperty Name="requestip" ColumnName="requestip" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="verified" ColumnName="verified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMailRequests">
+      <EntityTypeMapping TypeName="BugSkanDBModel.EMailRequest">
+        <MappingFragment StoreEntitySet="EMailRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="requestip" ColumnName="requestip" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="verified" ColumnName="verified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailJobs">
+      <EntityTypeMapping TypeName="BugSkanDBModel.MailJob">
+        <MappingFragment StoreEntitySet="MailJobs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SubcriberId" ColumnName="SubcriberId" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResultItems">
+      <EntityTypeMapping TypeName="BugSkanDBModel.ResultItem">
+        <MappingFragment StoreEntitySet="ResultItems">
+          <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="ResultTitle" ColumnName="ResultTitle" />
+          <ScalarProperty Name="ResultCount" ColumnName="ResultCount" />
+          <ScalarProperty Name="ResultSummary" ColumnName="ResultSummary" />
+          <ScalarProperty Name="VectorDetails" ColumnName="VectorDetails" />
+          <ScalarProperty Name="CveNumber" ColumnName="CveNumber" />
+          <ScalarProperty Name="ThreatLevel" ColumnName="ThreatLevel" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShieldLogs">
+      <EntityTypeMapping TypeName="BugSkanDBModel.ShieldLog">
+        <MappingFragment StoreEntitySet="ShieldLog">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="SourceIp" ColumnName="SourceIp" />
+          <ScalarProperty Name="SourcePort" ColumnName="SourcePort" />
+          <ScalarProperty Name="DestIp" ColumnName="DestIp" />
+          <ScalarProperty Name="DestPort" ColumnName="DestPort" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Host" ColumnName="Host" />
+          <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+          <ScalarProperty Name="PostData" ColumnName="PostData" />
+          <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+          <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+          <ScalarProperty Name="IpInfo" ColumnName="IpInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sites">
+      <EntityTypeMapping TypeName="BugSkanDBModel.Site">
+        <MappingFragment StoreEntitySet="Site">
+          <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+          <ScalarProperty Name="LoginPass" ColumnName="LoginPass" />
+          <ScalarProperty Name="Technology" ColumnName="Technology" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginUrl" ColumnName="LoginUrl" />
+          <ScalarProperty Name="LoginSuccess" ColumnName="LoginSuccess" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="Server" ColumnName="Server" />
+          <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SkanJobs">
+      <EntityTypeMapping TypeName="BugSkanDBModel.SkanJob">
+        <MappingFragment StoreEntitySet="SkanJobs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SkanId" ColumnName="SkanId" />
+          <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="PutTime" ColumnName="PutTime" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="RefId" ColumnName="RefId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SkanResults">
+      <EntityTypeMapping TypeName="BugSkanDBModel.SkanResult">
+        <MappingFragment StoreEntitySet="SkanResults">
+          <ScalarProperty Name="resultId" ColumnName="resultId" />
+          <ScalarProperty Name="href" ColumnName="href" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="skanid" ColumnName="skanid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subscriptions">
+      <EntityTypeMapping TypeName="BugSkanDBModel.Subscription">
+        <MappingFragment StoreEntitySet="Subscriptions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="PaymentMade" ColumnName="PaymentMade" />
+          <ScalarProperty Name="PaymentPending" ColumnName="PaymentPending" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentDueDate" ColumnName="PaymentDueDate" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Apps">
+      <EntityTypeMapping TypeName="BugSkanDBModel.App">
+        <MappingFragment StoreEntitySet="App">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppName" ColumnName="AppName" />
+          <ScalarProperty Name="AppTitle" ColumnName="AppTitle" />
+          <ScalarProperty Name="AppType" ColumnName="AppType" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+          <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ReportUrl" ColumnName="ReportUrl" />
+          <ScalarProperty Name="Critical" ColumnName="Critical" />
+          <ScalarProperty Name="Warning" ColumnName="Warning" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,24 @@
+﻿<script id="source">
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+    var days = [
+        [new Date(2016, 0, 1), 31],
+          [new Date(2016, 1, 1), 29],
+            [new Date(2016, 2, 1), 30],
+              [new Date(2016, 3, 1), 30]
+
+    ]
+    var data = google.visualization.arrayToDataTable(days,true);
+    var options = {
+        title: 'Days Chart',
+        animation: { startup: true, duration: 2000 },
+        legend: { position: 'none' },
+        width: 500,
+        height:350
+    };
+    var chart = new google.visualization.AreaChart(document.getElementById('divChart'));
+    chart.draw(data.options);
+
+}
+</script>

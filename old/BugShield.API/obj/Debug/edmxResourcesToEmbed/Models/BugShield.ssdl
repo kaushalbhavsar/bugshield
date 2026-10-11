@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BugSkanDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.App' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="App">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AppName" Type="varchar(max)" />
+    <Property Name="AppTitle" Type="varchar(max)" />
+    <Property Name="AppType" Type="varchar" MaxLength="50" />
+    <Property Name="Url" Type="varchar(max)" />
+    <Property Name="SubmittedDate" Type="datetime" />
+    <Property Name="LastScan" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ReportUrl" Type="varchar(max)" />
+    <Property Name="Critical" Type="int" />
+    <Property Name="Warning" Type="int" />
+    <Property Name="Info" Type="int" />
+  </EntityType>
+  <EntityType Name="BugDB">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Links" Type="varchar(max)" />
+    <Property Name="VideoUrl" Type="varchar(max)" />
+    <Property Name="TimeStamp" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Bugs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Links" Type="varchar(max)" />
+    <Property Name="VideoUrl" Type="varchar(max)" />
+    <Property Name="TimeStamp" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar(max)" />
+    <Property Name="Address1" Type="varchar(max)" />
+    <Property Name="Address2" Type="varchar(max)" />
+    <Property Name="Address3" Type="varchar(max)" />
+    <Property Name="City" Type="varchar(max)" />
+    <Property Name="State" Type="varchar(max)" />
+    <Property Name="Country" Type="varchar(max)" />
+    <Property Name="ZipCode" Type="varchar" MaxLength="20" />
+    <Property Name="Website" Type="varchar(max)" />
+    <Property Name="Phone" Type="varchar(max)" />
+    <Property Name="Email" Type="varchar(max)" />
+    <Property Name="Notes" Type="varchar(max)" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="DomainRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="domain" Type="varchar(max)" />
+    <Property Name="requestip" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="verified" Type="bit" />
+  </EntityType>
+  <EntityType Name="EMailRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmailId" Type="varchar(max)" />
+    <Property Name="requestip" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="verified" Type="bit" />
+  </EntityType>
+  <EntityType Name="MailJobs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubcriberId" Type="varchar(max)" />
+    <Property Name="JobId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ResultItems">
+    <Key>
+      <PropertyRef Name="ResultId" />
+    </Key>
+    <Property Name="ResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppId" Type="uniqueidentifier" />
+    <Property Name="ResultTitle" Type="varchar(max)" />
+    <Property Name="ResultCount" Type="int" />
+    <Property Name="ResultSummary" Type="varchar(max)" />
+    <Property Name="VectorDetails" Type="varchar(max)" />
+    <Property Name="CveNumber" Type="varchar(max)" />
+    <Property Name="ThreatLevel" Type="varchar" MaxLength="50" />
+    <Property Name="Tags" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ShieldLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="SourceIp" Type="varchar" MaxLength="50" />
+    <Property Name="SourcePort" Type="varchar" MaxLength="50" />
+    <Property Name="DestIp" Type="varchar" MaxLength="50" />
+    <Property Name="DestPort" Type="varchar" MaxLength="50" />
+    <Property Name="Method" Type="varchar" MaxLength="50" />
+    <Property Name="Url" Type="varchar(max)" />
+    <Property Name="Host" Type="varchar" MaxLength="50" />
+    <Property Name="UserAgent" Type="varchar(max)" />
+    <Property Name="PostData" Type="varchar(max)" />
+    <Property Name="ResponseCode" Type="varchar" MaxLength="50" />
+    <Property Name="AttackId" Type="int" />
+    <Property Name="IpInfo" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Site">
+    <Key>
+      <PropertyRef Name="SiteId" />
+    </Key>
+    <Property Name="SiteId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="Url" Type="varchar(max)" Nullable="false" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="LastScan" Type="datetime" />
+    <Property Name="Status" Type="varchar(max)" />
+    <Property Name="Notes" Type="varchar(max)" />
+    <Property Name="LoginUser" Type="varchar(max)" />
+    <Property Name="LoginPass" Type="varchar(max)" />
+    <Property Name="Technology" Type="varchar(max)" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+    <Property Name="LoginUrl" Type="varchar(max)" />
+    <Property Name="LoginSuccess" Type="nchar" MaxLength="10" />
+    <Property Name="IPAddress" Type="varchar(max)" />
+    <Property Name="Server" Type="varchar(max)" />
+    <Property Name="PlanName" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="SkanJobs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SkanId" Type="varchar" MaxLength="50" />
+    <Property Name="SubscriberId" Type="varchar(max)" />
+    <Property Name="Url" Type="varchar(max)" />
+    <Property Name="PutTime" Type="datetime" />
+    <Property Name="CurrentStatus" Type="varchar" MaxLength="50" />
+    <Property Name="StartTime" Type="datetime" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="RefId" Type="int" />
+    <Property Name="Notes" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="SkanResults">
+    <Key>
+      <PropertyRef Name="resultId" />
+    </Key>
+    <Property Name="resultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="href" Type="varchar(max)" />
+    <Property Name="id" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar(max)" />
+    <Property Name="url" Type="varchar(max)" />
+    <Property Name="description" Type="varchar(max)" />
+    <Property Name="skanid" Type="int" />
+  </EntityType>
+  <EntityType Name="Subscriptions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PlanName" Type="varchar" MaxLength="50" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="PaymentMade" Type="int" />
+    <Property Name="PaymentPending" Type="int" />
+    <Property Name="PaymentDate" Type="datetime" />
+    <Property Name="PaymentDueDate" Type="datetime" />
+    <Property Name="CustomerId" Type="uniqueidentifier" />
+  </EntityType>
+  <Association Name="FK_ShieldLog_BugDB">
+    <End Role="BugDB" Type="Self.BugDB" Multiplicity="0..1" />
+    <End Role="ShieldLog" Type="Self.ShieldLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BugDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShieldLog">
+        <PropertyRef Name="AttackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BugSkanDBModelStoreContainer">
+    <EntitySet Name="BugDB" EntityType="Self.BugDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bugs" EntityType="Self.Bugs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DomainRequest" EntityType="Self.DomainRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMailRequest" EntityType="Self.EMailRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MailJobs" EntityType="Self.MailJobs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResultItems" EntityType="Self.ResultItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShieldLog" EntityType="Self.ShieldLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SkanJobs" EntityType="Self.SkanJobs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SkanResults" EntityType="Self.SkanResults" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="App" EntityType="Self.App" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [App].[Id] AS [Id], 
+    [App].[AppName] AS [AppName], 
+    [App].[AppTitle] AS [AppTitle], 
+    [App].[AppType] AS [AppType], 
+    [App].[Url] AS [Url], 
+    [App].[SubmittedDate] AS [SubmittedDate], 
+    [App].[LastScan] AS [LastScan], 
+    [App].[UserId] AS [UserId], 
+    [App].[ReportUrl] AS [ReportUrl], 
+    [App].[Critical] AS [Critical], 
+    [App].[Warning] AS [Warning], 
+    [App].[Info] AS [Info]
+    FROM [dbo].[App] AS [App]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ShieldLog_BugDB" Association="Self.FK_ShieldLog_BugDB">
+      <End Role="BugDB" EntitySet="BugDB" />
+      <End Role="ShieldLog" EntitySet="ShieldLog" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

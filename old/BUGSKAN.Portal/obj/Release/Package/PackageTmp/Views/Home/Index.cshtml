@@ -1,0 +1,488 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Inner.cshtml";
+    ViewBag.Current = "Scheduler";
+}
+
+<script src="node_modules/highcharts-no-data-to-display/index.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/no-data-to-display.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<div class="row">
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <h4 class="title">Events on <b>@HttpContext.Current.Session["CurrentSite"].ToString()</b>&nbsp; @*<a href="#" id="btnChangeSite" class="btn btn-default"> <i class="icon icon-primary"></i> Change</a>*@  </h4>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card" style="height:420px;">
+
+                    <div class="content">
+                        <div class="col-md-12">
+
+
+                            <script type="text/javascript">
+                              
+                                $(document).ready(function () {
+
+
+                                    // Get the CSV and create the chart
+                                    var options = {
+
+
+                                        chart: {
+                                            renderTo: 'container',
+                                            type: 'line',
+
+
+                                        },
+                                        title: {
+                                            text: 'Attacks blocked in the last 7 days'
+                                        },
+
+
+                                        xAxis: [{
+                                            title: {
+                                                text: 'Date'
+                                            },
+                                            type: 'category',
+
+                                            labels: {
+                                                format: Highcharts.dateFormat('%A, %b %e, %Y', this.x)
+                                            },
+
+                                        }],
+
+                                        yAxis: [{ // left y axis
+                                            title: {
+                                                text: 'No. of attacks blocked'
+                                            },
+                                            labels: {
+                                                align: 'left',
+                                                x: 3,
+                                                y: 16,
+                                                format: '{value:.,0f}'
+                                            },
+                                            showFirstLabel: false
+                                        }, { // right y axis
+                                            linkedTo: 0,
+                                            gridLineWidth: 0,
+                                            opposite: true,
+                                            title: {
+                                                text: null
+                                            },
+                                            labels: {
+                                                align: 'right',
+                                                x: -3,
+                                                y: 16,
+                                                format: '{value:.,0f}'
+                                            },
+                                            showFirstLabel: false
+                                        }],
+
+                                        legend: {
+                                            align: 'left',
+                                            verticalAlign: 'top',
+                                            y: 20,
+                                            floating: true,
+                                            borderWidth: 0
+                                        },
+
+                                        tooltip: {
+                                            formatter: function () {
+                                                if (this.point.value == null) {
+                                                    chart.hideNoData();
+                                                    return 'No data';
+                                                }
+                                                else {
+                                                    shared: true;
+                                                    crosshairs: true
+                                                }
+                                            }},
+
+                                        plotOptions: {
+                                            series: {
+                                                name: 'No. of attacks blocked',
+                                                color: '#d40000',
+                                                cursor: 'pointer',
+                                                point: {
+                                                    events: {
+                                                        click: function (e) {
+                                                            hs.htmlExpand(null, {
+                                                                pageOrigin: {
+                                                                    x: e.pageX || e.clientX,
+                                                                    y: e.pageY || e.clientY
+                                                                },
+                                                                headingText: this.series.name,
+                                                                maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                                    this.y + ' visits',
+                                                                width: 200
+                                                            });
+                                                        }
+                                                    }
+                                                },
+                                                marker: {
+                                                    lineWidth: 1
+                                                }
+                                            }
+                                        },
+
+                                        series: [{
+
+                                        }],
+                                        lang: {
+                                            noData: "No Attacks in the last 7 days"
+                                        },
+                                    }
+                                    $.getJSON('/Graph/RecentAttacksBlocked', function (data) {
+                                        options.series[0].data = data;
+                                        var chart = new Highcharts.Chart(options);
+                                       
+                                    });
+
+                                });
+                            </script>
+
+
+                        </div>
+                        <div id="container" style="height:33%;width:100%">
+                            <table style="width:100%">
+                                <tr style="height:33%;width:100%"><td>&nbsp;</td></tr>
+                                <tr style="height:33%;width:100%">
+                                    <td style="vertical-align:middle;text-align:center"><img src="/Hourglass/bugskan_loader.gif" style="width:72px" alt="" /></td>
+                                </tr>
+                                <tr style="height:33%;width:100%"><td>&nbsp;</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card" style="height:420px;">
+                    <div class="content table-responsive">
+                        <div class="col-md-12">
+                            <script type="text/javascript">
+
+                                $(document).ready(function () {
+                                    // Get the CSV and create the chart
+                                    var options = {
+
+                                        chart: {
+                                            renderTo: 'piecontainer',
+                                            type: 'pie'
+                                        },
+
+
+                                        title: {
+                                            text: 'Attacks types'
+                                        },
+
+
+
+                                        xAxis: [{
+                                            title: {
+                                                text: 'URL'
+                                            },
+                                            type: 'category',
+
+                                            labels: {
+                                                format: Highcharts.dateFormat('%A, %b %e, %Y', this.x)
+                                            },
+
+                                        }],
+
+
+                                        yAxis: [{ // left y axis
+                                            title: {
+                                                text: 'No. of attacks blocked'
+                                            },
+                                            labels: {
+                                                align: 'left',
+                                                x: 3,
+                                                y: 16,
+                                                format: '{value:.,0f}'
+                                            },
+                                            showFirstLabel: false
+                                        }, { // right y axis
+                                            linkedTo: 0,
+                                            gridLineWidth: 0,
+                                            opposite: true,
+                                            title: {
+                                                text: null
+                                            },
+                                            labels: {
+                                                align: 'right',
+                                                x: -3,
+                                                y: 16,
+                                                format: '{value:.,0f}'
+                                            },
+                                            showFirstLabel: false
+                                        }],
+
+                                        legend: {
+                                            align: 'left',
+                                            verticalAlign: 'top',
+                                            y: 20,
+                                            floating: true,
+                                            borderWidth: 0
+                                        },
+
+                                        tooltip: {
+                                            formatter: function () {
+                                                if (this.point.value == null) {
+                                                    chart.hideNoData();
+                                                    return 'No data';
+                                                }
+                                                else {
+                                                    shared: true;
+                                                    crosshairs: true
+                                                }
+                                            }},
+
+                                            //shared: true,
+                                            //crosshairs: true
+                                        
+
+
+                                        plotOptions: {
+                                            series: {
+                                                name: 'Attacks',
+                                                color: '#d40000',
+                                                cursor: 'pointer',
+                                                point: {
+                                                    events: {
+                                                        click: function (e) {
+                                                            hs.htmlExpand(null, {
+                                                                pageOrigin: {
+                                                                    x: e.pageX || e.clientX,
+                                                                    y: e.pageY || e.clientY
+                                                                },
+                                                                headingText: this.series.name,
+                                                                maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                                    this.y + ' visits',
+                                                                width: 200
+                                                            });
+                                                        }
+                                                    }
+                                                },
+                                                marker: {
+                                                    lineWidth: 1
+                                                }
+                                            }
+                                        },
+
+                                        series: [{
+
+                                        }],
+                                        lang: {
+                                            noData: "No Attacks in the last 7 days"
+                                },
+                                    }
+                                    $.getJSON('/Graph/RecentAttackTypeCount', function (data) {
+                                        options.series[0].data = data;
+                                        var chart = new Highcharts.Chart(options);
+                                      
+                                    });
+                                });
+
+                            </script>
+
+
+                            <div id="piecontainer" style="height:33%;width:100%">
+                                <table style="width:100%" >
+                                   
+                                    <tr style="height: 33%;width:100%"><td>&nbsp;</td></tr>
+                                    <tr style="height: 33%;width:100%">
+                                        <td style="vertical-align:middle;text-align:center"><img src="/Hourglass/bugskan_loader.gif" style="width:72px" alt="" /></td>
+                                    </tr>
+                                    <tr style="height: 33%;width:100%"><td>&nbsp;</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+
+                <div class="card" style="height:420px;">
+
+                    <div class="content table-responsive">
+
+                        <div class="col-md-12">
+
+
+                            <script type="text/javascript">
+
+                                $(document).ready(function () {
+                                    // Get the CSV and create the chart
+                                    var options = {
+
+                                        chart: {
+                                            renderTo: 'barcontainer',
+                                            type: 'bar'
+
+                                        },
+
+                                        title: {
+                                            text: 'Top 10 Target Urls'
+                                        },
+
+                                        xAxis: [{
+                                            title: {
+                                                text: 'URL'
+                                            },
+                                            type: 'category',
+                                            labels: {
+                                                formatter: function () {
+                                                    var text = this.value,
+                                                        formatted = text.length > 25 ? text.substring(0, 25) + '...' : text;
+
+                                                    return '<div class="js-ellipse" style="width:150px; overflow:hidden" title="' + text + '">' + formatted + '</div>';
+                                                },
+                                                useHTML: true
+                                            }
+                                           
+                                            //labels: {
+                                            //    format: Highcharts.dateFormat('%A, %b %e, %Y', this.x)
+                                            //},
+
+                                        }],
+
+                                        yAxis: [{ // left y axis
+                                            title: {
+                                                text: 'No. of attacks blocked'
+                                            },
+                                            labels: {
+                                                align: 'left',
+                                                x: 3,
+                                                y: 16,
+                                                format: '{value:.,0f}'
+                                            },
+                                            showFirstLabel: false
+                                        }, { // right y axis
+                                            linkedTo: 0,
+                                            gridLineWidth: 0,
+                                            opposite: true,
+                                            title: {
+                                                text: null
+                                            },
+                                            labels: {
+                                                align: 'right',
+                                                x: -3,
+                                                y: 16,
+                                                format: '{value:.,0f}'
+                                            },
+                                            showFirstLabel: false
+                                        }],
+
+                                        legend: {
+                                            align: 'left',
+                                            verticalAlign: 'top',
+                                            y: 20,
+                                            floating: true,
+                                            borderWidth: 0
+                                        },
+
+                                        tooltip: {
+                                            formatter: function () {
+                                                if (this.point.value == null) {
+                                                    chart.hideNoData();
+                                                    return 'No data';
+                                                }
+                                                else {
+                                                    shared: true;
+                                                    crosshairs: true
+                                                }
+                                            }
+                                        },
+
+                                        //    shared: true,
+                                        //    crosshairs: true
+                                        //},
+
+                                        plotOptions: {
+                                            series: {
+                                                name: 'No. of attacks blocked',
+                                                color: '#d40000',
+                                                cursor: 'pointer',
+                                                point: {
+                                                    events: {
+                                                        click: function (e) {
+                                                            hs.htmlExpand(null, {
+                                                                pageOrigin: {
+                                                                    x: e.pageX || e.clientX,
+                                                                    y: e.pageY || e.clientY
+                                                                },
+                                                                headingText: this.series.name,
+                                                                maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                                    this.y + ' visits',
+                                                                width: 200
+                                                            });
+                                                        }
+                                                    }
+                                                },
+
+                                                marker: {
+                                                    lineWidth: 1
+                                                }
+                                            }
+                                        },
+
+                                        series: [{
+
+                                        }],
+                                        lang: {
+                                            noData: "No Attacks in the last 7 days"
+                                        },
+                                       
+                                    }
+                                    $.getJSON('/Graph/RecentAttackUrlCount', function (data) {
+                                        options.series[0].data = data;
+                                        var chart = new Highcharts.Chart(options);
+                                       
+
+                                    });
+                                });
+
+                            </script>
+
+
+                            <div id="barcontainer" style="height:33%;width:100%">
+                                <table style="width:100%">
+                                  
+                                    <tr style="height: 33%;width:100%"><td>&nbsp;</td></tr>
+                                    <tr style="height: 33%;width:100%">
+                                        <td style="vertical-align:middle;text-align:center"><img src="/Hourglass/bugskan_loader.gif" style="width:72px" alt="" /></td>
+                                    </tr>
+                                    <tr style="height: 33%;width:100%"><td>&nbsp;</td></tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+
+</div>

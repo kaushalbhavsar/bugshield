@@ -1,0 +1,134 @@
+﻿@model PagedList.IPagedList<BugShield.Portal.Models.ShieldLog>
+@using PagedList.Mvc;
+@using Newtonsoft.Json;
+@using MaxMind.GeoIP2.Responses;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Attack Logs";
+}
+
+<h2>
+    @{if (ViewContext.HttpContext.Request.QueryString["date"] != null)
+        {
+            @:Attacks on @ViewContext.HttpContext.Request.QueryString["date"]
+        }
+        else
+        {
+            @:Attacks today
+        }
+    }
+</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name:
+
+        <div class="custom-search hidden-sm hidden-xs pull-left">
+            @Html.TextBox("SearchString", "Search here", new { @class = "search-query" })
+
+            <input type="submit" class="fa fa-search" value="Search" />
+
+        </div>
+
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            <span>    <a href="@Url.Action("Index", new { sortOrder = ViewBag.TimeSortParm , currentFilter=ViewBag.CurrentFilter})">Time  <i class="glyphicon glyphicon-sort"></i></a>  </span>
+        </th>
+
+        <th>
+            <span>    <a href="@Url.Action("Index", new { sortOrder = ViewBag.SourceSortParm , currentFilter=ViewBag.CurrentFilter })">Attack Source   <i class="glyphicon glyphicon-sort"></i></a>  </span>
+        </th>
+
+        <th>
+            <span>    <a href="@Url.Action("Index", new { sortOrder = ViewBag.MethodSortParm , currentFilter=ViewBag.CurrentFilter })">Method  <i class="glyphicon glyphicon-sort"></i></a>  </span>
+        </th>
+
+        <th>
+            <span>    <a href="@Url.Action("Index", new { sortOrder = ViewBag.UrlSortParm,currentFilter=ViewBag.CurrentFilter })">URL  <i class="glyphicon glyphicon-sort"></i></a>  </span>
+        </th>
+
+        <th>
+            <span>    <a href="@Url.Action("Index", new { sortOrder = ViewBag.HostSortParm,currentFilter=ViewBag.CurrentFilter })">Host  <i class="glyphicon glyphicon-sort"></i></a>  </span>
+        </th>
+
+        <th>
+            <span>    <a href="@Url.Action("Index", new { sortOrder = ViewBag.AttackidSortParm,currentFilter=ViewBag.CurrentFilter })">Type  <i class="glyphicon glyphicon-sort"></i></a>  </span>
+        </th>
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceIp)
+
+                <br />
+
+
+
+                @{
+                    if (item.IpInfo != null)
+                    {
+
+                        CityResponse city = (CityResponse)JsonConvert.DeserializeObject<CityResponse>(item.IpInfo);
+
+
+
+                        @:<p><span class="flag-icon flag-icon-@city.Country.IsoCode.ToLower()"></span> @city.Country.Name </p>
+                        Html.Display(city.Country.Name);
+                    }
+
+                    else
+                    {
+
+                    }
+                }
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Method)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Host)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ResponseCode)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.BugDB.Title)
+            </td>
+            <td>
+
+                <a href="@Url.Action("Details",new { id=item.id } )" class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i> Details</a>
+
+
+            </td>
+        </tr>
+                    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

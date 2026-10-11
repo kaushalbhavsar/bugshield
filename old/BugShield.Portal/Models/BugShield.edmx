@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BugSkanDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BugDB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Links" Type="varchar(max)" />
+          <Property Name="VideoUrl" Type="varchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDb.dbo.Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar(max)" />
+          <Property Name="Address1" Type="varchar(max)" />
+          <Property Name="Address2" Type="varchar(max)" />
+          <Property Name="Address3" Type="varchar(max)" />
+          <Property Name="City" Type="varchar(max)" />
+          <Property Name="State" Type="varchar(max)" />
+          <Property Name="Country" Type="varchar(max)" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="20" />
+          <Property Name="Website" Type="varchar(max)" />
+          <Property Name="Phone" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="ShieldLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="SourceIp" Type="varchar" MaxLength="50" />
+          <Property Name="SourcePort" Type="varchar" MaxLength="50" />
+          <Property Name="DestIp" Type="varchar" MaxLength="50" />
+          <Property Name="DestPort" Type="varchar" MaxLength="50" />
+          <Property Name="Method" Type="varchar" MaxLength="50" />
+          <Property Name="Url" Type="varchar(max)" />
+          <Property Name="Host" Type="varchar" MaxLength="50" />
+          <Property Name="UserAgent" Type="varchar(max)" />
+          <Property Name="PostData" Type="varchar(max)" />
+          <Property Name="ResponseCode" Type="varchar" MaxLength="50" />
+          <Property Name="AttackId" Type="int" />
+          <Property Name="IpInfo" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Url" Type="varchar(max)" Nullable="false" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="LastScan" Type="datetime" />
+          <Property Name="Status" Type="varchar(max)" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="LoginUser" Type="varchar(max)" />
+          <Property Name="LoginPass" Type="varchar(max)" />
+          <Property Name="Technology" Type="varchar(max)" />
+          <Property Name="UserId" Type="nvarchar(max)" />
+          <Property Name="LoginUrl" Type="varchar(max)" />
+          <Property Name="LoginSuccess" Type="nchar" MaxLength="10" />
+          <Property Name="IPAddress" Type="varchar(max)" />
+          <Property Name="Server" Type="varchar(max)" />
+          <Property Name="PlanName" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PlanName" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="PaymentMade" Type="int" />
+          <Property Name="PaymentPending" Type="int" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="PaymentDueDate" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_ShieldLog_BugDB">
+          <End Role="BugDB" Type="Self.BugDB" Multiplicity="0..1" />
+          <End Role="ShieldLog" Type="Self.ShieldLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BugDB">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShieldLog">
+              <PropertyRef Name="AttackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Rpt_AttackCountByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackCountByHour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sdate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Rpt_AttackTypeByHost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="host" Type="varchar(max)" Mode="In" />
+          <Parameter Name="sdate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="BugSkanDBModelStoreContainer">
+          <EntitySet Name="BugDB" EntityType="Self.BugDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShieldLog" EntityType="Self.ShieldLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customer].[Id] AS [Id], 
+    [Customer].[CompanyName] AS [CompanyName], 
+    [Customer].[Address1] AS [Address1], 
+    [Customer].[Address2] AS [Address2], 
+    [Customer].[Address3] AS [Address3], 
+    [Customer].[City] AS [City], 
+    [Customer].[State] AS [State], 
+    [Customer].[Country] AS [Country], 
+    [Customer].[ZipCode] AS [ZipCode], 
+    [Customer].[Website] AS [Website], 
+    [Customer].[Phone] AS [Phone], 
+    [Customer].[Email] AS [Email], 
+    [Customer].[Notes] AS [Notes], 
+    [Customer].[Created] AS [Created], 
+    [Customer].[UserId] AS [UserId]
+    FROM [dbo].[Customer] AS [Customer]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ShieldLog_BugDB" Association="Self.FK_ShieldLog_BugDB">
+            <End Role="BugDB" EntitySet="BugDB" />
+            <End Role="ShieldLog" EntitySet="ShieldLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BugSkanDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BugSkanDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="BugSkanDBModel.Customer" />
+          <EntitySet Name="Subscriptions" EntityType="BugSkanDBModel.Subscription" />
+          <EntitySet Name="Sites" EntityType="BugSkanDBModel.Site" />
+          <EntitySet Name="BugDBs" EntityType="BugSkanDBModel.BugDB" />
+          <EntitySet Name="ShieldLogs" EntityType="BugSkanDBModel.ShieldLog" />
+          <AssociationSet Name="FK_ShieldLog_BugDB" Association="BugSkanDBModel.FK_ShieldLog_BugDB">
+            <End Role="BugDB" EntitySet="BugDBs" />
+            <End Role="ShieldLog" EntitySet="ShieldLogs" />
+          </AssociationSet>
+          <FunctionImport Name="Rpt_AttackCountByDate" ReturnType="Collection(BugSkanDBModel.AttackByDate)">
+          <Parameter Name="host" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackCountByHour" ReturnType="Collection(BugSkanDBModel.Rpt_AttackCountByHour_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_AttackTypeByHost" ReturnType="Collection(BugSkanDBModel.Rpt_AttackTypeByHost_Result)">
+            <Parameter Name="host" Mode="In" Type="String" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PlanName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentMade" Type="Int32" />
+          <Property Name="PaymentPending" Type="Int32" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentDueDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastScan" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LoginUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LoginPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Technology" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LoginUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LoginSuccess" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Server" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlanName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BugDB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Links" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ShieldLogs" Relationship="BugSkanDBModel.FK_ShieldLog_BugDB" FromRole="BugDB" ToRole="ShieldLog" />
+        </EntityType>
+        <EntityType Name="ShieldLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="SourceIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SourcePort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestPort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResponseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttackId" Type="Int32" />
+          <Property Name="IpInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BugDB" Relationship="BugSkanDBModel.FK_ShieldLog_BugDB" FromRole="ShieldLog" ToRole="BugDB" />
+        </EntityType>
+        <Association Name="FK_ShieldLog_BugDB">
+          <End Type="BugSkanDBModel.BugDB" Role="BugDB" Multiplicity="0..1" />
+          <End Type="BugSkanDBModel.ShieldLog" Role="ShieldLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BugDB">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShieldLog">
+              <PropertyRef Name="AttackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Rpt_AttackCountByDate_Result">
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackCountByHour_Result">
+          <Property Type="DateTime" Name="ForDate" Nullable="true" />
+          <Property Type="Int32" Name="OnHour" Nullable="true" />
+          <Property Type="Int32" Name="Totals" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Rpt_AttackTypeByHost_Result">
+          <Property Type="Int32" Name="attackid" Nullable="true" />
+          <Property Type="String" Name="title" Nullable="true" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AttackByDate">
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="count" Nullable="true" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BugSkanDBModelStoreContainer" CdmEntityContainer="BugSkanDBEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PaymentDueDate" ColumnName="PaymentDueDate" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentPending" ColumnName="PaymentPending" />
+                <ScalarProperty Name="PaymentMade" ColumnName="PaymentMade" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sites">
+            <EntityTypeMapping TypeName="BugSkanDBModel.Site">
+              <MappingFragment StoreEntitySet="Site">
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="Server" ColumnName="Server" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="LoginSuccess" ColumnName="LoginSuccess" />
+                <ScalarProperty Name="LoginUrl" ColumnName="LoginUrl" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Technology" ColumnName="Technology" />
+                <ScalarProperty Name="LoginPass" ColumnName="LoginPass" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastScan" ColumnName="LastScan" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BugDBs">
+            <EntityTypeMapping TypeName="BugSkanDBModel.BugDB">
+              <MappingFragment StoreEntitySet="BugDB">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="Links" ColumnName="Links" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShieldLogs">
+            <EntityTypeMapping TypeName="BugSkanDBModel.ShieldLog">
+              <MappingFragment StoreEntitySet="ShieldLog">
+                <ScalarProperty Name="IpInfo" ColumnName="IpInfo" />
+                <ScalarProperty Name="AttackId" ColumnName="AttackId" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="PostData" ColumnName="PostData" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="DestPort" ColumnName="DestPort" />
+                <ScalarProperty Name="DestIp" ColumnName="DestIp" />
+                <ScalarProperty Name="SourcePort" ColumnName="SourcePort" />
+                <ScalarProperty Name="SourceIp" ColumnName="SourceIp" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackCountByDate" FunctionName="BugSkanDBModel.Store.Rpt_AttackCountByDate">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.AttackByDate">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackCountByHour" FunctionName="BugSkanDBModel.Store.Rpt_AttackCountByHour">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackCountByHour_Result">
+                <ScalarProperty Name="ForDate" ColumnName="ForDate" />
+                <ScalarProperty Name="OnHour" ColumnName="OnHour" />
+                <ScalarProperty Name="Totals" ColumnName="Totals" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_AttackTypeByHost" FunctionName="BugSkanDBModel.Store.Rpt_AttackTypeByHost">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BugSkanDBModel.Rpt_AttackTypeByHost_Result">
+                <ScalarProperty Name="attackid" ColumnName="attackid" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

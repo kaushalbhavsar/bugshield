@@ -1,0 +1,88 @@
+﻿@using BUGSKAN.Portal.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_Outer.cshtml";
+
+}
+<div class="wrapper wrapper-full-page">
+    <div class="full-page login-page" data-color="rose">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="card card-login card-hidden">
+                                    <div class="header text-center">
+                                        <img src="/assets/img/logo.png" width="180" style="width:250px;" />
+                                    </div>
+                                    <div class="content">
+                                        <div class="text-danger">
+                                            @ViewBag.LoginErrorMsg
+                                            @ViewBag.MsgForResetPass
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Email)
+
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-no-border" })
+
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Password)
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control input-no-border" })
+
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                        
+<div class="text-center">
+                                            <input type="submit" class="btn btn-rose btn-wd btn-lg" value="Sign in" />
+                                            <p>
+
+                                                <br />
+                                                <a href="register" style="color:#d40000;">
+                                                    <i class="ti-id-badge"></i> Create a new account
+                                                </a>
+                                            </p>
+
+
+                                        </div>
+                                        <div class="text-center">
+                                           
+                                            <p>
+
+                                                <br />
+                                                <a href="ForgotPassword" style="color:#d40000;">
+                                                    <i class="ti-id-badge"></i> Forgot Password
+                                                </a>
+                                            </p>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+                        </section>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

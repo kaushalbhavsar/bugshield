@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BugSkanDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BugSkanDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BugDBs" EntityType="BugSkanDBModel.BugDB" />
+    <EntitySet Name="ShieldLogs" EntityType="BugSkanDBModel.ShieldLog" />
+    <EntitySet Name="Sites" EntityType="BugSkanDBModel.Site" />
+    <AssociationSet Name="FK_ShieldLog_BugDB" Association="BugSkanDBModel.FK_ShieldLog_BugDB">
+      <End Role="BugDB" EntitySet="BugDBs" />
+      <End Role="ShieldLog" EntitySet="ShieldLogs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BugDB">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Links" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ShieldLogs" Relationship="BugSkanDBModel.FK_ShieldLog_BugDB" FromRole="BugDB" ToRole="ShieldLog" />
+  </EntityType>
+  <EntityType Name="ShieldLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="SourceIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SourcePort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DestIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DestPort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PostData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResponseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AttackId" Type="Int32" />
+    <NavigationProperty Name="BugDB" Relationship="BugSkanDBModel.FK_ShieldLog_BugDB" FromRole="ShieldLog" ToRole="BugDB" />
+    <Property Name="IpInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Site">
+    <Key>
+      <PropertyRef Name="SiteId" />
+    </Key>
+    <Property Name="SiteId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastScan" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LoginUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LoginPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Technology" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Guid" />
+    <Property Name="LoginUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LoginSuccess" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Server" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PlanName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_ShieldLog_BugDB">
+    <End Type="BugSkanDBModel.BugDB" Role="BugDB" Multiplicity="0..1" />
+    <End Type="BugSkanDBModel.ShieldLog" Role="ShieldLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BugDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShieldLog">
+        <PropertyRef Name="AttackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

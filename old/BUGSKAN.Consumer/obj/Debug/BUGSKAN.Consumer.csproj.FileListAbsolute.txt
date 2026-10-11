@@ -1,0 +1,16 @@
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\BUGSKAN.Consumer.exe.config
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\BUGSKAN.Consumer.exe
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\BUGSKAN.Consumer.pdb
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\RabbitMQ.Client.dll
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\RabbitMQ.Client.xml
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\slnBugShield\BUGSKAN.Consumer\obj\Debug\BUGSKAN.Consumer.csprojResolveAssemblyReference.cache
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\slnBugShield\BUGSKAN.Consumer\obj\Debug\BUGSKAN.Consumer.exe
+C:\Users\BugSkan\Source\Workspaces\Workspace\BugShield\slnBugShield\BUGSKAN.Consumer\obj\Debug\BUGSKAN.Consumer.pdb
+D:\Projects\BUGSKAN\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\BUGSKAN.Consumer.exe.config
+D:\Projects\BUGSKAN\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\BUGSKAN.Consumer.exe
+D:\Projects\BUGSKAN\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\BUGSKAN.Consumer.pdb
+D:\Projects\BUGSKAN\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\RabbitMQ.Client.dll
+D:\Projects\BUGSKAN\BugShield\slnBugShield\BUGSKAN.Consumer\bin\Debug\RabbitMQ.Client.xml
+D:\Projects\BUGSKAN\BugShield\slnBugShield\BUGSKAN.Consumer\obj\Debug\BUGSKAN.Consumer.csprojResolveAssemblyReference.cache
+D:\Projects\BUGSKAN\BugShield\slnBugShield\BUGSKAN.Consumer\obj\Debug\BUGSKAN.Consumer.exe
+D:\Projects\BUGSKAN\BugShield\slnBugShield\BUGSKAN.Consumer\obj\Debug\BUGSKAN.Consumer.pdb

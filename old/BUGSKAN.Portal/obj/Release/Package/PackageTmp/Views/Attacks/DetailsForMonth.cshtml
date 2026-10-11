@@ -1,0 +1,110 @@
+﻿@model BUGSKAN.Portal.Models.ShieldLog
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Inner.cshtml";
+}
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card" style="height:300px;">
+
+            <div class="content">
+                <div class="col-md-12">
+                    <table>
+
+
+                        <tr>
+
+                            <td width="40%"><b>@Html.DisplayNameFor(model => model.Time)</b></td>
+                            <td>@Html.DisplayFor(model => model.Time)</td>
+                        </tr>
+                        <tr style="height: 10px !important">
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+
+                            <td width="40%"><b>Source IP</b></td>
+                            <td>@Html.DisplayFor(model => model.SourceIp)</td>
+                        </tr>
+                        <tr style="height: 10px !important">
+                            <td colspan="3"></td>
+                        </tr>
+                        @*<tr>
+                                <td></td>
+                                <td>@Html.DisplayNameFor(model => model.SourcePort)</td>
+                                <td>@Html.DisplayFor(model => model.SourcePort)</td>
+                            </tr>*@
+
+                        @*<tr>
+                                <td></td>
+                                <td>@Html.DisplayNameFor(model => model.DestIp)</td>
+                                <td>@Html.DisplayFor(model => model.DestIp)</td>
+                            </tr>*@
+
+
+                        <tr>
+                            <td width="40%"><b>@Html.DisplayNameFor(model => model.Method)</b></td>
+                            <td>@Html.DisplayFor(model => model.Method)</td>
+                        </tr>
+                        <tr style="height: 10px !important">
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><b> Code</b></td>
+                            <td>@Html.DisplayFor(model => model.ResponseCode)</td>
+                        </tr>
+                        <tr style="height: 10px !important">
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><b>@Html.DisplayNameFor(model => model.Url)</b></td>
+                            <td><code>@Html.DisplayFor(model => model.Host):@Html.DisplayFor(model => model.DestPort)@Html.DisplayFor(model => model.Url)</code></td>
+                        </tr>
+                        <tr style="height: 10px !important">
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+
+                            <td width="40%"><b>User Agent</b></td>
+                            <td>@Html.DisplayFor(model => model.UserAgent)</td>
+                            <td>
+                        </tr>
+                        <tr style="height: 10px !important">
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+
+                            <td width="40%"><b>Post Data</b></td>
+                            <td>
+                                @{
+                                    var newPostData = Model.PostData;
+                                    String PostData = newPostData.Replace("\\n", Environment.NewLine);
+
+                                    @:<pre class="prettyprint">@PostData</pre>
+
+
+
+
+                                }
+
+
+                            </td>
+                            <td width="20%"></td>
+                        </tr>
+
+
+
+
+                        <tr><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    <p>
+                        <a href="@Url.Action("AttackThisMonth"@*,new { searchString = Model.Host}*@)" class="btn btn-transparent"><i class="glyphicon glyphicon-backward"></i> Back to List</a>
+                    </p>
+

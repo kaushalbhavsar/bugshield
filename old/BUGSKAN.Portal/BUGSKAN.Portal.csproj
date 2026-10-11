@@ -1,0 +1,1616 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{97E383C4-73B0-40A1-B340-7E19A4C75FEA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BUGSKAN.Portal</RootNamespace>
+    <AssemblyName>BUGSKAN.Portal</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MaxMind.Db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
+      <HintPath>packages\MaxMind.Db.2.1.3\lib\net45\MaxMind.Db.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaxMind.GeoIP2, Version=2.6.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
+      <HintPath>packages\MaxMind.GeoIP2.2.7.2\lib\net45\MaxMind.GeoIP2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.5.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.5.1\lib\net452\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.SmtpApi, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.3.3\lib\SendGrid.SmtpApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AspNetUsersController.cs" />
+    <Compile Include="Controllers\AttacksController.cs" />
+    <Compile Include="Controllers\GraphController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\PreferencesController.cs" />
+    <Compile Include="Controllers\RealTimeController.cs" />
+    <Compile Include="Controllers\SitesController.cs" />
+    <Compile Include="Controllers\SubscriptionsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccessLog.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\App.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserRole.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttackClassification.cs" />
+    <Compile Include="Models\Bug.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BugDB.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BugSkan.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BugSkan.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BugSkan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BugSkan.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BugSkan.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckEmailStatus_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainRequest.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EMailRequest.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FindAppbyId1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FindAppbyId_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FindAppsByUser1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FindAppsByUser_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetAttackIp1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetAttackIp_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetAttacksByDate1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetAttacksByDate_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetLogsPerMinute1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetLogsPerMinute_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetLogsPerSecond1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetLogsPerSecond21_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetLogsPerSecond2_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetLogsPerSecond_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetResultItems1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetResultItems_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetScanStatus1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetScanStatus_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSkanDetails1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSkanDetailsbyId1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSkanDetailsbyId_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSkanDetails_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSkanResult1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSkanResult_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IPAttacksBlocked1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IPAttacksBlocked_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IPAttacksBlocked_Result1.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IPAttacksBlocked_Result2.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IPAttackTypeCount1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IPAttackTypeCount_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IPAttackTypeCount_Result1.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IpAttackUrlCount1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IpAttackUrlCount_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IpAttackUrlCount_Result1.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MailJob.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Preference.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttacksBlocked1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttacksBlocked_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttacksBlocked_Result1.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttackTypeCount1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttackTypeCount_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttackTypeCount_Result1.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttackUrlCount1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttackUrlCount_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecentAttackUrlCount_Result1.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ResultItem.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackByCustomDateDetails11_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackByCustomDateDetails1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackByCustomDateDetails2_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackByCustomDateDetails_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackByURL1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackByURLDetails1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackByURLDetails_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackByURL_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackCountByDate1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackCountByDate_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackCountByHour1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackCountByHour_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackTypeByHost1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackTypeByHost_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackType_Today1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rpt_AttackType_Today_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShieldLog.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Site.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SkanJob.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SkanResult.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams1_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Subscription.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>BugSkan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\amaze.css" />
+    <Content Include="assets\css\bootstrap-datetimepicker.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\demo.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\font-muli.css" />
+    <Content Include="assets\css\paper-dashboard.html" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\themify-icons.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\img\apple-icon.html" />
+    <Content Include="assets\img\bg1.jpg" />
+    <Content Include="assets\img\faces\avatar.png" />
+    <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\vendors\charts\highcharts\css\highcharts.css" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts-3d.js" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts-3d.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts-more.js" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts-more.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts.js" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts-3d.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts-3d.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts-more.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts-more.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\accessibility.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\accessibility.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\annotations.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\annotations.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\boost-canvas.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\boost-canvas.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\boost.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\boost.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\broken-axis.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\broken-axis.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\data.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\data.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\drilldown.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\drilldown.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\export-data.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\export-data.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\exporting.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\exporting.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\funnel.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\funnel.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\gantt.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\gantt.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\grid-axis.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\grid-axis.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\heatmap.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\heatmap.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\no-data-to-display.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\no-data-to-display.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\offline-exporting.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\offline-exporting.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\overlapping-datalabels.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\overlapping-datalabels.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\series-label.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\series-label.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\solid-gauge.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\solid-gauge.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\static-scale.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\static-scale.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\stock.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\stock.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\treemap.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\treemap.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\xrange-series.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\xrange-series.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\themes\dark-blue.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\themes\dark-green.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\themes\dark-unica.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\themes\gray.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\themes\grid-light.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\themes\grid.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\themes\sand-signika.js" />
+    <Content Include="assets\vendors\charts\highcharts\js\themes\skies.js" />
+    <Content Include="assets\vendors\charts\highcharts\lib\canvg.js" />
+    <Content Include="assets\vendors\charts\highcharts\lib\canvg.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\lib\jspdf.js" />
+    <Content Include="assets\vendors\charts\highcharts\lib\jspdf.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\lib\rgbcolor.js" />
+    <Content Include="assets\vendors\charts\highcharts\lib\rgbcolor.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\lib\svg2pdf.js" />
+    <Content Include="assets\vendors\charts\highcharts\lib\svg2pdf.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\accessibility.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\accessibility.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\annotations.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\annotations.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\boost-canvas.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\boost-canvas.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\boost.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\boost.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\broken-axis.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\broken-axis.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\data.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\data.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\drilldown.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\drilldown.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\export-data.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\export-data.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\exporting.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\exporting.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\funnel.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\funnel.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\gantt.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\gantt.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\grid-axis.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\grid-axis.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\heatmap.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\heatmap.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\no-data-to-display.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\offline-exporting.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\offline-exporting.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\overlapping-datalabels.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\overlapping-datalabels.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\series-label.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\series-label.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\solid-gauge.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\solid-gauge.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\static-scale.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\static-scale.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\stock.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\stock.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\treemap.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\treemap.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\xrange-series.js" />
+    <Content Include="assets\vendors\charts\highcharts\modules\xrange-series.src.js" />
+    <Content Include="assets\vendors\charts\highcharts\readme.txt" />
+    <Content Include="assets\vendors\charts\highcharts\themes\dark-blue.js" />
+    <Content Include="assets\vendors\charts\highcharts\themes\dark-green.js" />
+    <Content Include="assets\vendors\charts\highcharts\themes\dark-unica.js" />
+    <Content Include="assets\vendors\charts\highcharts\themes\gray.js" />
+    <Content Include="assets\vendors\charts\highcharts\themes\grid-light.js" />
+    <Content Include="assets\vendors\charts\highcharts\themes\grid.js" />
+    <Content Include="assets\vendors\charts\highcharts\themes\sand-signika.js" />
+    <Content Include="assets\vendors\charts\highcharts\themes\skies.js" />
+    <Content Include="flags\4x3\ad.svg" />
+    <Content Include="flags\4x3\ae.svg" />
+    <Content Include="flags\4x3\af.svg" />
+    <Content Include="flags\4x3\ag.svg" />
+    <Content Include="flags\4x3\ai.svg" />
+    <Content Include="flags\4x3\al.svg" />
+    <Content Include="flags\4x3\am.svg" />
+    <Content Include="flags\4x3\ao.svg" />
+    <Content Include="flags\4x3\aq.svg" />
+    <Content Include="flags\4x3\ar.svg" />
+    <Content Include="flags\4x3\as.svg" />
+    <Content Include="flags\4x3\at.svg" />
+    <Content Include="flags\4x3\AU.png" />
+    <Content Include="flags\4x3\au.svg" />
+    <Content Include="flags\4x3\aw.svg" />
+    <Content Include="flags\4x3\ax.svg" />
+    <Content Include="flags\4x3\az.svg" />
+    <Content Include="flags\4x3\ba.svg" />
+    <Content Include="flags\4x3\bb.svg" />
+    <Content Include="flags\4x3\bd.svg" />
+    <Content Include="flags\4x3\be.svg" />
+    <Content Include="flags\4x3\bf.svg" />
+    <Content Include="flags\4x3\bg.svg" />
+    <Content Include="flags\4x3\bh.svg" />
+    <Content Include="flags\4x3\bi.svg" />
+    <Content Include="flags\4x3\bj.svg" />
+    <Content Include="flags\4x3\bl.svg" />
+    <Content Include="flags\4x3\bm.svg" />
+    <Content Include="flags\4x3\bn.svg" />
+    <Content Include="flags\4x3\bo.svg" />
+    <Content Include="flags\4x3\bq.svg" />
+    <Content Include="flags\4x3\BR.png" />
+    <Content Include="flags\4x3\br.svg" />
+    <Content Include="flags\4x3\bs.svg" />
+    <Content Include="flags\4x3\bt.svg" />
+    <Content Include="flags\4x3\bv.svg" />
+    <Content Include="flags\4x3\bw.svg" />
+    <Content Include="flags\4x3\by.svg" />
+    <Content Include="flags\4x3\bz.svg" />
+    <Content Include="flags\4x3\ca.svg" />
+    <Content Include="flags\4x3\cc.svg" />
+    <Content Include="flags\4x3\cd.svg" />
+    <Content Include="flags\4x3\cf.svg" />
+    <Content Include="flags\4x3\cg.svg" />
+    <Content Include="flags\4x3\ch.svg" />
+    <Content Include="flags\4x3\ci.svg" />
+    <Content Include="flags\4x3\ck.svg" />
+    <Content Include="flags\4x3\cl.svg" />
+    <Content Include="flags\4x3\cm.svg" />
+    <Content Include="flags\4x3\cn.svg" />
+    <Content Include="flags\4x3\co.svg" />
+    <Content Include="flags\4x3\cr.svg" />
+    <Content Include="flags\4x3\cu.svg" />
+    <Content Include="flags\4x3\cv.svg" />
+    <Content Include="flags\4x3\cw.svg" />
+    <Content Include="flags\4x3\cx.svg" />
+    <Content Include="flags\4x3\cy.svg" />
+    <Content Include="flags\4x3\cz.svg" />
+    <Content Include="flags\4x3\DE.png" />
+    <Content Include="flags\4x3\de.svg" />
+    <Content Include="flags\4x3\dj.svg" />
+    <Content Include="flags\4x3\dk.svg" />
+    <Content Include="flags\4x3\dm.svg" />
+    <Content Include="flags\4x3\do.svg" />
+    <Content Include="flags\4x3\dz.svg" />
+    <Content Include="flags\4x3\ec.svg" />
+    <Content Include="flags\4x3\ee.svg" />
+    <Content Include="flags\4x3\eg.svg" />
+    <Content Include="flags\4x3\eh.svg" />
+    <Content Include="flags\4x3\er.svg" />
+    <Content Include="flags\4x3\es.svg" />
+    <Content Include="flags\4x3\et.svg" />
+    <Content Include="flags\4x3\eu.svg" />
+    <Content Include="flags\4x3\fi.svg" />
+    <Content Include="flags\4x3\fj.svg" />
+    <Content Include="flags\4x3\fk.svg" />
+    <Content Include="flags\4x3\fm.svg" />
+    <Content Include="flags\4x3\fo.svg" />
+    <Content Include="flags\4x3\fr.svg" />
+    <Content Include="flags\4x3\ga.svg" />
+    <Content Include="flags\4x3\gb-eng.svg" />
+    <Content Include="flags\4x3\gb-nir.svg" />
+    <Content Include="flags\4x3\gb-sct.svg" />
+    <Content Include="flags\4x3\gb-wls.svg" />
+    <Content Include="flags\4x3\GB.png" />
+    <Content Include="flags\4x3\gb.svg" />
+    <Content Include="flags\4x3\gd.svg" />
+    <Content Include="flags\4x3\ge.svg" />
+    <Content Include="flags\4x3\gf.svg" />
+    <Content Include="flags\4x3\gg.svg" />
+    <Content Include="flags\4x3\gh.svg" />
+    <Content Include="flags\4x3\gi.svg" />
+    <Content Include="flags\4x3\gl.svg" />
+    <Content Include="flags\4x3\gm.svg" />
+    <Content Include="flags\4x3\gn.svg" />
+    <Content Include="flags\4x3\gp.svg" />
+    <Content Include="flags\4x3\gq.svg" />
+    <Content Include="flags\4x3\gr.svg" />
+    <Content Include="flags\4x3\gs.svg" />
+    <Content Include="flags\4x3\gt.svg" />
+    <Content Include="flags\4x3\gu.svg" />
+    <Content Include="flags\4x3\gw.svg" />
+    <Content Include="flags\4x3\gy.svg" />
+    <Content Include="flags\4x3\hk.svg" />
+    <Content Include="flags\4x3\hm.svg" />
+    <Content Include="flags\4x3\hn.svg" />
+    <Content Include="flags\4x3\hr.svg" />
+    <Content Include="flags\4x3\ht.svg" />
+    <Content Include="flags\4x3\hu.svg" />
+    <Content Include="flags\4x3\id.svg" />
+    <Content Include="flags\4x3\ie.svg" />
+    <Content Include="flags\4x3\il.svg" />
+    <Content Include="flags\4x3\im.svg" />
+    <Content Include="flags\4x3\in.svg" />
+    <Content Include="flags\4x3\io.svg" />
+    <Content Include="flags\4x3\iq.svg" />
+    <Content Include="flags\4x3\ir.svg" />
+    <Content Include="flags\4x3\is.svg" />
+    <Content Include="flags\4x3\it.svg" />
+    <Content Include="flags\4x3\je.svg" />
+    <Content Include="flags\4x3\jm.svg" />
+    <Content Include="flags\4x3\jo.svg" />
+    <Content Include="flags\4x3\jp.svg" />
+    <Content Include="flags\4x3\ke.svg" />
+    <Content Include="flags\4x3\kg.svg" />
+    <Content Include="flags\4x3\kh.svg" />
+    <Content Include="flags\4x3\ki.svg" />
+    <Content Include="flags\4x3\km.svg" />
+    <Content Include="flags\4x3\kn.svg" />
+    <Content Include="flags\4x3\kp.svg" />
+    <Content Include="flags\4x3\kr.svg" />
+    <Content Include="flags\4x3\kw.svg" />
+    <Content Include="flags\4x3\ky.svg" />
+    <Content Include="flags\4x3\kz.svg" />
+    <Content Include="flags\4x3\la.svg" />
+    <Content Include="flags\4x3\lb.svg" />
+    <Content Include="flags\4x3\lc.svg" />
+    <Content Include="flags\4x3\li.svg" />
+    <Content Include="flags\4x3\lk.svg" />
+    <Content Include="flags\4x3\lr.svg" />
+    <Content Include="flags\4x3\ls.svg" />
+    <Content Include="flags\4x3\lt.svg" />
+    <Content Include="flags\4x3\lu.svg" />
+    <Content Include="flags\4x3\lv.svg" />
+    <Content Include="flags\4x3\ly.svg" />
+    <Content Include="flags\4x3\ma.svg" />
+    <Content Include="flags\4x3\mc.svg" />
+    <Content Include="flags\4x3\md.svg" />
+    <Content Include="flags\4x3\me.svg" />
+    <Content Include="flags\4x3\mf.svg" />
+    <Content Include="flags\4x3\mg.svg" />
+    <Content Include="flags\4x3\mh.svg" />
+    <Content Include="flags\4x3\mk.svg" />
+    <Content Include="flags\4x3\ml.svg" />
+    <Content Include="flags\4x3\mm.svg" />
+    <Content Include="flags\4x3\mn.svg" />
+    <Content Include="flags\4x3\mo.svg" />
+    <Content Include="flags\4x3\mp.svg" />
+    <Content Include="flags\4x3\mq.svg" />
+    <Content Include="flags\4x3\mr.svg" />
+    <Content Include="flags\4x3\ms.svg" />
+    <Content Include="flags\4x3\mt.svg" />
+    <Content Include="flags\4x3\mu.svg" />
+    <Content Include="flags\4x3\mv.svg" />
+    <Content Include="flags\4x3\mw.svg" />
+    <Content Include="flags\4x3\mx.svg" />
+    <Content Include="flags\4x3\my.svg" />
+    <Content Include="flags\4x3\mz.svg" />
+    <Content Include="flags\4x3\na.svg" />
+    <Content Include="flags\4x3\nc.svg" />
+    <Content Include="flags\4x3\ne.svg" />
+    <Content Include="flags\4x3\nf.svg" />
+    <Content Include="flags\4x3\ng.svg" />
+    <Content Include="flags\4x3\ni.svg" />
+    <Content Include="flags\4x3\nl.svg" />
+    <Content Include="flags\4x3\no.svg" />
+    <Content Include="flags\4x3\np.svg" />
+    <Content Include="flags\4x3\nr.svg" />
+    <Content Include="flags\4x3\nu.svg" />
+    <Content Include="flags\4x3\nz.svg" />
+    <Content Include="flags\4x3\om.svg" />
+    <Content Include="flags\4x3\pa.svg" />
+    <Content Include="flags\4x3\pe.svg" />
+    <Content Include="flags\4x3\pf.svg" />
+    <Content Include="flags\4x3\pg.svg" />
+    <Content Include="flags\4x3\ph.svg" />
+    <Content Include="flags\4x3\pk.svg" />
+    <Content Include="flags\4x3\pl.svg" />
+    <Content Include="flags\4x3\pm.svg" />
+    <Content Include="flags\4x3\pn.svg" />
+    <Content Include="flags\4x3\pr.svg" />
+    <Content Include="flags\4x3\ps.svg" />
+    <Content Include="flags\4x3\pt.svg" />
+    <Content Include="flags\4x3\pw.svg" />
+    <Content Include="flags\4x3\py.svg" />
+    <Content Include="flags\4x3\qa.svg" />
+    <Content Include="flags\4x3\re.svg" />
+    <Content Include="flags\4x3\RO.png" />
+    <Content Include="flags\4x3\ro.svg" />
+    <Content Include="flags\4x3\rs.svg" />
+    <Content Include="flags\4x3\ru.svg" />
+    <Content Include="flags\4x3\rw.svg" />
+    <Content Include="flags\4x3\sa.svg" />
+    <Content Include="flags\4x3\sb.svg" />
+    <Content Include="flags\4x3\sc.svg" />
+    <Content Include="flags\4x3\sd.svg" />
+    <Content Include="flags\4x3\se.svg" />
+    <Content Include="flags\4x3\sg.svg" />
+    <Content Include="flags\4x3\sh.svg" />
+    <Content Include="flags\4x3\si.svg" />
+    <Content Include="flags\4x3\sj.svg" />
+    <Content Include="flags\4x3\sk.svg" />
+    <Content Include="flags\4x3\sl.svg" />
+    <Content Include="flags\4x3\sm.svg" />
+    <Content Include="flags\4x3\sn.svg" />
+    <Content Include="flags\4x3\so.svg" />
+    <Content Include="flags\4x3\sr.svg" />
+    <Content Include="flags\4x3\ss.svg" />
+    <Content Include="flags\4x3\st.svg" />
+    <Content Include="flags\4x3\sv.svg" />
+    <Content Include="flags\4x3\sx.svg" />
+    <Content Include="flags\4x3\sy.svg" />
+    <Content Include="flags\4x3\sz.svg" />
+    <Content Include="flags\4x3\tc.svg" />
+    <Content Include="flags\4x3\td.svg" />
+    <Content Include="flags\4x3\tf.svg" />
+    <Content Include="flags\4x3\tg.svg" />
+    <Content Include="flags\4x3\th.svg" />
+    <Content Include="flags\4x3\tj.svg" />
+    <Content Include="flags\4x3\tk.svg" />
+    <Content Include="flags\4x3\tl.svg" />
+    <Content Include="flags\4x3\tm.svg" />
+    <Content Include="flags\4x3\tn.svg" />
+    <Content Include="flags\4x3\to.svg" />
+    <Content Include="flags\4x3\tr.svg" />
+    <Content Include="flags\4x3\tt.svg" />
+    <Content Include="flags\4x3\tv.svg" />
+    <Content Include="flags\4x3\tw.svg" />
+    <Content Include="flags\4x3\tz.svg" />
+    <Content Include="flags\4x3\ua.svg" />
+    <Content Include="flags\4x3\ug.svg" />
+    <Content Include="flags\4x3\um.svg" />
+    <Content Include="flags\4x3\un.svg" />
+    <Content Include="flags\4x3\US.png" />
+    <Content Include="flags\4x3\us.svg" />
+    <Content Include="flags\4x3\uy.svg" />
+    <Content Include="flags\4x3\uz.svg" />
+    <Content Include="flags\4x3\va.svg" />
+    <Content Include="flags\4x3\vc.svg" />
+    <Content Include="flags\4x3\ve.svg" />
+    <Content Include="flags\4x3\vg.svg" />
+    <Content Include="flags\4x3\vi.svg" />
+    <Content Include="flags\4x3\vn.svg" />
+    <Content Include="flags\4x3\vu.svg" />
+    <Content Include="flags\4x3\wf.svg" />
+    <Content Include="flags\4x3\ws.svg" />
+    <Content Include="flags\4x3\ye.svg" />
+    <Content Include="flags\4x3\yt.svg" />
+    <Content Include="flags\4x3\za.svg" />
+    <Content Include="flags\4x3\zm.svg" />
+    <Content Include="flags\4x3\zw.svg" />
+    <Content Include="assets\img\image_placeholder.jpg" />
+    <Content Include="assets\img\logo-small.png" />
+    <Content Include="assets\img\logo-white.png" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\logo_placeholder.png" />
+    <Content Include="assets\img\placeholder.jpg" />
+    <Content Include="assets\img\product-image-120x120.png" />
+    <Content Include="assets\js\amaze.js" />
+    <Content Include="assets\js\bootstrap-checkbox-radio-switch-tags.js" />
+    <Content Include="assets\js\charts\chartjs-charts.js" />
+    <Content Include="assets\js\charts\flot-charts.js" />
+    <Content Include="assets\js\demo.js" />
+    <Content Include="assets\js\jquery.easypiechart.min.js" />
+    <Content Include="assets\vendors\bootstrap-datetimepicker.js" />
+    <Content Include="assets\vendors\bootstrap-notify.js" />
+    <Content Include="assets\vendors\bootstrap.min.js" />
+    <Content Include="assets\vendors\chartist.min.js" />
+    <Content Include="assets\vendors\charts\chartjs\Chart.min.js" />
+    <Content Include="assets\vendors\charts\flot\jquery.flot.categories.js" />
+    <Content Include="assets\vendors\charts\flot\jquery.flot.js" />
+    <Content Include="assets\vendors\charts\flot\jquery.flot.pie.js" />
+    <Content Include="assets\vendors\charts\flot\jquery.flot.resize.js" />
+    <Content Include="assets\vendors\charts\flot\jquery.flot.stack.js" />
+    <Content Include="assets\vendors\dropzone\dropzone.min.css" />
+    <Content Include="assets\vendors\dropzone\dropzone.min.js" />
+    <Content Include="assets\vendors\fullcalendar.min.js" />
+    <Content Include="assets\vendors\jasny-bootstrap.min.js" />
+    <Content Include="assets\vendors\jquery-3.1.1.min.js" />
+    <Content Include="assets\vendors\jquery-jvectormap.js" />
+    <Content Include="assets\vendors\jquery-ui-1.12.0\jquery-ui.css" />
+    <Content Include="assets\vendors\jquery-ui-1.12.0\jquery-ui.js" />
+    <Content Include="assets\vendors\jquery-ui.min.js" />
+    <Content Include="assets\vendors\jquery.bootstrap-wizard.js" />
+    <Content Include="assets\vendors\jquery.datatables.js" />
+    <Content Include="assets\vendors\jquery.select-bootstrap.js" />
+    <Content Include="assets\vendors\jquery.tagsinput.js" />
+    <Content Include="assets\vendors\jquery.validate.min.js" />
+    <Content Include="assets\vendors\material.min.js" />
+    <Content Include="assets\vendors\moment.min.js" />
+    <Content Include="assets\vendors\nouislider.min.js" />
+    <Content Include="assets\vendors\perfect-scrollbar.jquery.min.js" />
+    <Content Include="assets\vendors\sweetalert2.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="css\cssfileforattacks.css" />
+    <Content Include="css\animate.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\daterange.css" />
+    <Content Include="css\flag-icon.css" />
+    <Content Include="css\flag-icon.min.css" />
+    <Content Include="css\fullcalendar.css" />
+    <Content Include="css\gallery.css" />
+    <Content Include="css\login.css" />
+    <Content Include="css\main.css" />
+    <Content Include="css\slidebars.css" />
+    <Content Include="css\summernote.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Hourglass\bugskan_loader.gif" />
+    <Content Include="Models\BugSkan.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BugSkan.edmx</DependentUpon>
+      <LastGenOutput>BugSkan.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BugSkan.edmx.sql" />
+    <Content Include="Models\BugSkan.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BugSkan.edmx</DependentUpon>
+      <LastGenOutput>BugSkan.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\angular-bootstrap-prettify.js" />
+    <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
+    <Content Include="Scripts\angular-bootstrap.js" />
+    <Content Include="Scripts\angular-bootstrap.min.js" />
+    <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular-highcharts.js" />
+    <Content Include="Scripts\angular-loader.js" />
+    <Content Include="Scripts\angular-loader.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-resource.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular-scenario.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\BugSkan.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BugSkan.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BugSkan.edmx.diagram">
+      <DependentUpon>BugSkan.edmx</DependentUpon>
+    </Content>
+    <Content Include="assets\fonts\themify.eot" />
+    <Content Include="assets\fonts\themify.woff" />
+    <Content Include="assets\fonts\themify.ttf" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts-3d.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts-more.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\highcharts.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\highmaps.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\highstock.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts-3d.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts-more.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\highcharts.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\highmaps.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\highstock.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\accessibility.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\annotations.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\boost-canvas.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\boost.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\broken-axis.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\canvasrenderer.experimental.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\data.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\drilldown.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\export-data.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\exporting.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\funnel.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\gantt.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\grid-axis.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\heatmap.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\map-parser.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\map.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\no-data-to-display.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\offline-exporting.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\overlapping-datalabels.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\series-label.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\solid-gauge.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\static-scale.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\stock.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\treemap.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\js\modules\xrange-series.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\accessibility.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\annotations.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\boost-canvas.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\boost.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\broken-axis.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\canvasrenderer.experimental.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\data.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\drilldown.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\export-data.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\exporting.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\funnel.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\gantt.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\grid-axis.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\heatmap.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\map-parser.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\map.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\no-data-to-display.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\offline-exporting.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\overlapping-datalabels.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\series-label.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\solid-gauge.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\static-scale.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\stock.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\treemap.js.map" />
+    <Content Include="assets\vendors\charts\highcharts\modules\xrange-series.js.map" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="json.json" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Default.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\highcharts.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\Highcharts\adapters\mootools-adapter.js" />
+    <Content Include="Scripts\Highcharts\adapters\mootools-adapter.src.js" />
+    <Content Include="Scripts\Highcharts\adapters\prototype-adapter.js" />
+    <Content Include="Scripts\Highcharts\adapters\prototype-adapter.src.js" />
+    <Content Include="Scripts\Highcharts\adapters\standalone-framework.js" />
+    <Content Include="Scripts\Highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\Highcharts\exporting.js" />
+    <Content Include="Scripts\Highcharts\highcharts-3d.js" />
+    <Content Include="Scripts\Highcharts\highcharts-3d.src.js" />
+    <Content Include="Scripts\Highcharts\highcharts-more.js" />
+    <Content Include="Scripts\Highcharts\highcharts-more.src.js" />
+    <Content Include="Scripts\Highcharts\highcharts.js" />
+    <Content Include="Scripts\Highcharts\highcharts.src.js" />
+    <Content Include="Scripts\Highcharts\highstock.js" />
+    <Content Include="Scripts\Highcharts\highstock.src.js" />
+    <Content Include="Scripts\Highcharts\modules\annotations.js" />
+    <Content Include="Scripts\Highcharts\modules\annotations.src.js" />
+    <Content Include="Scripts\Highcharts\modules\canvas-tools.js" />
+    <Content Include="Scripts\Highcharts\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\Highcharts\modules\data.js" />
+    <Content Include="Scripts\Highcharts\modules\data.src.js" />
+    <Content Include="Scripts\Highcharts\modules\exporting.js" />
+    <Content Include="Scripts\Highcharts\modules\exporting.src.js" />
+    <Content Include="Scripts\Highcharts\modules\funnel.js" />
+    <Content Include="Scripts\Highcharts\modules\funnel.src.js" />
+    <Content Include="Scripts\Highcharts\modules\heatmap.js" />
+    <Content Include="Scripts\Highcharts\modules\heatmap.src.js" />
+    <Content Include="Scripts\Highcharts\modules\map.js" />
+    <Content Include="Scripts\Highcharts\modules\map.src.js" />
+    <Content Include="Scripts\Highcharts\themes\dark-blue.js" />
+    <Content Include="Scripts\Highcharts\themes\dark-green.js" />
+    <Content Include="Scripts\Highcharts\themes\gray.js" />
+    <Content Include="Scripts\Highcharts\themes\grid.js" />
+    <Content Include="Scripts\Highcharts\themes\skies.js" />
+    <Content Include="Scripts\highstock.js" />
+    <Content Include="Scripts\i18n\angular-locale_af-na.js" />
+    <Content Include="Scripts\i18n\angular-locale_af-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_af.js" />
+    <Content Include="Scripts\i18n\angular-locale_am-et.js" />
+    <Content Include="Scripts\i18n\angular-locale_am.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-001.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ae.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-bh.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-dz.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-eg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-iq.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-jo.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-kw.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-lb.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ly.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ma.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-om.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-qa.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-sa.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-sd.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-sy.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-tn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar-ye.js" />
+    <Content Include="Scripts\i18n\angular-locale_ar.js" />
+    <Content Include="Scripts\i18n\angular-locale_bg-bg.js" />
+    <Content Include="Scripts\i18n\angular-locale_bg.js" />
+    <Content Include="Scripts\i18n\angular-locale_bn-bd.js" />
+    <Content Include="Scripts\i18n\angular-locale_bn-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_bn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca-ad.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_ca.js" />
+    <Content Include="Scripts\i18n\angular-locale_chr.js" />
+    <Content Include="Scripts\i18n\angular-locale_cs-cz.js" />
+    <Content Include="Scripts\i18n\angular-locale_cs.js" />
+    <Content Include="Scripts\i18n\angular-locale_cy.js" />
+    <Content Include="Scripts\i18n\angular-locale_da-dk.js" />
+    <Content Include="Scripts\i18n\angular-locale_da.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-at.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-be.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-de.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-li.js" />
+    <Content Include="Scripts\i18n\angular-locale_de-lu.js" />
+    <Content Include="Scripts\i18n\angular-locale_de.js" />
+    <Content Include="Scripts\i18n\angular-locale_el-cy.js" />
+    <Content Include="Scripts\i18n\angular-locale_el-gr.js" />
+    <Content Include="Scripts\i18n\angular-locale_el-polyton.js" />
+    <Content Include="Scripts\i18n\angular-locale_el.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-as.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-au.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bb.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-be.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bw.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-bz.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ca.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-dsrt-us.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-dsrt.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-fm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gb.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gu.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-gy.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ie.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-iso.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-jm.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mh.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mp.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mt.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-mu.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-na.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-nz.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-ph.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-pk.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-pr.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-pw.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-sg.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-tc.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-tt.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-um.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-us.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-vg.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-vi.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-zw.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-zz.js" />
+    <Content Include="Scripts\i18n\angular-locale_en.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-419.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ar.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-bo.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-cl.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-co.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-cr.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-do.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ea.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ec.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-gq.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-gt.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-hn.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ic.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-mx.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ni.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-pa.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-pe.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-pr.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-py.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-sv.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-us.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-uy.js" />
+    <Content Include="Scripts\i18n\angular-locale_es-ve.js" />
+    <Content Include="Scripts\i18n\angular-locale_es.js" />
+    <Content Include="Scripts\i18n\angular-locale_et-ee.js" />
+    <Content Include="Scripts\i18n\angular-locale_et.js" />
+    <Content Include="Scripts\i18n\angular-locale_eu-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_eu.js" />
+    <Content Include="Scripts\i18n\angular-locale_fa-af.js" />
+    <Content Include="Scripts\i18n\angular-locale_fa-ir.js" />
+    <Content Include="Scripts\i18n\angular-locale_fa.js" />
+    <Content Include="Scripts\i18n\angular-locale_fi-fi.js" />
+    <Content Include="Scripts\i18n\angular-locale_fi.js" />
+    <Content Include="Scripts\i18n\angular-locale_fil-ph.js" />
+    <Content Include="Scripts\i18n\angular-locale_fil.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-be.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-bf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-bi.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-bj.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-bl.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ca.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-cd.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-cf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-cg.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ci.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-cm.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-dj.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-fr.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ga.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-gf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-gn.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-gp.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-gq.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-km.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-lu.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mc.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mf.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mg.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ml.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-mq.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-ne.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-re.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-rw.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-sn.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-td.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-tg.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-yt.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr.js" />
+    <Content Include="Scripts\i18n\angular-locale_gl-es.js" />
+    <Content Include="Scripts\i18n\angular-locale_gl.js" />
+    <Content Include="Scripts\i18n\angular-locale_gsw-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_gsw.js" />
+    <Content Include="Scripts\i18n\angular-locale_gu-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_gu.js" />
+    <Content Include="Scripts\i18n\angular-locale_haw.js" />
+    <Content Include="Scripts\i18n\angular-locale_he-il.js" />
+    <Content Include="Scripts\i18n\angular-locale_he.js" />
+    <Content Include="Scripts\i18n\angular-locale_hi-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_hi.js" />
+    <Content Include="Scripts\i18n\angular-locale_hr-hr.js" />
+    <Content Include="Scripts\i18n\angular-locale_hr.js" />
+    <Content Include="Scripts\i18n\angular-locale_hu-hu.js" />
+    <Content Include="Scripts\i18n\angular-locale_hu.js" />
+    <Content Include="Scripts\i18n\angular-locale_id-id.js" />
+    <Content Include="Scripts\i18n\angular-locale_id.js" />
+    <Content Include="Scripts\i18n\angular-locale_in.js" />
+    <Content Include="Scripts\i18n\angular-locale_is-is.js" />
+    <Content Include="Scripts\i18n\angular-locale_is.js" />
+    <Content Include="Scripts\i18n\angular-locale_it-ch.js" />
+    <Content Include="Scripts\i18n\angular-locale_it-it.js" />
+    <Content Include="Scripts\i18n\angular-locale_it-sm.js" />
+    <Content Include="Scripts\i18n\angular-locale_it.js" />
+    <Content Include="Scripts\i18n\angular-locale_iw.js" />
+    <Content Include="Scripts\i18n\angular-locale_ja-jp.js" />
+    <Content Include="Scripts\i18n\angular-locale_ja.js" />
+    <Content Include="Scripts\i18n\angular-locale_kn-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_kn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ko-kr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ko.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln-cd.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln-cg.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln.js" />
+    <Content Include="Scripts\i18n\angular-locale_lt-lt.js" />
+    <Content Include="Scripts\i18n\angular-locale_lt.js" />
+    <Content Include="Scripts\i18n\angular-locale_lv-lv.js" />
+    <Content Include="Scripts\i18n\angular-locale_lv.js" />
+    <Content Include="Scripts\i18n\angular-locale_ml-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ml.js" />
+    <Content Include="Scripts\i18n\angular-locale_mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_mr-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_mr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms-bn.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms-my.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms.js" />
+    <Content Include="Scripts\i18n\angular-locale_mt-mt.js" />
+    <Content Include="Scripts\i18n\angular-locale_mt.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-aw.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-be.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-cw.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-nl.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-sx.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl.js" />
+    <Content Include="Scripts\i18n\angular-locale_no.js" />
+    <Content Include="Scripts\i18n\angular-locale_or-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_or.js" />
+    <Content Include="Scripts\i18n\angular-locale_pl-pl.js" />
+    <Content Include="Scripts\i18n\angular-locale_pl.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-ao.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-br.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-gw.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-mz.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-pt.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-st.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt.js" />
+    <Content Include="Scripts\i18n\angular-locale_ro-md.js" />
+    <Content Include="Scripts\i18n\angular-locale_ro-ro.js" />
+    <Content Include="Scripts\i18n\angular-locale_ro.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-md.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-ru.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-ua.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru.js" />
+    <Content Include="Scripts\i18n\angular-locale_sk-sk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sk.js" />
+    <Content Include="Scripts\i18n\angular-locale_sl-si.js" />
+    <Content Include="Scripts\i18n\angular-locale_sl.js" />
+    <Content Include="Scripts\i18n\angular-locale_sq-al.js" />
+    <Content Include="Scripts\i18n\angular-locale_sq.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-me.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-rs.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-me.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-rs.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-rs.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr.js" />
+    <Content Include="Scripts\i18n\angular-locale_sv-fi.js" />
+    <Content Include="Scripts\i18n\angular-locale_sv-se.js" />
+    <Content Include="Scripts\i18n\angular-locale_sv.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw-ke.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw-tz.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta-lk.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta.js" />
+    <Content Include="Scripts\i18n\angular-locale_te-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_te.js" />
+    <Content Include="Scripts\i18n\angular-locale_th-th.js" />
+    <Content Include="Scripts\i18n\angular-locale_th.js" />
+    <Content Include="Scripts\i18n\angular-locale_tl-ph.js" />
+    <Content Include="Scripts\i18n\angular-locale_tl.js" />
+    <Content Include="Scripts\i18n\angular-locale_tr-tr.js" />
+    <Content Include="Scripts\i18n\angular-locale_tr.js" />
+    <Content Include="Scripts\i18n\angular-locale_uk-ua.js" />
+    <Content Include="Scripts\i18n\angular-locale_uk.js" />
+    <Content Include="Scripts\i18n\angular-locale_ur-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ur-pk.js" />
+    <Content Include="Scripts\i18n\angular-locale_ur.js" />
+    <Content Include="Scripts\i18n\angular-locale_vi-vn.js" />
+    <Content Include="Scripts\i18n\angular-locale_vi.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-cn.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-cn.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-sg.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-tw.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-tw.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh.js" />
+    <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
+    <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Preferences\Create.cshtml" />
+    <Content Include="Views\Preferences\Delete.cshtml" />
+    <Content Include="Views\Preferences\Details.cshtml" />
+    <Content Include="Views\Preferences\Edit.cshtml" />
+    <Content Include="Views\Preferences\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\Account\Confirm.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
+    <Content Include="Views\Shared\_ViewStart.cshtml" />
+    <Content Include="Views\Home\LiveMap.cshtml" />
+    <Resource Include="SignUp.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Outer.cshtml" />
+    <Content Include="Views\Shared\_Inner.cshtml" />
+    <Content Include="Views\Shared\_Register.cshtml" />
+    <Content Include="Views\Attacks\Create.cshtml" />
+    <Content Include="Views\Attacks\Delete.cshtml" />
+    <Content Include="Views\Attacks\DetailsForToday.cshtml" />
+    <Content Include="Views\Attacks\Edit.cshtml" />
+    <Content Include="Views\Attacks\Index.cshtml" />
+    <Content Include="Views\Attacks\AttacksGrid.cshtml" />
+    <Content Include="Views\Attacks\ListIP.cshtml" />
+    <Content Include="Views\Sites\Create.cshtml" />
+    <Content Include="Views\Sites\Delete.cshtml" />
+    <Content Include="Views\Sites\Details.cshtml" />
+    <Content Include="Views\Sites\Edit.cshtml" />
+    <Content Include="Views\Sites\Index.cshtml" />
+    <Content Include="Views\Subscriptions\Create.cshtml" />
+    <Content Include="Views\Subscriptions\Delete.cshtml" />
+    <Content Include="Views\Subscriptions\Details.cshtml" />
+    <Content Include="Views\Subscriptions\Edit.cshtml" />
+    <Content Include="Views\Subscriptions\Index.cshtml" />
+    <Content Include="Views\Attacks\AttackToday.cshtml" />
+    <Content Include="Views\Attacks\DetailsIPForToday.cshtml" />
+    <Content Include="Views\Attacks\AttackThisWeek.cshtml" />
+    <Content Include="Views\Attacks\AttackThisMonth.cshtml" />
+    <Content Include="Views\Attacks\DetailsIPForWeek.cshtml" />
+    <Content Include="Views\Attacks\DetailsIPForMonth.cshtml" />
+    <Content Include="Views\Attacks\DetailsForWeek.cshtml" />
+    <Content Include="Views\Attacks\DetailsForMonth.cshtml" />
+    <Content Include="Views\Attacks\Chart1.cshtml" />
+    <Content Include="Views\Shared\_ChartData.cshtml" />
+    <Content Include="Views\Attacks\PieChart.cshtml" />
+    <Content Include="Views\Shared\_DropdownList.cshtml" />
+    <Content Include="Views\Attacks\CustomDateChart.cshtml" />
+    <Content Include="Views\Attacks\AttackByUrl.cshtml" />
+    <Content Include="Views\Attacks\DetailsForAttackByUrl.cshtml" />
+    <Content Include="Views\Attacks\DetailsForAttackByUrl1.cshtml" />
+    <Content Include="Views\Attacks\AttacksCustomDate.cshtml" />
+    <Content Include="Views\Attacks\SampleChart.cshtml" />
+    <Content Include="Views\Attacks\PieChartHighchart.cshtml" />
+    <Content Include="Views\Shared\HighCharts\_HighChart.cshtml" />
+    <Content Include="Views\RealTime\Index.cshtml" />
+    <Content Include="Views\Home\Preferences.cshtml" />
+    <Content Include="Views\Home\Support.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Graph\" />
+    <Folder Include="Views\Notifications\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2975</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2975/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

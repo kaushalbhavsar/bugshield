@@ -1,0 +1,219 @@
+﻿
+
+
+
+<script type="text/javascript">
+    var $border_color = "#f9f9f9";
+    var $grid_color = "#eeeeee";
+    var $default_black = "#666666";
+    var $default_white = "#ffffff";
+    var $green = "#8ecf67";
+    var $red = "#d40000";
+
+    // var dataurl = [{ "label": "N/A", "data": 27 },
+    //  { "label": "Request Containing Content, but Missing Content-Type header", "data": 24 }
+    // ];
+    var dataurl ='Reports/GetAttackTypesByHost';
+     //var dataticks = [[0, "N/A"], [1, "Request Containing Content, but Missing Content-Type header"]];
+    // setup plot
+   // var dataticks = @*@TempData["Ticks"];*@
+
+    var dataticks=  @ViewData["ticks"];
+    //var options = {
+
+    //    series: {
+    //        shadowSize: 0,
+    //        bars: {
+    //            lineWidth: 1,
+    //            show: true,
+    //            align: "center"
+    //        }
+    //    },
+    //    grid: {
+    //        hoverable: true,
+    //        clickable: false,
+    //        borderWidth: 1,
+    //        tickColor: $border_color,
+    //        borderColor: $grid_color,
+    //        backgroundColor: { colors: [$default_white, $default_white] }
+    //    },
+    //    legend: {
+    //        show: true,
+    //        position: 'nw',
+    //        noColumns: 0,
+    //    },
+    //    tooltip: true,
+    //    tooltipOpts: {
+    //        content: '%y attacks'
+    //    },
+    //    lines:{
+    //        show: true
+    //    },
+    //    xaxis: {
+    //        //ticks:[[1,"N/A"],[2,"Request Containing Content, but Missing Content-Type header"]]
+    //        // mode: "categories"
+    //        //categories: ["Category One", "Category Two", "Category Three"],
+    //        ticks: dataticks,
+    //        tickColor: 'transparent'
+
+    //    },
+
+    //colors: [$red],
+
+
+    //};
+
+    $.ajax({
+        url: dataurl,
+        method: 'GET',
+        data: { date: 'bugskan.com' },
+        dataType: 'json',
+        
+
+        error: function (request, error) {
+            console.log(arguments);
+            alert("Can't do because: " + error);
+        },
+        success: function (result) {
+
+
+            var options = {
+
+                series: {
+                    shadowSize: 0,
+                    bars: {
+                        lineWidth: 1,
+                        show: true,
+                        align: "center",
+                        barWidth:1,
+                    }
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 1,
+                    tickColor: $border_color,
+                    borderColor: $grid_color,
+                    backgroundColor: { colors: [$default_white, $default_white] }
+                },
+                legend: {
+                    show: true,
+                    position: 'nw',
+                    noColumns: 0,
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: '%y attacks'
+                },
+                xaxis: {
+                    //ticks: [[0, "N/A"], [1, "Request Containing Content, but Missing Content-Type header"]]
+                    //mode: "categories"
+                    // categories:["N/A","Request Containing Content, but Missing Content-Type header"]
+                    //categories:null
+                    //categories: ["Category One", "Category Two", "Category Three"],
+                    ticks: dataticks
+
+                },
+
+                colors: [$red],
+
+
+            };
+
+
+            $.plot($("#placeholder3"), result, options);
+        }
+    });
+</script>
+@*  <script id="source">
+        var data='/Reports/GetAttackTypesByHost';
+        var options={ series: {
+            pie: {
+                show: true
+            }
+        }
+        };
+
+        $.ajax({
+            success: function (result) {
+                $.plot($("#placeholder4"), data, options)
+            }
+        });
+    </script>
+    </script>
+
+
+
+    <script type="text/javascript">
+    var options = { series: { pie: {show: true} } };
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Reports/GetAttackTypesByHost",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                //var jsObj = [];
+                //jsObj.push($.parseJSON(msg.d));
+                var data = ($.parseJSON(msg.d));
+                $.plot($("#piechart"), data, options);
+            }
+        });
+    });
+        </script>
+
+
+
+
+    @*<script id="source">
+        var $border_color = "#f9f9f9";
+        var $grid_color = "#eeeeee";
+        var $default_black = "#999999";
+        var $default_white = "#ffffff";
+        var $sky_blue = "#edf5fa";
+        var $green = "#8ecf67";
+        var $blue = "#12A4F4";
+
+        var dataurl = '/Reports/GetAttackTypesByHost';
+        var options = {
+            series: {
+                pie: { show: true },
+            },
+            legend: {
+                show: true,
+                position: 'ne',
+                labelBoxBorderColor: "none"
+            },
+            grid: {
+                hoverable: false,
+            },
+
+            colors: [$green, $blue, $default_black],
+        }
+        //    });
+        //    $("#placeholder3").bind("plothover", pieHover);
+        //});
+
+        //function pieHover(event, pos, obj) {
+        //    if (!obj)
+        //        return;
+
+        //    percent = parseFloat(obj.series.percent).toFixed(2);
+        //    $("#pieHover").html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
+        //}
+        $.ajax({
+            url: dataurl,
+            method: 'GET',
+            data: { date: 'bugskan.com' },
+
+            error: function (request, error) {
+                console.log(arguments);
+                alert(" Can't do because: " + error);
+            },
+            success: function (result) {
+
+                $.plot($("#placeholder3"), result, options);
+            }
+        });
+    </script>*@

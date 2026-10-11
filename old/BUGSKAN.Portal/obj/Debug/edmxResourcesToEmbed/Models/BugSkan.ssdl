@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BugSkanDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.__MigrationHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+      <PropertyRef Name="Model" />
+      <PropertyRef Name="ProductVersion" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccessLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LogDetails" Type="ntext" />
+    <Property Name="Url" Type="nvarchar" MaxLength="50" />
+    <Property Name="TimeStamp" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.App' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="App">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AppName" Type="varchar(max)" />
+    <Property Name="AppTitle" Type="varchar(max)" />
+    <Property Name="AppType" Type="varchar" MaxLength="50" />
+    <Property Name="Url" Type="varchar(max)" />
+    <Property Name="SubmittedDate" Type="datetime" />
+    <Property Name="LastScan" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ReportUrl" Type="varchar(max)" />
+    <Property Name="Critical" Type="int" />
+    <Property Name="Warning" Type="int" />
+    <Property Name="Info" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetUserClaims' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetUserLogins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetUserRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.AspNetUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="EmailConfirmed" />
+      <PropertyRef Name="PhoneNumberConfirmed" />
+      <PropertyRef Name="TwoFactorEnabled" />
+      <PropertyRef Name="LockoutEnabled" />
+      <PropertyRef Name="AccessFailedCount" />
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="TempConfCode" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="BugDB">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Links" Type="varchar(max)" />
+    <Property Name="VideoUrl" Type="varchar(max)" />
+    <Property Name="TimeStamp" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.Bugs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Bugs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Links" Type="varchar(max)" />
+    <Property Name="VideoUrl" Type="varchar(max)" />
+    <Property Name="TimeStamp" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar(max)" />
+    <Property Name="Address1" Type="varchar(max)" />
+    <Property Name="Address2" Type="varchar(max)" />
+    <Property Name="Address3" Type="varchar(max)" />
+    <Property Name="City" Type="varchar(max)" />
+    <Property Name="State" Type="varchar(max)" />
+    <Property Name="Country" Type="varchar(max)" />
+    <Property Name="ZipCode" Type="varchar" MaxLength="20" />
+    <Property Name="Website" Type="varchar(max)" />
+    <Property Name="Phone" Type="varchar(max)" />
+    <Property Name="Email" Type="varchar(max)" />
+    <Property Name="Notes" Type="varchar(max)" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.DomainRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DomainRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="domain" Type="varchar(max)" />
+    <Property Name="requestip" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="verified" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.EMailRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EMailRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EmailId" Type="varchar(max)" />
+    <Property Name="requestip" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="verified" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.MailJobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MailJobs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="SubcriberId" Type="varchar(max)" />
+    <Property Name="JobId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="NotificationId" />
+    </Key>
+    <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NotificationContent" Type="varchar(max)" />
+    <Property Name="NotificationDate" Type="datetime" />
+    <Property Name="NotificationEmails" Type="varchar(max)" />
+    <Property Name="SentDate" Type="datetime" />
+    <Property Name="ViewDate" Type="datetime" />
+    <Property Name="EventId" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Preferences">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Site" Type="uniqueidentifier" />
+    <Property Name="NotificationEmail" Type="varchar(max)" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.ResultItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ResultItems">
+    <Key>
+      <PropertyRef Name="ResultId" />
+    </Key>
+    <Property Name="ResultId" Type="int" Nullable="false" />
+    <Property Name="AppId" Type="uniqueidentifier" />
+    <Property Name="ResultTitle" Type="varchar(max)" />
+    <Property Name="ResultCount" Type="int" />
+    <Property Name="ResultSummary" Type="varchar(max)" />
+    <Property Name="VectorDetails" Type="varchar(max)" />
+    <Property Name="CveNumber" Type="varchar(max)" />
+    <Property Name="ThreatLevel" Type="varchar" MaxLength="50" />
+    <Property Name="Tags" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ShieldLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="SourceIp" Type="varchar" MaxLength="50" />
+    <Property Name="SourcePort" Type="varchar" MaxLength="50" />
+    <Property Name="DestIp" Type="varchar" MaxLength="50" />
+    <Property Name="DestPort" Type="varchar" MaxLength="50" />
+    <Property Name="Method" Type="varchar" MaxLength="50" />
+    <Property Name="Url" Type="varchar(max)" />
+    <Property Name="Host" Type="varchar" MaxLength="50" />
+    <Property Name="UserAgent" Type="varchar(max)" />
+    <Property Name="PostData" Type="varchar(max)" />
+    <Property Name="ResponseCode" Type="varchar" MaxLength="50" />
+    <Property Name="AttackId" Type="int" />
+    <Property Name="IpInfo" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Site">
+    <Key>
+      <PropertyRef Name="SiteId" />
+    </Key>
+    <Property Name="SiteId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="Url" Type="varchar(max)" Nullable="false" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="LastScan" Type="datetime" />
+    <Property Name="Status" Type="varchar(max)" />
+    <Property Name="Notes" Type="varchar(max)" />
+    <Property Name="LoginUser" Type="varchar(max)" />
+    <Property Name="LoginPass" Type="varchar(max)" />
+    <Property Name="Technology" Type="varchar(max)" />
+    <Property Name="UserId" Type="nvarchar(max)" />
+    <Property Name="LoginUrl" Type="varchar(max)" />
+    <Property Name="LoginSuccess" Type="nchar" MaxLength="10" />
+    <Property Name="IPAddress" Type="varchar(max)" />
+    <Property Name="Server" Type="varchar(max)" />
+    <Property Name="PlanName" Type="varchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.SkanJobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SkanJobs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SkanId" Type="varchar" MaxLength="50" />
+    <Property Name="SubscriberId" Type="varchar(max)" />
+    <Property Name="Url" Type="varchar(max)" />
+    <Property Name="PutTime" Type="datetime" />
+    <Property Name="CurrentStatus" Type="varchar" MaxLength="50" />
+    <Property Name="StartTime" Type="datetime" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="RefId" Type="int" />
+    <Property Name="Notes" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="SkanResults">
+    <Key>
+      <PropertyRef Name="resultId" />
+    </Key>
+    <Property Name="resultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="href" Type="varchar(max)" />
+    <Property Name="id" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar(max)" />
+    <Property Name="url" Type="varchar(max)" />
+    <Property Name="description" Type="varchar(max)" />
+    <Property Name="skanid" Type="int" />
+  </EntityType>
+  <EntityType Name="Subscriptions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PlanName" Type="varchar" MaxLength="50" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="PaymentMade" Type="int" />
+    <Property Name="PaymentPending" Type="int" />
+    <Property Name="PaymentDate" Type="datetime" />
+    <Property Name="PaymentDueDate" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BugSkanDB.dbo.sysdiagrams' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="name" />
+      <PropertyRef Name="principal_id" />
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Preferences_Site">
+    <End Role="Site" Type="Self.Site" Multiplicity="0..1" />
+    <End Role="Preferences" Type="Self.Preferences" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Site">
+        <PropertyRef Name="SiteId" />
+      </Principal>
+      <Dependent Role="Preferences">
+        <PropertyRef Name="Site" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShieldLog_ToTable">
+    <End Role="BugDB" Type="Self.BugDB" Multiplicity="0..1" />
+    <End Role="ShieldLog" Type="Self.ShieldLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BugDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShieldLog">
+        <PropertyRef Name="AttackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddNewApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="appName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="appTitle" Type="varchar(max)" Mode="In" />
+    <Parameter Name="appType" Type="varchar" Mode="In" />
+    <Parameter Name="url" Type="varchar(max)" Mode="In" />
+    <Parameter Name="submittedDate" Type="datetime" Mode="In" />
+    <Parameter Name="userId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddNewSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="url" Type="varchar(max)" Mode="In" />
+    <Parameter Name="IPAddress" Type="varchar(max)" Mode="In" />
+    <Parameter Name="userId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddNewSiteAndPreferences" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="url" Type="varchar(max)" Mode="In" />
+    <Parameter Name="IPAddress" Type="varchar(max)" Mode="In" />
+    <Parameter Name="userId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="CheckEmailConfirmedStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CheckEmailConfirmStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CheckEmailStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CheckEmailStatus1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CreateNewCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="companyName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="address1" Type="varchar(max)" Mode="In" />
+    <Parameter Name="address2" Type="varchar(max)" Mode="In" />
+    <Parameter Name="address3" Type="varchar(max)" Mode="In" />
+    <Parameter Name="city" Type="varchar(max)" Mode="In" />
+    <Parameter Name="state" Type="varchar(max)" Mode="In" />
+    <Parameter Name="country" Type="varchar(max)" Mode="In" />
+    <Parameter Name="zipCode" Type="varchar" Mode="In" />
+    <Parameter Name="website" Type="varchar(max)" Mode="In" />
+    <Parameter Name="phone" Type="varchar(max)" Mode="In" />
+    <Parameter Name="email" Type="varchar(max)" Mode="In" />
+    <Parameter Name="notes" Type="varchar(max)" Mode="In" />
+    <Parameter Name="created" Type="datetime" Mode="In" />
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="CreateNewSubscription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="planName" Type="varchar" Mode="In" />
+    <Parameter Name="startDate" Type="datetime" Mode="In" />
+    <Parameter Name="endDate" Type="datetime" Mode="In" />
+    <Parameter Name="paymentMade" Type="int" Mode="In" />
+    <Parameter Name="paymentPending" Type="int" Mode="In" />
+    <Parameter Name="paymentDate" Type="datetime" Mode="In" />
+    <Parameter Name="paymentDueDate" Type="datetime" Mode="In" />
+    <Parameter Name="customerId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="DeleteSkanbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FindAppbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="appId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="FindAppsByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GetAttackIp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Url" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetAttacksByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="datetime" Mode="In" />
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetLogsPerMinute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetLogsPerSecond" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetLogsPerSecond2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetNewApps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetResultItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="appId" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetScanStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="url" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetSkanDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetSkanDetailsbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetSkanResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="InsertLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="nvarchar" Mode="In" />
+    <Parameter Name="Date" Type="datetime" Mode="In" />
+    <Parameter Name="Time" Type="datetime" Mode="In" />
+    <Parameter Name="SourceIp" Type="varchar" Mode="In" />
+    <Parameter Name="SourcePort" Type="varchar" Mode="In" />
+    <Parameter Name="DestIp" Type="varchar" Mode="In" />
+    <Parameter Name="DestPort" Type="varchar" Mode="In" />
+    <Parameter Name="Method" Type="varchar" Mode="In" />
+    <Parameter Name="Url" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Host" Type="varchar" Mode="In" />
+    <Parameter Name="UserAgent" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PostData" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ResponseCode" Type="varchar" Mode="In" />
+    <Parameter Name="AttackId" Type="varchar" Mode="In" />
+    <Parameter Name="IpInfo" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="InsertLogFromRabbit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LogDetails" Type="ntext" Mode="In" />
+    <Parameter Name="Url" Type="nvarchar" Mode="In" />
+    <Parameter Name="TimeStamp" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="IPAttacksBlocked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ip" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="IPAttackTypeCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ip" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="IpAttackUrlCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ip" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="PutDomainCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="domainName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="requestIp" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="PutEmailCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="emailId" Type="varchar(max)" Mode="In" />
+    <Parameter Name="requestIp" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="PutSkcanJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="varchar" Mode="In" />
+    <Parameter Name="domainName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="requestIp" Type="varchar(max)" Mode="In" />
+    <Parameter Name="subscriberId" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="RecentAttacksBlocked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="RecentAttackTypeCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="RecentAttackUrlCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Rpt_AttackByCustomDateDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sdate" Type="datetime" Mode="In" />
+    <Parameter Name="edate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Rpt_AttackByCustomDateDetails1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sdate" Type="datetime" Mode="In" />
+    <Parameter Name="edate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Rpt_AttackByURL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Rpt_AttackByURLDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="url" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Rpt_AttackCountByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Rpt_AttackCountByHour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sdate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Rpt_AttackType_Today" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Rpt_AttackTypeByHost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="host" Type="varchar(max)" Mode="In" />
+    <Parameter Name="sdate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="appName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="appTitle" Type="varchar(max)" Mode="In" />
+    <Parameter Name="appType" Type="varchar" Mode="In" />
+    <Parameter Name="url" Type="varchar(max)" Mode="In" />
+    <Parameter Name="lastScan" Type="datetime" Mode="In" />
+    <Parameter Name="reportUrl" Type="varchar(max)" Mode="In" />
+    <Parameter Name="criticalbugs" Type="int" Mode="In" />
+    <Parameter Name="warningbugs" Type="int" Mode="In" />
+    <Parameter Name="infobugs" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="url" Type="varchar(max)" Mode="In" />
+    <Parameter Name="IPAddress" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Server" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PlanName" Type="varchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="BugSkanDBModelStoreContainer">
+    <EntitySet Name="AccessLog" EntityType="Self.AccessLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BugDB" EntityType="Self.BugDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Preferences" EntityType="Self.Preferences" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShieldLog" EntityType="Self.ShieldLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SkanResults" EntityType="Self.SkanResults" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [__MigrationHistory].[MigrationId] AS [MigrationId], 
+    [__MigrationHistory].[ContextKey] AS [ContextKey], 
+    [__MigrationHistory].[Model] AS [Model], 
+    [__MigrationHistory].[ProductVersion] AS [ProductVersion]
+    FROM [dbo].[__MigrationHistory] AS [__MigrationHistory]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="App" EntityType="Self.App" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [App].[Id] AS [Id], 
+    [App].[AppName] AS [AppName], 
+    [App].[AppTitle] AS [AppTitle], 
+    [App].[AppType] AS [AppType], 
+    [App].[Url] AS [Url], 
+    [App].[SubmittedDate] AS [SubmittedDate], 
+    [App].[LastScan] AS [LastScan], 
+    [App].[UserId] AS [UserId], 
+    [App].[ReportUrl] AS [ReportUrl], 
+    [App].[Critical] AS [Critical], 
+    [App].[Warning] AS [Warning], 
+    [App].[Info] AS [Info]
+    FROM [dbo].[App] AS [App]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AspNetRoles].[Id] AS [Id], 
+    [AspNetRoles].[Name] AS [Name]
+    FROM [dbo].[AspNetRoles] AS [AspNetRoles]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AspNetUserClaims].[Id] AS [Id], 
+    [AspNetUserClaims].[UserId] AS [UserId], 
+    [AspNetUserClaims].[ClaimType] AS [ClaimType], 
+    [AspNetUserClaims].[ClaimValue] AS [ClaimValue]
+    FROM [dbo].[AspNetUserClaims] AS [AspNetUserClaims]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AspNetUserLogins].[LoginProvider] AS [LoginProvider], 
+    [AspNetUserLogins].[ProviderKey] AS [ProviderKey], 
+    [AspNetUserLogins].[UserId] AS [UserId]
+    FROM [dbo].[AspNetUserLogins] AS [AspNetUserLogins]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AspNetUserRoles].[UserId] AS [UserId], 
+    [AspNetUserRoles].[RoleId] AS [RoleId]
+    FROM [dbo].[AspNetUserRoles] AS [AspNetUserRoles]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AspNetUsers].[Id] AS [Id], 
+    [AspNetUsers].[Email] AS [Email], 
+    [AspNetUsers].[EmailConfirmed] AS [EmailConfirmed], 
+    [AspNetUsers].[PasswordHash] AS [PasswordHash], 
+    [AspNetUsers].[SecurityStamp] AS [SecurityStamp], 
+    [AspNetUsers].[PhoneNumber] AS [PhoneNumber], 
+    [AspNetUsers].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed], 
+    [AspNetUsers].[TwoFactorEnabled] AS [TwoFactorEnabled], 
+    [AspNetUsers].[LockoutEndDateUtc] AS [LockoutEndDateUtc], 
+    [AspNetUsers].[LockoutEnabled] AS [LockoutEnabled], 
+    [AspNetUsers].[AccessFailedCount] AS [AccessFailedCount], 
+    [AspNetUsers].[UserName] AS [UserName], 
+    [AspNetUsers].[TempConfCode] AS [TempConfCode]
+    FROM [dbo].[AspNetUsers] AS [AspNetUsers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Bugs" EntityType="Self.Bugs" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Bugs].[Id] AS [Id], 
+    [Bugs].[Title] AS [Title], 
+    [Bugs].[Description] AS [Description], 
+    [Bugs].[Links] AS [Links], 
+    [Bugs].[VideoUrl] AS [VideoUrl], 
+    [Bugs].[TimeStamp] AS [TimeStamp]
+    FROM [dbo].[Bugs] AS [Bugs]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DomainRequest" EntityType="Self.DomainRequest" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DomainRequest].[Id] AS [Id], 
+    [DomainRequest].[domain] AS [domain], 
+    [DomainRequest].[requestip] AS [requestip], 
+    [DomainRequest].[status] AS [status], 
+    [DomainRequest].[verified] AS [verified]
+    FROM [dbo].[DomainRequest] AS [DomainRequest]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="EMailRequest" EntityType="Self.EMailRequest" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [EMailRequest].[Id] AS [Id], 
+    [EMailRequest].[EmailId] AS [EmailId], 
+    [EMailRequest].[requestip] AS [requestip], 
+    [EMailRequest].[status] AS [status], 
+    [EMailRequest].[verified] AS [verified]
+    FROM [dbo].[EMailRequest] AS [EMailRequest]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MailJobs" EntityType="Self.MailJobs" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MailJobs].[Id] AS [Id], 
+    [MailJobs].[SubcriberId] AS [SubcriberId], 
+    [MailJobs].[JobId] AS [JobId]
+    FROM [dbo].[MailJobs] AS [MailJobs]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ResultItems" EntityType="Self.ResultItems" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ResultItems].[ResultId] AS [ResultId], 
+    [ResultItems].[AppId] AS [AppId], 
+    [ResultItems].[ResultTitle] AS [ResultTitle], 
+    [ResultItems].[ResultCount] AS [ResultCount], 
+    [ResultItems].[ResultSummary] AS [ResultSummary], 
+    [ResultItems].[VectorDetails] AS [VectorDetails], 
+    [ResultItems].[CveNumber] AS [CveNumber], 
+    [ResultItems].[ThreatLevel] AS [ThreatLevel], 
+    [ResultItems].[Tags] AS [Tags]
+    FROM [dbo].[ResultItems] AS [ResultItems]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SkanJobs" EntityType="Self.SkanJobs" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SkanJobs].[Id] AS [Id], 
+    [SkanJobs].[SkanId] AS [SkanId], 
+    [SkanJobs].[SubscriberId] AS [SubscriberId], 
+    [SkanJobs].[Url] AS [Url], 
+    [SkanJobs].[PutTime] AS [PutTime], 
+    [SkanJobs].[CurrentStatus] AS [CurrentStatus], 
+    [SkanJobs].[StartTime] AS [StartTime], 
+    [SkanJobs].[EndTime] AS [EndTime], 
+    [SkanJobs].[RefId] AS [RefId], 
+    [SkanJobs].[Notes] AS [Notes]
+    FROM [dbo].[SkanJobs] AS [SkanJobs]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [sysdiagrams].[name] AS [name], 
+    [sysdiagrams].[principal_id] AS [principal_id], 
+    [sysdiagrams].[diagram_id] AS [diagram_id], 
+    [sysdiagrams].[version] AS [version], 
+    [sysdiagrams].[definition] AS [definition]
+    FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Preferences_Site" Association="Self.FK_Preferences_Site">
+      <End Role="Site" EntitySet="Site" />
+      <End Role="Preferences" EntitySet="Preferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShieldLog_ToTable" Association="Self.FK_ShieldLog_ToTable">
+      <End Role="BugDB" EntitySet="BugDB" />
+      <End Role="ShieldLog" EntitySet="ShieldLog" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

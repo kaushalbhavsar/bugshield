@@ -1,0 +1,325 @@
+﻿@model PagedList.IPagedList<BugShield.Portal.Models.ShieldLog>
+@using PagedList.Mvc;
+@using Newtonsoft.Json;
+@using MaxMind.GeoIP2.Responses;
+@using BugShield.Portal.Models;
+@using Microsoft.AspNet.Identity;
+@*<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />*@
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+
+    @*<li class="caret">*@
+
+        <table>
+            <tr>
+                <td> @Html.DropDownList("host", (List<SelectListItem>)ViewBag.ListofHosts, "ABC", new { @class = "btn btn-info dropdown-toggle form-control" })</td>
+                <td><h6>Date:</h6></td>
+                <td><input class="datefield form-control" data-val="true" data-val-required="Date is required" id="DateforChart" name="DateforChart" type="date" value="1/11/1989" /></td>
+                <td><input type="submit" class="btn btn-primary form-control" placeholder="Search" value="Search" /></td>
+            </tr>
+            @*<ul class="dropdown-menu sm fadeInUp animated messages form-control">
+                    <li class="dropdown-content">
+
+
+                    </li>
+                </ul>*@
+
+        </table>
+
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            $.ajax({
+                type: "POST",
+                url: "/Home/AjaxMethod",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    //Pie
+                    var options = {
+                        title: 'Chart By Host'
+                    };
+                    var chart = new google.visualization.AreaChart($("#chart")[0]);
+                    chart.draw(data, options);
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+        </script>
+        <div id="chart" style="width: 500px; height: 400px;">
+        </div>
+     
+    @*@Html.DropDownListFor(m => m.Userid,Model.Sites.Select(d=>new SelectListItem { Value=d.userid}
+         (List<SelectListItem>)ViewBag.ListofHost, null, null);
+        @Html.DropDownList("host", (List<SelectListItem>)ViewBag.ListofHost,null,null)<span class="caret"></span>*@
+
+ @*<div class="col-md-6 col-sm-6 col-sx-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h4>Attack types</h4>
+                    <ul class="links">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-area-chart"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div id="placeholder3" class="chart-height">
+
+                        <img src="~/img/hourglass.svg" class="hourglass" />
+                        @{Html.RenderPartial("_GetAttackTypesByHost", "Reports", new ViewDataDictionary { { "ticks", Html.Raw(ViewBag.Ticks) } });
+                        }
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>*@
+
+
+
+
+
+
+    @*<div class="col-md-6 col-sm-6 col-sx-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h4>Attacks this month</h4>
+                    <ul class="links">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-area-chart"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div id="placeholder" class="chart-height">
+
+                        <img src="/img/hourglass.svg" class="hourglass" />
+                        @{Html.RenderPartial("_GetAttacksByDay", "Reports");
+                        }
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>*@
+
+
+
+    @*<div class="col-md-6 col-sm-6 col-sx-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h4>Attacks today</h4>
+                <ul class="links">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-area-chart"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div id="placeholder2" class="chart-height">
+
+                    <img src="/img/hourglass.svg" class="hourglass" />
+                    @{Html.RenderPartial("_GetAttacksByHour", "Reports");
+                    }
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>*@
+
+
+    @*<div class="col-md-4">
+        </div>
+
+        <script type="text/jscript">
+
+            //  $('#partialView').load('/shared/_GetAttacksByDay');
+        </script>
+
+
+        @*<div class="col-md-4">
+                <div id="placeholder2">
+
+
+                </div>
+            </div>*@
+                        @*<div class="col-md-4">
+                            </div>
+
+
+                            <script type="text/jscript">
+
+                                //  $('#partialView').load('/shared/_GetAttacksByDay');
+                            </script>*@
+
+                        @*<div class="col-lg-6">
+
+                                @{Html.RenderPartial("_GetAttackTypesByHost");
+                                }
+                            </div>*@
+
+
+                        @*<div class="col-md-6 col-sm-6 col-sx-12">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h4>Attacks this month</h4>
+                                        <ul class="links">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-area-chart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="placeholder2" class="chart-height">
+
+                                            <img src="~/img/hourglass.svg" class="hourglass" />
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-sx-12">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h4>Attacks today</h4>
+                                        <ul class="links">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-area-chart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="placeholder" class="chart-height">
+
+                                            <img src="~/img/hourglass.svg" class="hourglass" />
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<div class="col-md-4">
+                                <div id="placeholder2">
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+
+                            <script type="text/jscript">
+
+                                            //  $('#partialView').load('/shared/_GetAttacksByDay');
+                            </script>*@
+
+
+
+
+                        @*@{Html.RenderAction("GetAttackTypesByHost", "Reports");
+                                }
+
+
+                            @*<div class="col-lg-6">*@
+
+                        @*@{Html.RenderPartial("GetAttacksByDay", "Reports");
+                            }
+
+
+
+
+
+                            <div class="col-md-6 col-sm-6 col-sx-12">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h4>Attack type</h4>
+                                        <ul class="links">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-area-chart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="placeholder" class="chart-height">
+
+
+                                            <img src="~/img/hourglass.svg" class="hourglass" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        @*<div class="col-md-6 col-sm-6 col-sx-12">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4>Attacks today</h4>
+                                    <ul class="links">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-area-chart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="placeholder2" class="chart-height">
+
+                                        <img src="~/img/hourglass.svg" class="hourglass" />
+
+                                    </div>
+
+
+                                </div>*@
+
+
+                        @*<div class="col-md-4">
+                                <div id="placeholder3`">
+
+
+                                </div>
+                            </div>*@
+                        @*<div class="col-md-4">
+                            </div>
+
+
+                            <script type="text/jscript">
+
+                                // $('#partialView').load('/shared/_GetAttacksByDay');
+                            </script> *@
+                        }

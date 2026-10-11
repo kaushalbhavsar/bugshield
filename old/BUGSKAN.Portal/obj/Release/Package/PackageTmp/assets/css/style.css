@@ -1,0 +1,52 @@
+﻿body {
+}
+
+.media-left, .media-right, .media-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+    font-weight: 400;
+    /* margin: 30px 0 15px; */
+}
+
+.wrappedcell {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 1px;
+}
+
+.table-striped > thead > tr > th, .table-striped > tbody > tr > th, .table-striped > tfoot > tr > th, .table-striped > thead > tr > td, .table-striped > tbody > tr > td, .table-striped > tfoot > tr > td {
+    padding: 8px 8px;
+}
+
+h5, .h5 {
+    font-size: 1em;
+    font-weight: 400;
+    /* line-height: 1.4em; */
+    /* margin-bottom: 15px; */
+}
+
+.login-page .card {
+    padding: 20px;
+}
+
+.full-page:after {
+    background: #5e5e5e;
+    z-index: 3;
+    opacity: 1;
+    background-image: url(/assets/img/bg1.jpg);
+}
+
+.footer {
+    background-attachment: fixed;
+    position: relative;
+    line-height: 20px;
+    background-color: #ffffff;
+}
+
+    .footer a {
+        color: #d40000;
+    }
