@@ -9,8 +9,10 @@ export function EmptyState({
 }) {
   return (
     <div className="card empty">
-      <h3>{title}</h3>
-      <p>{children}</p>
+      <div className="card-content">
+        <h3 className="title">{title}</h3>
+        <p className="category">{children}</p>
+      </div>
     </div>
   );
 }

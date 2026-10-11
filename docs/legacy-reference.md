@@ -1,9 +1,13 @@
 # Reference analysis of the original BugShield project
 
 This document records what could be learned about the discontinued BugShield
-product and which behaviors this successor reuses. The original Windows tree at
-`D:\Kaushal\Projects\bugshield` was not available in the environment that built
-this repository. No source, credentials, or secrets were copied from it.
+product and which behaviors this successor reuses. The original tree is now on `main` under `old/` (`BUGSKAN.Portal`). This
+successor does not modify that folder. The operator UI is ported from
+`BUGSKAN.Portal` views and assets (`_Inner.cshtml`, `_Outer.cshtml`,
+`Account/Login.cshtml`, `Home/Index.cshtml`, `Attacks/AttackToday.cshtml`,
+`Preferences/Edit.cshtml`, `Manage/ChangePassword.cshtml`, `Home/Support.cshtml`,
+plus `amaze.css`, `style.css`, Themify fonts, logos, and `bg1.jpg`). No
+credentials or secrets were copied from it. Highcharts was not vendored.
 
 ## What the original product did
 
@@ -28,7 +32,7 @@ RabbitMQ, and Redis. The product was discontinued around the end of 2018.
 | Python workers + RabbitMQ | Asynchronous log shipping / processing | Replaced by a small file-tailing agent plus a synchronous ingest API. A queue is unnecessary for the MVP volume. |
 | Redis | Sessions, rate limits, or cache | Sessions live in PostgreSQL. In-process rate limits cover ingest. |
 | MySQL | Primary store | PostgreSQL, with explicit migrations and UTC timestamps. |
-| ASP.NET + Bootstrap | Admin UI, sites, reports | FastAPI + React/TypeScript. |
+| ASP.NET + Bootstrap | Admin UI, sites, reports | FastAPI + React/TypeScript. The operator chrome follows the original Amaze / Material Dashboard views (white sidebar, danger-red active item, rose login). |
 
 ## Reusable product behavior
 

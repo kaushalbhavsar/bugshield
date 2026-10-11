@@ -7,9 +7,9 @@ records, searches them, and shows what the log actually recorded. It does
 **not** claim that every event was blocked.
 
 This repository is a modern open-source successor to the discontinued
-BugShield SecaaS product (ASP.NET / MySQL). The original Windows tree was not
-included here and no credentials were copied from it. See
-[docs/legacy-reference.md](docs/legacy-reference.md).
+BugShield SecaaS product (ASP.NET / MySQL). The original Windows tree is kept
+under `old/` for reference and is not modified. No credentials were copied from
+it. See [docs/legacy-reference.md](docs/legacy-reference.md).
 
 ## What the MVP does
 
@@ -51,9 +51,9 @@ npm install
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. Create the administrator, add a site, then either
-upload `backend/tests/fixtures/` samples or load the demo dataset from
-Settings.
+Open http://127.0.0.1:5173. Create the administrator, add a site from
+Preferences, then either upload `backend/tests/fixtures/` samples or load the
+demo dataset from Preferences.
 
 Health check: `curl http://127.0.0.1:8000/health`
 

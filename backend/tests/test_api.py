@@ -110,6 +110,30 @@ def test_search_dashboard_and_demo(admin_client: TestClient):
     assert detail["rules"]
 
 
+def test_change_password(admin_client: TestClient, client: TestClient):
+    denied = admin_client.post(
+        "/api/auth/password",
+        json={"current_password": "wrong-password", "new_password": "new-correct-horse"},
+    )
+    assert denied.status_code == 401
+    changed = admin_client.post(
+        "/api/auth/password",
+        json={"current_password": "correct-horse-battery", "new_password": "new-correct-horse"},
+    )
+    assert changed.status_code == 200
+    admin_client.post("/api/auth/logout")
+    failed = client.post(
+        "/api/auth/login",
+        json={"email": "admin@example.test", "password": "correct-horse-battery"},
+    )
+    assert failed.status_code == 401
+    ok = client.post(
+        "/api/auth/login",
+        json={"email": "admin@example.test", "password": "new-correct-horse"},
+    )
+    assert ok.status_code == 200
+
+
 def test_health(client: TestClient):
     response = client.get("/health")
     assert response.status_code == 200

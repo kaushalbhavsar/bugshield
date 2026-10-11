@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { api } from "../api";
-import { EmptyState } from "../components/EmptyState";
 import type { Dashboard, Site, User } from "../types";
 
 export function DashboardPage({ user }: { user: User }) {
@@ -22,119 +20,175 @@ export function DashboardPage({ user }: { user: User }) {
       .catch((err) => setError(err instanceof Error ? err.message : "dashboard failed"));
   }, [siteId]);
 
-  if (!data) {
-    return <p className="muted">{error || "Loading dashboard…"}</p>;
-  }
-
+  if (!data) return <p className="muted">{error || "Loading dashboard…"}</p>;
+  const siteName = sites.find((site) => site.id === siteId)?.name || "all sites";
   const maxTrend = Math.max(1, ...data.trends.map((point) => point.events));
-  const empty = data.event_count === 0;
 
   return (
-    <div>
-      <div className="page-title">
-        <div>
-          <h1>Dashboard</h1>
-          <p className="muted">
-            Counts distinguish detections from confirmed disruptive actions. Times are shown in{" "}
-            {user.timezone}.
-          </p>
-        </div>
-        <select value={siteId} onChange={(event) => setSiteId(event.target.value)} style={{ maxWidth: 240 }}>
-          <option value="">All sites</option>
-          {sites.map((site) => (
-            <option key={site.id} value={site.id}>
-              {site.name}
-            </option>
-          ))}
-        </select>
+    <div className="row">
+      <div className="col-md-12">
+        <h4 className="title" title={user.timezone}>
+          Events on <b>{siteName}</b>
+          <select className="form-control" value={siteId} onChange={(event) => setSiteId(event.target.value)} style={{ maxWidth: 240, display: "inline-block", marginLeft: 12 }}>
+            <option value="">All sites</option>
+            {sites.map((site) => (
+              <option key={site.id} value={site.id}>
+                {site.name}
+              </option>
+            ))}
+          </select>
+        </h4>
+        {data.demo_count > 0 && (
+          <div className="banner">Demo dataset is loaded ({data.demo_count} synthetic events). These records are labelled and are not production traffic.</div>
+        )}
       </div>
-      {data.demo_count > 0 && (
-        <div className="banner">
-          Demo dataset is loaded ({data.demo_count} synthetic events). These records are labelled and
-          are not production traffic.
-        </div>
-      )}
-      <div className="grid metrics">
-        <div className="card metric">
-          Events
-          <b>{data.event_count}</b>
-        </div>
-        <div className="card metric">
-          Confirmed disruptive
-          <b>{data.disrupted_count}</b>
-        </div>
-        <div className="card metric">
-          Detected
-          <b>{data.detected_count}</b>
-        </div>
-        <div className="card metric">
-          Observed
-          <b>{data.observed_count}</b>
+
+      <div className="col-lg-3 col-md-6 col-sm-6">
+        <StatCard icon="ti-stats-up" tone="warning" label="Events" value={data.event_count} footer="Recorded audit events" />
+      </div>
+      <div className="col-lg-3 col-md-6 col-sm-6">
+        <StatCard icon="ti-receipt" tone="danger" label="Confirmed disruptive" value={data.disrupted_count} footer="Disruptive action in the log" />
+      </div>
+      <div className="col-lg-3 col-md-6 col-sm-6">
+        <StatCard icon="ti-shield" tone="success" label="Detected" value={data.detected_count} footer="Matched without a confirmed block" />
+      </div>
+      <div className="col-lg-3 col-md-6 col-sm-6">
+        <StatCard icon="ti-panel" tone="info" label="Observed" value={data.observed_count} footer="No matched-rule evidence" />
+      </div>
+
+      <div className="col-md-12">
+        <div className="card" style={{ height: 420 }}>
+          <div className="content">
+            <h4 className="title">Attacks blocked in the last 7 days</h4>
+            {data.trends.length === 0 ? (
+              <p className="muted">No Attacks in the last 7 days</p>
+            ) : (
+              <div className="chart-line" aria-label="attacks blocked">
+                <svg viewBox="0 0 600 280" preserveAspectRatio="none">
+                  <polyline
+                    fill="none"
+                    stroke="#d40000"
+                    strokeWidth="3"
+                    points={data.trends
+                      .map((point, index) => {
+                        const x = (index / Math.max(1, data.trends.length - 1)) * 580 + 10;
+                        const y = 260 - (point.disrupted / maxTrend) * 240;
+                        return `${x},${y}`;
+                      })
+                      .join(" ")}
+                  />
+                </svg>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      {empty ? (
-        <EmptyState title="No audit events yet">
-          Create a site, generate an ingestion token, and upload a ModSecurity audit log — or load the
-          labelled demo dataset from Settings.
-        </EmptyState>
-      ) : (
-        <div className="columns" style={{ marginTop: "1rem" }}>
-          <div className="card">
-            <h3>Hourly trend</h3>
-            <p className="muted">Blue bars are all events. The lower marker is confirmed disruptive actions.</p>
-            <div className="trend" aria-label="event trend">
-              {data.trends.map((point) => (
-                <i key={point.bucket} style={{ height: `${(point.events / maxTrend) * 100}%` }}>
-                  <em style={{ height: `${point.events ? (point.disrupted / point.events) * 100 : 0}%` }} />
-                </i>
-              ))}
-            </div>
-          </div>
-          <div className="card">
-            <h3>Top rules</h3>
-            <RankList items={data.top_rules} empty="No rule IDs were present in the selected window." />
+
+      <div className="col-lg-6 col-md-12">
+        <div className="card" style={{ height: 420 }}>
+          <div className="content">
+            <h4 className="title">Attacks types</h4>
+            <OutcomePie data={data} />
           </div>
         </div>
-      )}
-      {!empty && (
-        <div className="columns" style={{ marginTop: "1rem" }}>
-          <div className="card">
-            <h3>Source IPs</h3>
-            <RankList items={data.top_source_ips} empty="No source IPs recorded." />
-          </div>
-          <div className="card">
-            <h3>Targeted URLs</h3>
-            <RankList items={data.top_urls} empty="No URLs recorded." />
+      </div>
+      <div className="col-lg-6 col-md-12">
+        <div className="card" style={{ height: 420 }}>
+          <div className="content">
+            <h4 className="title">Top 10 Target Urls</h4>
+            {data.top_urls.length === 0 ? (
+              <p className="muted">No Attacks in the last 7 days</p>
+            ) : (
+              data.top_urls.slice(0, 10).map((item) => {
+                const max = Math.max(1, data.top_urls[0].count);
+                return (
+                  <div className="bar-row" key={item.name}>
+                    <span title={item.name}>{item.name.length > 25 ? `${item.name.slice(0, 25)}…` : item.name}</span>
+                    <div className="track">
+                      <div className="fill" style={{ width: `${(item.count / max) * 100}%` }} />
+                    </div>
+                    <strong>{item.count}</strong>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
-      )}
-      <p style={{ marginTop: "1rem" }}>
-        <Link to="/events">Search events</Link>
-      </p>
+      </div>
     </div>
   );
 }
 
-function RankList({
-  items,
-  empty,
+function StatCard({
+  icon,
+  tone,
+  label,
+  value,
+  footer,
 }: {
-  items: Array<{ name: string; count: number }>;
-  empty: string;
+  icon: string;
+  tone: string;
+  label: string;
+  value: number;
+  footer: string;
 }) {
-  const max = Math.max(1, ...items.map((item) => item.count));
-  if (!items.length) return <p className="muted">{empty}</p>;
   return (
-    <div className="bars">
-      {items.map((item) => (
-        <div key={item.name}>
-          <div className="bar">
-            <span>{item.name}</span>
-            <strong>{item.count}</strong>
+    <div className="card">
+      <div className="content">
+        <div className="row">
+          <div className="col-xs-5">
+            <div className={`icon-big icon-${tone} text-center`}>
+              <i className={icon} />
+            </div>
           </div>
-          <div className="bar-track">
-            <div className="bar-fill" style={{ width: `${(item.count / max) * 100}%` }} />
+          <div className="col-xs-7">
+            <div className="numbers">
+              <p>{label}</p>
+              {value}
+            </div>
           </div>
+        </div>
+      </div>
+      <div className="card-footer">
+        <div className="stats">
+          <i className="ti-reload" /> {footer}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OutcomePie({ data }: { data: Dashboard }) {
+  const slices = [
+    { name: "Confirmed disruptive", value: data.disrupted_count, color: "#d40000" },
+    { name: "Detected", value: data.detected_count, color: "#ff9800" },
+    { name: "Observed", value: data.observed_count, color: "#9a9a9a" },
+  ];
+  const total = slices.reduce((sum, slice) => sum + slice.value, 0);
+  if (!total) return <p className="muted">No Attacks in the last 7 days</p>;
+  let angle = 0;
+  const paths = slices.map((slice) => {
+    const sweep = (slice.value / total) * Math.PI * 2;
+    const start = angle;
+    angle += sweep;
+    const x1 = 80 + Math.cos(start) * 70;
+    const y1 = 80 + Math.sin(start) * 70;
+    const x2 = 80 + Math.cos(angle) * 70;
+    const y2 = 80 + Math.sin(angle) * 70;
+    const large = sweep > Math.PI ? 1 : 0;
+    return { ...slice, d: `M80,80 L${x1},${y1} A70,70 0 ${large} 1 ${x2},${y2} Z` };
+  });
+  return (
+    <div className="chart-pie">
+      <svg viewBox="0 0 280 200">
+        {paths.map((slice) => (
+          <path key={slice.name} d={slice.d} fill={slice.color} />
+        ))}
+      </svg>
+      {slices.map((slice) => (
+        <div key={slice.name} className="muted">
+          <span style={{ display: "inline-block", width: 10, height: 10, background: slice.color, marginRight: 6 }} />
+          {slice.name}: {slice.value}
         </div>
       ))}
     </div>

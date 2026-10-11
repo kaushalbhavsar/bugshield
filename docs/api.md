@@ -32,6 +32,7 @@ Requires the session cookie. Site IDs that the user does not own return 404.
 | POST | `/api/auth/logout` | Delete sessions |
 | GET | `/api/auth/me` | Current user |
 | PATCH | `/api/auth/me` | Update timezone |
+| POST | `/api/auth/password` | Change the current user's password |
 | GET/POST | `/api/sites` | List / create sites |
 | GET/PATCH/DELETE | `/api/sites/{id}` | Site management |
 | GET/POST | `/api/sites/{id}/tokens` | List / create tokens (secret shown once) |

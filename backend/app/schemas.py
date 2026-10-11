@@ -48,6 +48,11 @@ class TimezoneUpdate(BaseModel):
     timezone: str = Field(min_length=1, max_length=64)
 
 
+class PasswordChange(BaseModel):
+    current_password: str = Field(min_length=1, max_length=128)
+    new_password: str = Field(min_length=12, max_length=128)
+
+
 class SiteCreate(BaseModel):
     name: str = Field(min_length=1, max_length=160)
     hostname: str = Field(default="", max_length=255)
