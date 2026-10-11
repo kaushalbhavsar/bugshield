@@ -1,0 +1,26 @@
+{
+  "transaction": {
+    "client_ip": "203.0.113.200",
+    "time_stamp": "Sat Oct 11 12:18:00 2026",
+    "client_port": 1000,
+    "host_ip": "192.0.2.20",
+    "host_port": 443,
+    "unique_id": "json-v3-observed-007",
+    "request": {
+      "method": "GET",
+      "uri": "/healthz",
+      "headers": {
+        "Host": "shop.example.test"
+      }
+    },
+    "response": {
+      "http_code": 200,
+      "headers": {}
+    },
+    "producer": {
+      "modsecurity": "ModSecurity v3.0.8",
+      "secrules_engine": "Enabled"
+    },
+    "messages": []
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "transaction": {
+    "client_ip": "203.0.113.10",
+    "time_stamp": "Sat Oct 11 12:01:04 2026",
+    "server_id": "test-server",
+    "client_port": 51234,
+    "host_ip": "192.0.2.20",
+    "host_port": 443,
+    "unique_id": "json-v3-blocked-001",
+    "request": {
+      "method": "GET",
+      "http_version": 1.1,
+      "uri": "/search?q=1%20OR%201=1&password=supersecret",
+      "headers": {
+        "Host": "shop.example.test",
+        "User-Agent": "synthetic-client",
+        "Cookie": "session=abc123",
+        "Authorization": "Bearer secret-token"
+      }
+    },
+    "response": {
+      "http_code": 403,
+      "headers": {}
+    },
+    "producer": {
+      "modsecurity": "ModSecurity v3.0.8",
+      "connector": "ModSecurity-nginx v1.0.3",
+      "secrules_engine": "Enabled",
+      "components": ["OWASP_CRS/3.3.5"]
+    },
+    "messages": [
+      {
+        "message": "SQL Injection Attack Detected via libinjection",
+        "details": {
+          "match": "Matched Data: 1 OR 1=1 found within ARGS:q",
+          "reference": "v3",
+          "ruleId": "942100",
+          "file": "REQUEST-942-APPLICATION-ATTACK-SQLI.conf",
+          "lineNumber": "48",
+          "data": "1 OR 1=1",
+          "severity": "2",
+          "tags": ["attack-sqli", "OWASP_CRS"],
+          "action": "deny"
+        }
+      }
+    ]
+  }
+}
