@@ -35,6 +35,8 @@ export const api = {
   logout: () => request("/api/auth/logout", { method: "POST" }),
   me: () => request("/api/auth/me"),
   updateMe: (body: object) => request("/api/auth/me", { method: "PATCH", body: JSON.stringify(body) }),
+  changePassword: (body: object) =>
+    request("/api/auth/password", { method: "POST", body: JSON.stringify(body) }),
   sites: () => request("/api/sites"),
   createSite: (body: object) => request("/api/sites", { method: "POST", body: JSON.stringify(body) }),
   updateSite: (id: string, body: object) =>

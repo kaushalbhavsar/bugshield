@@ -5,9 +5,10 @@ from app.db import get_db
 from app.deps import current_user
 from app.models import Session as AuthSession
 from app.models import User
-from app.schemas import LoginRequest, TimezoneUpdate, UserOut
+from app.schemas import LoginRequest, PasswordChange, TimezoneUpdate, UserOut
 from app.security import (
     clear_session_cookies,
+    hash_password,
     hash_token,
     new_token,
     session_expiry,
@@ -62,6 +63,22 @@ def update_me(
     user: User = Depends(current_user),
 ) -> User:
     user.timezone = payload.timezone
+    db.commit()
+    db.refresh(user)
+    return user
+
+
+@router.post("/password", response_model=UserOut)
+def change_password(
+    payload: PasswordChange,
+    db: Session = Depends(get_db),
+    user: User = Depends(current_user),
+) -> User:
+    if not verify_password(payload.current_password, user.password_hash):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="current password is incorrect")
+    if payload.current_password == payload.new_password:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="new password must be different")
+    user.password_hash = hash_password(payload.new_password)
     db.commit()
     db.refresh(user)
     return user

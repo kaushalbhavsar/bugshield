@@ -31,15 +31,11 @@ export function DashboardPage({ user }: { user: User }) {
 
   return (
     <div>
-      <div className="page-title">
-        <div>
-          <h1>Dashboard</h1>
-          <p className="muted">
-            Counts distinguish detections from confirmed disruptive actions. Times are shown in{" "}
-            {user.timezone}.
-          </p>
-        </div>
-        <select value={siteId} onChange={(event) => setSiteId(event.target.value)} style={{ maxWidth: 240 }}>
+      <div className="page-toolbar">
+        <p className="muted">
+          Counts distinguish detections from confirmed disruptive actions. Times are shown in {user.timezone}.
+        </p>
+        <select className="input-bordered" value={siteId} onChange={(event) => setSiteId(event.target.value)} style={{ maxWidth: 240 }}>
           <option value="">All sites</option>
           {sites.map((site) => (
             <option key={site.id} value={site.id}>
@@ -50,67 +46,97 @@ export function DashboardPage({ user }: { user: User }) {
       </div>
       {data.demo_count > 0 && (
         <div className="banner">
-          Demo dataset is loaded ({data.demo_count} synthetic events). These records are labelled and
-          are not production traffic.
+          Demo dataset is loaded ({data.demo_count} synthetic events). These records are labelled and are not production traffic.
         </div>
       )}
-      <div className="grid metrics">
-        <div className="card metric">
-          Events
-          <b>{data.event_count}</b>
-        </div>
-        <div className="card metric">
-          Confirmed disruptive
-          <b>{data.disrupted_count}</b>
-        </div>
-        <div className="card metric">
-          Detected
-          <b>{data.detected_count}</b>
-        </div>
-        <div className="card metric">
-          Observed
-          <b>{data.observed_count}</b>
-        </div>
+      <div className="stats">
+        <Stat icon="ti-clipboard" tone="warning" label="Events" value={data.event_count} />
+        <Stat icon="ti-shield" tone="danger" label="Confirmed disruptive" value={data.disrupted_count} />
+        <Stat icon="ti-target" tone="rose" label="Detected" value={data.detected_count} />
+        <Stat icon="ti-panel" tone="info" label="Observed" value={data.observed_count} />
       </div>
       {empty ? (
         <EmptyState title="No audit events yet">
-          Create a site, generate an ingestion token, and upload a ModSecurity audit log — or load the
-          labelled demo dataset from Settings.
+          Create a site from Preferences, generate an ingestion token, and upload a ModSecurity audit log — or load the labelled demo dataset.
         </EmptyState>
       ) : (
-        <div className="columns" style={{ marginTop: "1rem" }}>
+        <div className="columns">
           <div className="card">
-            <h3>Hourly trend</h3>
-            <p className="muted">Blue bars are all events. The lower marker is confirmed disruptive actions.</p>
-            <div className="trend" aria-label="event trend">
-              {data.trends.map((point) => (
-                <i key={point.bucket} style={{ height: `${(point.events / maxTrend) * 100}%` }}>
-                  <em style={{ height: `${point.events ? (point.disrupted / point.events) * 100 : 0}%` }} />
-                </i>
-              ))}
+            <div className="header">
+              <h4 className="title">Hourly trend</h4>
+              <p className="category">All events versus confirmed disruptive actions</p>
+            </div>
+            <div className="content">
+              <div className="trend" aria-label="event trend">
+                {data.trends.map((point) => (
+                  <div key={point.bucket} className="col" style={{ height: `${(point.events / maxTrend) * 100}%` }} title={point.bucket}>
+                    <span className="disrupted" style={{ height: `${point.events ? (point.disrupted / point.events) * 100 : 0}%` }} />
+                  </div>
+                ))}
+              </div>
+              <div className="trend-legend">
+                <span><i className="swatch events" /> Events</span>
+                <span><i className="swatch blocks" /> Confirmed disruptive</span>
+              </div>
             </div>
           </div>
           <div className="card">
-            <h3>Top rules</h3>
-            <RankList items={data.top_rules} empty="No rule IDs were present in the selected window." />
+            <div className="header">
+              <h4 className="title">Top rules</h4>
+            </div>
+            <div className="content">
+              <RankList items={data.top_rules} empty="No rule IDs were present in the selected window." />
+            </div>
           </div>
         </div>
       )}
       {!empty && (
-        <div className="columns" style={{ marginTop: "1rem" }}>
+        <div className="columns even">
           <div className="card">
-            <h3>Source IPs</h3>
-            <RankList items={data.top_source_ips} empty="No source IPs recorded." />
+            <div className="header">
+              <h4 className="title">Source IPs</h4>
+            </div>
+            <div className="content">
+              <RankList items={data.top_source_ips} empty="No source IPs recorded." />
+            </div>
           </div>
           <div className="card">
-            <h3>Targeted URLs</h3>
-            <RankList items={data.top_urls} empty="No URLs recorded." />
+            <div className="header">
+              <h4 className="title">Targeted URLs</h4>
+            </div>
+            <div className="content">
+              <RankList items={data.top_urls} empty="No URLs recorded." />
+            </div>
           </div>
         </div>
       )}
-      <p style={{ marginTop: "1rem" }}>
-        <Link to="/events">Search events</Link>
+      <p>
+        <Link to="/attacks">Search blocked attacks</Link>
       </p>
+    </div>
+  );
+}
+
+function Stat({
+  icon,
+  tone,
+  label,
+  value,
+}: {
+  icon: string;
+  tone: string;
+  label: string;
+  value: number;
+}) {
+  return (
+    <div className="card stat-card">
+      <div className={`stat-icon ${tone}`}>
+        <i className={icon} />
+      </div>
+      <div className="card-content">
+        <p className="category">{label}</p>
+        <h3 className="title">{value}</h3>
+      </div>
     </div>
   );
 }

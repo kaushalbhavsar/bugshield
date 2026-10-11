@@ -51,9 +51,9 @@ npm install
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. Create the administrator, add a site, then either
-upload `backend/tests/fixtures/` samples or load the demo dataset from
-Settings.
+Open http://127.0.0.1:5173. Create the administrator, add a site from
+Preferences, then either upload `backend/tests/fixtures/` samples or load the
+demo dataset from Preferences.
 
 Health check: `curl http://127.0.0.1:8000/health`
 

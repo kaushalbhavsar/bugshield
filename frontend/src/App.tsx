@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 import { api } from "./api";
 import { Layout } from "./components/Layout";
+import { AttackDetailPage } from "./pages/AttackDetail";
+import { AttacksPage } from "./pages/Attacks";
+import { ChangePasswordPage } from "./pages/ChangePassword";
 import { DashboardPage } from "./pages/Dashboard";
-import { EventDetailPage } from "./pages/EventDetail";
-import { EventsPage } from "./pages/Events";
+import { ForgotPassword } from "./pages/ForgotPassword";
 import { Login } from "./pages/Login";
-import { SettingsPage } from "./pages/Settings";
+import { PreferencesPage } from "./pages/Preferences";
+import { ReportsPage } from "./pages/Reports";
+import { ScanPage } from "./pages/Scan";
 import { Setup } from "./pages/Setup";
-import { SitesPage } from "./pages/Sites";
+import { SupportPage } from "./pages/Support";
 import type { User } from "./types";
 
 export function App() {
@@ -37,13 +41,18 @@ export function App() {
   }, []);
 
   if (loading || needsSetup === null) {
-    return <p className="muted" style={{ padding: "2rem" }}>Starting BugShield…</p>;
+    return <p className="boot">Starting BugShield…</p>;
   }
   if (needsSetup) {
     return <Setup onReady={bootstrap} />;
   }
   if (!user) {
-    return <Login onReady={bootstrap} />;
+    return (
+      <Routes>
+        <Route path="/account/forgot-password" element={<ForgotPassword />} />
+        <Route path="*" element={<Login onReady={bootstrap} />} />
+      </Routes>
+    );
   }
 
   return (
@@ -60,12 +69,27 @@ export function App() {
         }
       >
         <Route path="/" element={<DashboardPage user={user} />} />
-        <Route path="/events" element={<EventsPage user={user} />} />
-        <Route path="/events/:eventId" element={<EventDetailPage user={user} />} />
-        <Route path="/sites" element={<SitesPage />} />
-        <Route path="/settings" element={<SettingsPage user={user} onUser={bootstrap} />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/dashboard" element={<DashboardPage user={user} />} />
+        <Route path="/attacks" element={<AttacksPage user={user} />} />
+        <Route path="/attacks/report" element={<ReportsPage user={user} />} />
+        <Route path="/attacks/:eventId" element={<AttackDetailPage user={user} />} />
+        <Route path="/skanjobs" element={<ScanPage />} />
+        <Route path="/preferences" element={<PreferencesPage user={user} onUser={bootstrap} />} />
+        <Route path="/preferences/edit" element={<PreferencesPage user={user} onUser={bootstrap} />} />
+        <Route path="/support" element={<SupportPage />} />
+        <Route path="/home/support" element={<SupportPage />} />
+        <Route path="/manage/change-password" element={<ChangePasswordPage />} />
+        <Route path="/events" element={<Navigate to="/attacks" replace />} />
+        <Route path="/events/:eventId" element={<EventRedirect />} />
+        <Route path="/sites" element={<Navigate to="/preferences/edit" replace />} />
+        <Route path="/settings" element={<Navigate to="/preferences/edit" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
     </Routes>
   );
+}
+
+function EventRedirect() {
+  const { eventId } = useParams();
+  return <Navigate to={`/attacks/${eventId}`} replace />;
 }
