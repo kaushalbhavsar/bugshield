@@ -1,0 +1,20 @@
+--aa11bb22-A--
+[11/Oct/2026:12:12:00 +0000] native-blocked-004 203.0.113.77 48111 192.0.2.20 443
+--aa11bb22-B--
+GET /wp-login.php HTTP/1.1
+Host: blog.example.test
+User-Agent: synthetic-scanner
+Cookie: wordpress_logged_in=secret
+Authorization: Basic dXNlcjpwYXNz
+
+--aa11bb22-F--
+HTTP/1.1 403 Forbidden
+Content-Type: text/html
+
+--aa11bb22-H--
+Message: Access denied with code 403 (phase 2). Pattern match "wp-login" at REQUEST_URI. [file "REQUEST-930-APPLICATION-ATTACK-LFI.conf"] [line "33"] [id "930120"] [msg "Local File Inclusion Attack"] [severity "CRITICAL"] [tag "attack-lfi"]
+Action: Intercepted (phase 2)
+Engine-Mode: "ENABLED"
+Producer: ModSecurity for Apache/2.9.7 (http://www.modsecurity.org/).
+
+--aa11bb22-Z--

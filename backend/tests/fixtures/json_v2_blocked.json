@@ -1,0 +1,29 @@
+{
+  "transaction": {
+    "time": "11/Oct/2026:12:08:11 +0000",
+    "transaction_id": "json-v2-blocked-003",
+    "remote_address": "203.0.113.55",
+    "remote_port": 39001,
+    "local_address": "192.0.2.20",
+    "local_port": 80
+  },
+  "request": {
+    "request_line": "GET /admin.php?id=1 UNION SELECT password FROM users HTTP/1.1",
+    "headers": {
+      "Host": "legacy.example.test",
+      "Cookie": "admin=1"
+    }
+  },
+  "response": {
+    "protocol": "HTTP/1.1 403 Forbidden",
+    "status": 403
+  },
+  "audit_data": {
+    "messages": [
+      "Warning. Pattern match \"UNION SELECT\" at ARGS:id. [file \"REQUEST-942-APPLICATION-ATTACK-SQLI.conf\"] [line \"120\"] [id \"942190\"] [msg \"SQL Injection Attack: SQL Operator Detected\"] [severity \"CRITICAL\"] [tag \"attack-sqli\"]"
+    ],
+    "action": "Intercepted (phase 2)",
+    "engine_mode": "ENABLED",
+    "producer": ["ModSecurity for Apache/2.9.7"]
+  }
+}

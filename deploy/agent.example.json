@@ -1,0 +1,10 @@
+{
+  "api_url": "http://127.0.0.1:8000",
+  "site_token": "bs_replace_with_the_token_shown_once",
+  "paths": [
+    "/var/log/modsec/audit.log"
+  ],
+  "state_path": "/var/lib/bugshield-agent/state.json",
+  "max_attempts": 6,
+  "interval": 2
+}
