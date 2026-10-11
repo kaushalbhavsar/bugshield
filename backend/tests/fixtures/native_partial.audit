@@ -1,0 +1,5 @@
+--ee55ff66-A--
+[11/Oct/2026:12:20:00 +0000] native-partial-006 203.0.113.2 1111 192.0.2.20 80
+--ee55ff66-B--
+GET /partial HTTP/1.1
+Host: blog.example.test

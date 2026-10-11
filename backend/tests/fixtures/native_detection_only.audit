@@ -1,0 +1,17 @@
+--cc33dd44-A--
+[11/Oct/2026:12:15:44 +0000] native-detect-005 198.51.100.9 22001 192.0.2.20 80
+--cc33dd44-B--
+GET /index.html?q=<script>alert(1)</script> HTTP/1.1
+Host: blog.example.test
+User-Agent: Mozilla/5.0
+
+--cc33dd44-F--
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+--cc33dd44-H--
+Message: Warning. XSS Filter. [file "REQUEST-941-APPLICATION-ATTACK-XSS.conf"] [line "40"] [id "941110"] [msg "XSS Filter - Category 1: Script Tag Vector"] [severity "CRITICAL"] [tag "attack-xss"]
+Engine-Mode: "DETECTION_ONLY"
+Producer: ModSecurity for Nginx/3.0.8
+
+--cc33dd44-Z--

@@ -22,7 +22,7 @@ class Recorder:
 
 def test_agent_retries_without_losing_position(tmp_path: Path):
     log = tmp_path / "audit.log"
-    log.write_text(read_fixture("native_blocked.log"), encoding="utf-8")
+    log.write_text(read_fixture("native_blocked.audit"), encoding="utf-8")
     store = StateStore(tmp_path / "state.json")
     sender = Recorder(fail_times=2)
     tailer = FileTailer(log, store, sender, max_attempts=4, base_delay=0.01)
@@ -33,7 +33,7 @@ def test_agent_retries_without_losing_position(tmp_path: Path):
 
 def test_agent_does_not_ack_partial_record(tmp_path: Path):
     log = tmp_path / "audit.log"
-    log.write_text(read_fixture("native_partial.log"), encoding="utf-8")
+    log.write_text(read_fixture("native_partial.audit"), encoding="utf-8")
     store = StateStore(tmp_path / "state.json")
     sender = Recorder()
     tailer = FileTailer(log, store, sender, base_delay=0.01)
@@ -44,7 +44,7 @@ def test_agent_does_not_ack_partial_record(tmp_path: Path):
 
 def test_agent_handles_rotation_and_restart(tmp_path: Path):
     log = tmp_path / "audit.log"
-    first = read_fixture("native_blocked.log")
+    first = read_fixture("native_blocked.audit")
     log.write_text(first, encoding="utf-8")
     store = StateStore(tmp_path / "state.json")
     sender = Recorder()
@@ -52,7 +52,7 @@ def test_agent_handles_rotation_and_restart(tmp_path: Path):
     assert len(sender.calls) == 1
 
     log.unlink()
-    second = read_fixture("native_detection_only.log")
+    second = read_fixture("native_detection_only.audit")
     log.write_text(second, encoding="utf-8")
     FileTailer(log, store, sender, base_delay=0.01).tick()
     assert len(sender.calls) == 2
@@ -61,7 +61,7 @@ def test_agent_handles_rotation_and_restart(tmp_path: Path):
 
 def test_retry_exhaustion_does_not_advance(tmp_path: Path):
     log = tmp_path / "audit.log"
-    log.write_text(read_fixture("native_blocked.log"), encoding="utf-8")
+    log.write_text(read_fixture("native_blocked.audit"), encoding="utf-8")
     store = StateStore(tmp_path / "state.json")
     sender = Recorder(fail_times=5)
     tailer = FileTailer(log, store, sender, max_attempts=2, base_delay=0.01)
@@ -71,6 +71,6 @@ def test_retry_exhaustion_does_not_advance(tmp_path: Path):
 
 
 def test_split_helper_used_by_agent():
-    records, leftover = split_complete_records(read_fixture("native_blocked.log") + "--xx-A--\n", "native")
+    records, leftover = split_complete_records(read_fixture("native_blocked.audit") + "--xx-A--\n", "native")
     assert len(records) == 1
     assert leftover.startswith("--xx-A--")

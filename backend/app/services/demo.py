@@ -12,8 +12,8 @@ DEMO_FILES = [
     "json_v3_blocked.json",
     "json_v3_detection_only.json",
     "json_v2_blocked.json",
-    "native_blocked.log",
-    "native_detection_only.log",
+    "native_blocked.audit",
+    "native_detection_only.audit",
     "json_v3_observed.json",
 ]
 

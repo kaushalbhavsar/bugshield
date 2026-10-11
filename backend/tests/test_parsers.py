@@ -36,8 +36,8 @@ def test_json_v2_message_fields_are_parsed():
 
 
 def test_native_blocked_and_detection_only():
-    blocked = parse_payload(read_fixture("native_blocked.log")).events[0]
-    detected = parse_payload(read_fixture("native_detection_only.log")).events[0]
+    blocked = parse_payload(read_fixture("native_blocked.audit")).events[0]
+    detected = parse_payload(read_fixture("native_detection_only.audit")).events[0]
     assert blocked.unique_id == "native-blocked-004"
     assert blocked.rules[0].rule_id == "930120"
     assert blocked.host == "blog.example.test"
@@ -46,7 +46,7 @@ def test_native_blocked_and_detection_only():
 
 
 def test_partial_native_entry_is_not_emitted():
-    result = parse_payload(read_fixture("native_partial.log"))
+    result = parse_payload(read_fixture("native_partial.audit"))
     assert result.events == []
     assert result.incomplete_tail is True
 
@@ -58,8 +58,8 @@ def test_malformed_json_is_reported():
 
 
 def test_complete_then_partial_native_split():
-    complete = read_fixture("native_blocked.log")
-    partial = read_fixture("native_partial.log")
+    complete = read_fixture("native_blocked.audit")
+    partial = read_fixture("native_partial.audit")
     records, leftover = split_complete_records(complete + partial, "native")
     assert len(records) == 1
     assert "native-partial-006" in leftover
