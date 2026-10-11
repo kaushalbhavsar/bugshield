@@ -52,7 +52,7 @@ export function ForgotPassword() {
                           </div>
                         </div>
                         <div className="text-center">
-                          <input type="submit" className="btn btn-rose btn-wd btn-lg" value="Submit" />
+                          <input type="submit" className="btn btn-rose btn-fill btn-wd btn-lg" value="Submit" />
                           <p>
                             <br />
                             <Link to="/" style={{ color: "#d40000" }}>

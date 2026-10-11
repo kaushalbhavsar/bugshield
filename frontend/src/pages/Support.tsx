@@ -1,6 +1,7 @@
 export function SupportPage() {
   return (
     <div className="card card-wizard">
+      <div className="content">
       <div className="form-group">
         <div className="col-md-6">
           <h3>For help and Support</h3>
@@ -11,6 +12,7 @@ export function SupportPage() {
             </a>
           </p>
         </div>
+      </div>
       </div>
     </div>
   );

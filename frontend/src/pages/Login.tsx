@@ -53,7 +53,7 @@ export function Login({ onReady }: { onReady: () => void }) {
                           <input className="form-control input-no-border" id="Password" name="password" type="password" required />
                         </div>
                         <div className="text-center">
-                          <input type="submit" className="btn btn-rose btn-wd btn-lg" value="Sign in" />
+                          <input type="submit" className="btn btn-rose btn-fill btn-wd btn-lg" value="Sign in" />
                           <p>
                             <br />
                             <Link to="/account/forgot-password" style={{ color: "#d40000" }}>

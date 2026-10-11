@@ -41,6 +41,32 @@ pre.redacted { background: #263238; color: #eceff1; padding: 12px; overflow: aut
 .modal-backdrop.in { opacity: 0.5; }
 .attacks-heading { overflow: hidden; }
 .attacks-heading .form-control { max-width: 260px; display: inline-block; margin-left: 12px; }
+/* amaze.css ships icon-rose / filter-color rose but never defines .btn-rose. */
+.btn.btn-rose,
+input.btn-rose {
+  color: #e91e63;
+  border-color: #e91e63;
+  background-color: transparent;
+}
+.btn.btn-rose.btn-fill,
+.btn.btn-rose.btn-wd,
+input.btn-rose.btn-fill,
+input.btn-rose.btn-wd {
+  color: #fff;
+  background-color: #e91e63;
+  border-color: #e91e63;
+}
+.btn.btn-rose.btn-fill:hover,
+.btn.btn-rose.btn-wd:hover,
+input.btn-rose.btn-wd:hover {
+  background-color: #d81b60;
+  color: #fff;
+}
+.modal-content { background: #fff; border-radius: 6px; box-shadow: 0 17px 50px 0 rgba(0,0,0,.19); }
+.modal-header { padding: 15px 20px; border-bottom: 1px solid #eee; }
+.modal-body { padding: 20px; }
+.modal-footer { padding: 15px 20px; text-align: right; }
+.card-wizard { padding: 20px 15px; }
 @media (max-width: 991px) {
   .sidebar { transform: translateX(-110%); }
   .sidebar.open { transform: translateX(0); z-index: 40; }
